@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sign Up - Math Falta</title>
+    <link rel="stylesheet" href="../styles/sign-up.css" />
+    <link rel="stylesheet" href="../styles/dark-theme.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Comic+Relief:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <img
+      src="../images/logo-math-falta.jpg"
+      alt="Math Falta Logo"
+      class="logo"
+    />
+    <div class="container">
+      <h1>Sign Up</h1>
+      <form>
+        <label for="username">Username:</label>
+        <input
+          type="text"
+          id="username"
+          name="username"
+          required
+          minlength="4"
+        />
+
+        <br />
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required />
+
+        <br />
+
+        <label for="parent-number">Parent's Phone Number:</label>
+        <input
+          type="text"
+          id="parent-number"
+          name="parent-number"
+          maxlength="11"
+          pattern="01[0-9]{9}"
+          inputmode="numeric"
+          required
+        />
+
+        <br />
+
+        <label for="grade">Grade:</label>
+        <select id="grade" name="grade" required>
+          <option value="">Select grade...</option>
+          <option value="5">5th Grade</option>
+          <option value="6">6th Grade</option>
+          <option value="7">7th Grade</option>
+          <option value="8">8th Grade</option>
+          <option value="9">9th Grade</option>
+          <option value="10">10th Grade</option>
+          <option value="11">11th Grade</option></select
+        ><br />
+
+        <label for="password">Password:</label>
+        <input
+          type="password"
+          id="password"
+          name="password"
+          required
+          minlength="8"
+        />
+
+        <br />
+
+        <button type="submit">Sign Up</button>
+      </form>
+      <p>
+        Already have an account? <a href="sign-in.html" class="back">Sign In</a>
+      </p>
+      <a class="back" href="../index.html">Back</a>
+    </div>
+    <script src="../scripts/sign-up.js"></script>
+  </body>
+</html>

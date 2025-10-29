@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Add Quiz - Admin - Math Falta</title>
+    <link rel="stylesheet" href="/Math-Falta/styles/sign-up.css" />
+    <link rel="stylesheet" href="/Math-Falta/styles/dark-theme.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Comic+Relief:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <img
+      src="/Math-Falta/images/logo-math-falta.jpg"
+      alt="Math Falta Logo"
+      class="logo logo-topleft"
+    />
+    <div class="container">
+      <h1>Add New Quiz</h1>
+      <form class="admin-form">
+        <div class="form-row">
+          <label for="quiz-topic">Quiz Topic:</label>
+          <input type="text" id="quiz-title" name="quiz-topic" required />
+        </div>
+        <div class="form-row">
+          <label for="grade">Grade:</label>
+          <select id="grade" name="grade" required>
+            <option value="">Select grade...</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+            <option value="10">10</option>
+            <option value="11">11</option>
+          </select>
+        </div>
+        <div class="form-row">
+          <label for="question">Question:</label>
+          <input type="text" id="question" name="question" required />
+        </div>
+        <div class="form-row">
+          <label for="choice1">Choice 1:</label>
+          <input type="text" id="choice1" name="choice1" required />
+        </div>
+        <div class="form-row">
+          <label for="choice2">Choice 2:</label>
+          <input type="text" id="choice2" name="choice2" required />
+        </div>
+        <div class="form-row">
+          <label for="choice3">Choice 3:</label>
+          <input type="text" id="choice3" name="choice3" required />
+        </div>
+        <div class="form-row">
+          <label for="choice4">Choice 4:</label>
+          <input type="text" id="choice4" name="choice4" required />
+        </div>
+        <div class="form-row">
+          <label for="correct-answer">Correct Answer:</label>
+          <select id="correct-answer" name="correct-answer" required>
+            <option value="">Select correct answer...</option>
+            <option value="1">Choice 1</option>
+            <option value="2">Choice 2</option>
+            <option value="3">Choice 3</option>
+            <option value="4">Choice 4</option>
+          </select>
+        </div>
+        <button type="submit" class="admin-btn">Add Quiz</button>
+      </form>
+      <div class="links">
+        <a href="nnqgx218wbrlkph.html">Back to Admin Dashboard</a>
+        <a href="../home.html">Back to Home</a>
+      </div>
+    </div>
+    <script src="/Math-Falta/scripts/admin/add.js"></script>
+  </body>
+</html>

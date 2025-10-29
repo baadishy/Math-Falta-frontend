@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment - Math Falta</title>
+    <link rel="stylesheet" href="../styles/payment.css">
+    <link rel="stylesheet" href="../styles/helper.css">
+    <link rel="stylesheet" href="../styles/profile.css">
+    <link rel="stylesheet" href="../styles/dark-theme.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Comic+Relief:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <img src="../images/logo-math-falta.jpg" alt="Math Falta Logo" class="logo">
+    <div class="profile">
+        <img src="https://api.dicebear.com/7.x/bottts/svg?seed=payment" alt="Profile" class="avatar">
+        <div class="username">Username</div>
+    </div>
+    <div class="container">
+        <div class="helper">
+			<img src="../images/helper.png">
+		</div>
+        <h1>Payment</h1>
+        <form>
+            <label for="cardnumber">Card Number:</label>
+            <input type="text" id="cardnumber" name="cardnumber" required><br>
+            <label for="expiry">Expiry Date:</label>
+            <input type="text" id="expiry" name="expiry" placeholder="MM/YY" required><br>
+            <label for="cvc">CVC:</label>
+            <input type="text" id="cvc" name="cvc" required><br>
+            <button type="submit">Pay Now</button>
+        </form>
+        <div class="links">
+            <a href="subscription.html">Back to Subscription</a>
+            <a href="landing.html">Back to Home</a>
+        </div>
+    </div>
+    <script src="../scripts/logo.js"></script>
+</body>
+</html>
