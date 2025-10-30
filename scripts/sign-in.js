@@ -170,7 +170,7 @@ function createPopUp() {
 }
 
 async function checkUser() {
-  let res = await fetch("https://math-falta.vercel.app/api/sign-in", {
+  let res = await fetch("https://math-falta.vercel.app/api/user/sign-in", {
     method: "POST",
     headers: {
       "content-type": "application/json",
