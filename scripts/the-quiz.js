@@ -11,7 +11,7 @@ async function getQuiz() {
   const quiz = (
     await (
       await fetch(
-        `https://math-falta.free.nf/api.php?endpoint=quizzes&grade=${localStorage.grade
+        `https://math-falta.vercel.app/api/quizzes?grade=${localStorage.grade
           .split("-")
           .pop()}&topic=${encodeURIComponent(localStorage["quiz-type"])}`
       )
@@ -54,7 +54,7 @@ window.onload = async function () {
   await getQuiz();
 };
 
-document.querySelector('.links a').href = `./${localStorage.grade}.html`
+document.querySelector(".links a").href = `./${localStorage.grade}.html`;
 
 document.querySelectorAll(".links a").forEach((option) => {
   option.onclick = function () {
@@ -106,7 +106,7 @@ async function showFinal() {
   let theUser = (
     await (
       await fetch(
-        `https://math-falta.free.nf/api.php?endpoint=user&id=${localStorage.theUserId}`
+        `https://math-falta.vercel.app/api/user/${localStorage.theUserId}`
       )
     ).json()
   ).data;
@@ -122,13 +122,13 @@ async function showFinal() {
       "transform: translatex(0);transition: all 1s ease-out;";
   }, 1000);
   if (theUser.quizzes) {
-        if (theUser.quizzes.some((quiz) => quiz.topic === theQuizzes.topic)) return;
+    if (theUser.quizzes.some((quiz) => quiz.topic === theQuizzes.topic)) return;
   }
   // theUser.quizzes.push(theQuizzes);
   let res = await fetch(
-    `https://math-falta.free.nf/api.php?endpoint=doneQuiz&id=${localStorage.theUserId}`,
+    `https://math-falta.vercel.app/api/user/${localStorage.theUserId}/doneQuiz`,
     {
-      method: "POST",
+      method: "PUT",
       headers: {
         "Content-type": "application/json",
       },

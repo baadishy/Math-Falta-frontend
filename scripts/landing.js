@@ -8,7 +8,9 @@ document.querySelector(".links a:first-of-type").onclick = async function () {
     let theUser = (
       await (
         await fetch(
-          `https://math-falta.free.nf/api.php?endpoint=user&id=${localStorage.getItem("theUserId")}`
+          `https://math-falta.vercel.app/api/user/${localStorage.getItem(
+            "theUserId"
+          )}`
         )
       ).json()
     ).data;

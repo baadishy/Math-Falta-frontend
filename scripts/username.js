@@ -5,7 +5,7 @@ window.onload = function () {
   });
 };
 let usernamePart = document.querySelector(".username");
-fetch(`https://math-falta.free.nf/api.php?endpoint=user&id=${localStorage.theUserId}`)
+fetch(`https://math-falta.vercel.app/api/user/${localStorage.theUserId}`)
   .then((data) => data.json())
   .then((data) => (usernamePart.textContent = data.data.username));
 

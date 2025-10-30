@@ -258,16 +258,13 @@ class User {
 
 async function addUser(newUser) {
   try {
-    let res = await fetch(
-      "https://math-falta.free.nf/api.php?endpoint=sign-up",
-      {
-        method: "POST",
-        headers: {
-          "content-type": "application/json",
-        },
-        body: JSON.stringify(newUser),
-      }
-    );
+    let res = await fetch("https://math-falta.vercel.app/api/user/sign-up", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(newUser),
+    });
     return await res.json();
   } catch (err) {
     alert(err);

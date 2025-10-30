@@ -1,6 +1,8 @@
 let users;
 async function getUsers() {
-  users = (await (await fetch("http://localhost:3000/api/users")).json()).data;
+  users = (
+    await (await fetch("https://math-falta.vercel.app/api/users")).json()
+  ).data;
   users = users.sort((user1, user2) => user2.totalScore - user1.totalScore);
   console.log(users);
 }
@@ -17,7 +19,7 @@ function showUsers() {
           </li>
         `;
       }
-    } else quizzeslis = `<div>No Quizzes Solved</div>`
+    } else quizzeslis = `<div>No Quizzes Solved</div>`;
 
     let li = `
         <li class="leader-item">

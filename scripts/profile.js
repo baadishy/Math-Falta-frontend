@@ -7,7 +7,7 @@ async function showInfo() {
   let theUser = (
     await (
       await fetch(
-        `https://math-falta.free.nf/api.php?endpoint=user&id=${localStorage.theUserId}`
+        `https://math-falta.vercel.app/api/user/${localStorage.theUserId}`
       )
     ).json()
   ).data;
@@ -25,7 +25,7 @@ async function showQuizzes() {
   let theUser = (
     await (
       await fetch(
-        `https://math-falta.free.nf/api.php?endpoint=user&id=${localStorage.theUserId}`
+        `https://math-falta.vercel.app/api/user/${localStorage.theUserId}`
       )
     ).json()
   ).data;

@@ -3,7 +3,7 @@ async function getQuizzes() {
     const quizzes = (
       await (
         await fetch(
-          `https://math-falta.free.nf/api.php?endpoint=topics&grade=${
+          `https://math-falta.vercel.app/api/topics?grade=${
             location.pathname.split("/").pop().split(".")[0].split("-")[1]
           }`
         )
@@ -64,7 +64,7 @@ async function checkQuizzes() {
     let theUser = (
       await (
         await fetch(
-          `https://math-falta.free.nf/api.php?endpoint=user&id=${localStorage.getItem(
+          `https://math-falta.vercel.app/api/user/${localStorage.getItem(
             "theUserId"
           )}`
         )
