@@ -1,8 +1,6 @@
 async function getUsers() {
   try {
-    let users = (
-      await (await fetch("https://math-falta.vercel.app/api/users")).json()
-    ).data;
+    let users = (await ((await fetch('https://math-falta.vercel.app/api/users')).json())).data;
     users = users.sort((user1, user2) => user2.totalScore - user1.totalScore);
     console.log(users);
     return users;
@@ -10,6 +8,7 @@ async function getUsers() {
     console.log(err);
   }
 }
+
 async function showUsers() {
   try {
     let users = await getUsers();
@@ -29,7 +28,7 @@ async function showUsers() {
       let li = `
           <li class="leader-item">
             <div class="rank">${
-              i === 0 ? "🥇" : i === 1 ? "🥈" : i === 3 ? "🥉" : i + 1
+              i === 0 ? "🥇" : i === 1 ? "🥈" : i === 2 ? "🥉" : i + 1
             }</div>
             <div class="meta">
               <div class="name">${user.username}</div>
@@ -56,6 +55,4 @@ async function showUsers() {
   }
 }
 
-window.onload = async function () {
-  await showUsers();
-};
+showUsers()
