@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Add New Quiz - MathAdmin</title>
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&amp;family=Noto+Sans:wght@400;500;700&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              primary: "#135bec",
+              "primary-hover": "#0f4bc2",
+              "background-light": "#f6f6f8",
+              "background-dark": "#111722",
+              "surface-dark": "#1e293b",
+              "surface-light": "#ffffff",
+              "border-dark": "#324467",
+              "border-light": "#e2e8f0",
+              "text-muted-dark": "#92a4c9",
+              "text-muted-light": "#64748b",
+            },
+            fontFamily: {
+              display: ["Inter", "sans-serif"],
+              body: ["Noto Sans", "sans-serif"],
+            },
+            borderRadius: {
+              DEFAULT: "0.25rem",
+              lg: "0.5rem",
+              xl: "0.75rem",
+              full: "9999px",
+            },
+          },
+        },
+      };
+    </script>
+  </head>
+  <body
+    class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-white font-display transition-colors duration-200 overflow-hidden"
+  >
+    <div class="flex flex-col h-screen w-full">
+      <header
+        class="h-16 shrink-0 z-50 flex items-center justify-between px-4 lg:px-6 border-b border-border-light dark:border-[#232f48] bg-surface-light dark:bg-[#111722]"
+      >
+        <div class="flex items-center gap-3">
+          <div class="size-8 text-primary">
+            <svg
+              class="w-full h-full"
+              fill="none"
+              viewBox="0 0 48 48"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                clip-rule="evenodd"
+                d="M12.0799 24L4 19.2479L9.95537 8.75216L18.04 13.4961L18.0446 4H29.9554L29.96 13.4961L38.0446 8.75216L44 19.2479L35.92 24L44 28.7521L38.0446 39.2479L29.96 34.5039L29.9554 44H18.0446L18.04 34.5039L9.95537 39.2479L4 28.7521L12.0799 24Z"
+                fill="currentColor"
+                fill-rule="evenodd"
+              ></path>
+            </svg>
+          </div>
+          <h2
+            class="text-slate-900 dark:text-white text-xl font-bold leading-tight tracking-tight"
+          >
+            MathAdmin
+          </h2>
+        </div>
+        <div class="flex items-center gap-4 sm:gap-6">
+          <div class="flex gap-2">
+            <button
+              class="group flex size-9 cursor-pointer items-center justify-center rounded-lg bg-slate-100 dark:bg-[#232f48] text-slate-600 dark:text-white hover:bg-slate-200 dark:hover:bg-[#2f3e5e] transition-colors"
+            >
+              <span class="material-symbols-outlined text-[20px]"
+                >light_mode</span
+              >
+            </button>
+            <button
+              class="group flex size-9 cursor-pointer items-center justify-center rounded-lg bg-slate-100 dark:bg-[#232f48] text-slate-600 dark:text-white hover:bg-slate-200 dark:hover:bg-[#2f3e5e] transition-colors"
+            >
+              <span class="material-symbols-outlined text-[20px]"
+                >notifications</span
+              >
+            </button>
+          </div>
+          <div
+            class="flex items-center gap-3 pl-4 border-l border-slate-200 dark:border-[#232f48]"
+          >
+            <div class="hidden sm:flex flex-col items-end">
+              <span class="text-sm font-semibold text-slate-900 dark:text-white"
+                >Admin User</span
+              >
+              <span class="text-xs text-slate-500 dark:text-[#92a4c9]"
+                >Mathematics Dept.</span
+              >
+            </div>
+            <div
+              class="bg-center bg-no-repeat bg-cover rounded-full size-9 ring-2 ring-slate-200 dark:ring-[#232f48]"
+              data-alt="Administrator profile picture placeholder"
+              style="
+                background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCt6_CIvMf2CCBoVh1WC9ILOkAGq0PPvic3VeZblZKiVoieHIQNxNwruSXVGueicagsy5km67bA55sU_-roreOL2SoQY0adj3g4DAc8G8Gl7yyBkw4M2kxn8DMSK_jW4aPGP5GKfepYKc6FMYSD0OdLu3yQGNIM7_IMtFhMTskmq2wVxW5_P9NzHhhpe90sopW_mJXajtL4YEA1TDYnPQ3BGEWr5E3YOZyLzVHsuhWuX5maUnfx9_akCnBp_c1yUkl7O_mebl96IF8');
+              "
+            ></div>
+          </div>
+        </div>
+      </header>
+      <div class="flex flex-1 overflow-hidden">
+        <aside
+          class="w-64 bg-surface-light dark:bg-[#111722] border-r border-border-light dark:border-[#232f48] hidden lg:flex flex-col overflow-y-auto"
+        >
+          <nav class="flex-1 p-4 space-y-1">
+            <a
+              class="flex items-center gap-3 px-4 py-3 text-sm font-medium text-slate-600 dark:text-[#92a4c9] rounded-lg hover:bg-slate-100 dark:hover:bg-[#1e293b] hover:text-slate-900 dark:hover:text-white transition-colors group"
+              href="/admin-dashboard.html"
+            >
+              <span
+                class="material-symbols-outlined text-[22px] text-slate-400 dark:text-slate-500 group-hover:text-primary transition-colors"
+                >dashboard</span
+              >
+              Dashboard
+            </a>
+            <a
+              class="flex items-center gap-3 px-4 py-3 text-sm font-medium text-slate-600 dark:text-[#92a4c9] rounded-lg hover:bg-slate-100 dark:hover:bg-[#1e293b] hover:text-slate-900 dark:hover:text-white transition-colors group"
+              href="/manage-lessons.html"
+            >
+              <span
+                class="material-symbols-outlined text-[22px] text-slate-400 dark:text-slate-500 group-hover:text-primary transition-colors"
+                >menu_book</span
+              >
+              Manage Lessons
+            </a>
+            <a
+              class="flex items-center gap-3 px-4 py-3 text-sm font-bold text-primary bg-primary/10 rounded-lg"
+              href="/manage-quizzes.html"
+            >
+              <span class="material-symbols-outlined text-[22px]">quiz</span>
+              Manage Quizzes
+            </a>
+            <a
+              class="flex items-center gap-3 px-4 py-3 text-sm font-medium text-slate-600 dark:text-[#92a4c9] rounded-lg hover:bg-slate-100 dark:hover:bg-[#1e293b] hover:text-slate-900 dark:hover:text-white transition-colors group"
+              href="/manage-users.html"
+            >
+              <span
+                class="material-symbols-outlined text-[22px] text-slate-400 dark:text-slate-500 group-hover:text-primary transition-colors"
+                >group</span
+              >
+              Users Management
+            </a>
+            <a
+              class="flex items-center gap-3 px-4 py-3 text-sm font-medium text-slate-600 dark:text-[#92a4c9] rounded-lg hover:bg-slate-100 dark:hover:bg-[#1e293b] hover:text-slate-900 dark:hover:text-white transition-colors group"
+              href="/admin-leaderboard.html"
+            >
+              <span
+                class="material-symbols-outlined text-[22px] text-slate-400 dark:text-slate-500 group-hover:text-primary transition-colors"
+                >leaderboard</span
+              >
+              Leaderboard
+            </a>
+          </nav>
+          <div class="p-4 border-t border-slate-200 dark:border-[#232f48]">
+            <div
+              class="bg-gradient-to-br from-primary/10 to-primary/5 rounded-xl p-4 border border-primary/10"
+            >
+              <p class="text-xs font-semibold text-primary mb-1">Pro Tip</p>
+              <p
+                class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed"
+              >
+                Use
+                <span
+                  class="font-mono bg-slate-200 dark:bg-slate-800 px-1 rounded"
+                  >Cmd+S</span
+                >
+                to quick save your quiz drafts.
+              </p>
+            </div>
+          </div>
+        </aside>
+        <main
+          class="flex-1 overflow-y-auto bg-background-light dark:bg-background-dark scroll-smooth relative"
+        >
+          <div class="flex justify-center py-8 px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col max-w-[960px] w-full gap-8 pb-20">
+              <div
+                class="flex flex-wrap justify-between items-end gap-4 pb-4 border-b border-slate-200 dark:border-[#324467]"
+              >
+                <div class="flex flex-col gap-2">
+                  <h1
+                    class="text-slate-900 dark:text-white text-3xl sm:text-4xl font-black leading-tight tracking-tight"
+                  >
+                    Create New Assessment
+                  </h1>
+                  <p
+                    class="text-slate-500 dark:text-[#92a4c9] text-base font-normal"
+                  >
+                    Configure quiz details and build your question bank.
+                  </p>
+                </div>
+                <div class="flex gap-3">
+                  <button
+                    class="h-10 px-4 rounded-lg border border-slate-300 dark:border-[#324467] text-slate-700 dark:text-white font-bold text-sm hover:bg-slate-100 dark:hover:bg-[#232f48] transition-colors"
+                  >
+                    Save Draft
+                  </button>
+                </div>
+              </div>
+              <section
+                class="bg-surface-light dark:bg-[#192233] rounded-xl p-6 shadow-sm border border-slate-200 dark:border-[#324467]"
+              >
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                  <div class="md:col-span-2">
+                    <label class="block mb-2">
+                      <span
+                        class="text-slate-900 dark:text-white text-sm font-medium"
+                        >Quiz Title</span
+                      >
+                    </label>
+                    <div class="relative">
+                      <span
+                        class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 dark:text-[#92a4c9]"
+                        >edit_document</span
+                      >
+                      <input
+                        class="w-full h-12 pl-12 pr-4 rounded-lg bg-slate-50 dark:bg-[#111722] border border-slate-200 dark:border-[#324467] text-slate-900 dark:text-white focus:ring-2 focus:ring-primary focus:border-transparent placeholder:text-slate-400 dark:placeholder:text-[#64748b]"
+                        placeholder="e.g., Linear Algebra Mid-Term 2024"
+                        type="text"
+                      />
+                    </div>
+                  </div>
+                  <div>
+                    <label class="block mb-2">
+                      <span
+                        class="text-slate-900 dark:text-white text-sm font-medium"
+                        >Grade Level</span
+                      >
+                    </label>
+                    <div class="relative">
+                      <span
+                        class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 dark:text-[#92a4c9]"
+                        >school</span
+                      >
+                      <select
+                        class="w-full h-12 pl-12 pr-10 rounded-lg bg-slate-50 dark:bg-[#111722] border border-slate-200 dark:border-[#324467] text-slate-900 dark:text-white focus:ring-2 focus:ring-primary focus:border-transparent appearance-none"
+                      >
+                        <option disabled="" selected="" value="">
+                          Select Grade
+                        </option>
+                        <option value="5">Grade 5</option>
+                        <option value="6">Grade 6</option>
+                        <option value="7">Grade 7</option>
+                        <option value="8">Grade 8</option>
+                        <option value="9">Grade 9</option>
+                      </select>
+                      <span
+                        class="material-symbols-outlined absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 dark:text-[#92a4c9] pointer-events-none text-sm"
+                        >expand_more</span
+                      >
+                    </div>
+                  </div>
+                </div>
+              </section>
+              <div class="flex flex-col gap-6">
+                <div
+                  class="group question-block relative bg-surface-light dark:bg-[#192233] rounded-xl border border-slate-200 dark:border-[#324467] overflow-hidden shadow-sm transition-all hover:border-primary/50 dark:hover:border-primary/50"
+                >
+                  <div
+                    class="absolute top-0 left-0 w-1.5 h-full bg-primary"
+                  ></div>
+                  <div class="p-6">
+                    <div class="flex justify-between items-start mb-6">
+                      <h3
+                        class="text-slate-900 dark:text-white text-lg font-bold flex items-center gap-2"
+                      >
+                        <span
+                          class="bg-primary/10 text-primary w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold"
+                          >1</span
+                        >
+                        Question Setup
+                      </h3>
+                      <div class="flex gap-2">
+                        <button
+                          class="p-2 text-slate-400 hover:text-primary transition-colors"
+                          title="Duplicate"
+                        >
+                          <span class="material-symbols-outlined text-[20px]"
+                            >content_copy</span
+                          >
+                        </button>
+                        <button
+                          class="p-2 text-slate-400 hover:text-red-500 transition-colors"
+                          title="Delete"
+                        >
+                          <span class="material-symbols-outlined text-[20px]"
+                            >delete</span
+                          >
+                        </button>
+                      </div>
+                    </div>
+                    <div
+                      class="flex gap-6 mb-6 border-b border-slate-200 dark:border-[#324467]"
+                    >
+                      <label
+                        class="cursor-pointer pb-3 border-b-2 border-primary text-primary font-medium text-sm flex items-center gap-2"
+                      >
+                        <span class="material-symbols-outlined text-[18px]"
+                          >text_fields</span
+                        >
+                        Text Question
+                      </label>
+                      <label
+                        class="cursor-pointer pb-3 border-b-2 border-transparent text-slate-500 dark:text-[#92a4c9] hover:text-slate-700 dark:hover:text-white font-medium text-sm flex items-center gap-2 transition-colors"
+                      >
+                        <span class="material-symbols-outlined text-[18px]"
+                          >image</span
+                        >
+                        Image Upload
+                      </label>
+                    </div>
+                    <div class="mb-8">
+                      <label
+                        class="block mb-2 text-slate-900 dark:text-white text-sm font-medium"
+                        >Question Text</label
+                      >
+                      <div class="relative">
+                        <textarea
+                          class="w-full min-h-[120px] p-4 rounded-lg bg-slate-50 dark:bg-[#111722] border border-slate-200 dark:border-[#324467] text-slate-900 dark:text-white focus:ring-2 focus:ring-primary focus:border-transparent placeholder:text-slate-400 dark:placeholder:text-[#64748b] resize-y"
+                          placeholder="Enter the math problem here... Use LaTeX for formulas if needed."
+                        ></textarea>
+                        <div class="absolute bottom-3 right-3 flex gap-2">
+                          <button
+                            class="p-1.5 rounded hover:bg-slate-200 dark:hover:bg-[#232f48] text-slate-400 dark:text-[#92a4c9]"
+                            title="Insert Math Symbol"
+                          >
+                            <span class="material-symbols-outlined text-[18px]"
+                              >functions</span
+                            >
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                    <div
+                      class="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-4"
+                    >
+                      <div class="relative group/option">
+                        <div class="flex items-center gap-3 mb-1.5">
+                          <div
+                            class="w-6 h-6 rounded-full border border-slate-300 dark:border-[#324467] flex items-center justify-center text-xs font-bold text-slate-500 dark:text-[#92a4c9] bg-slate-100 dark:bg-[#111722]"
+                          >
+                            A
+                          </div>
+                          <label
+                            class="text-xs font-bold text-slate-500 dark:text-[#92a4c9] uppercase tracking-wider"
+                            >Option 1</label
+                          >
+                        </div>
+                        <div class="flex items-center">
+                          <input
+                            class="flex-1 h-11 px-4 rounded-lg bg-slate-50 dark:bg-[#111722] border border-slate-200 dark:border-[#324467] text-slate-900 dark:text-white focus:ring-2 focus:ring-primary focus:border-transparent"
+                            placeholder="Answer for Option A"
+                            type="text"
+                          />
+                          <div class="ml-3 flex items-center gap-2">
+                            <input
+                              class="w-5 h-5 text-primary bg-slate-100 dark:bg-[#111722] border-slate-300 dark:border-[#324467] focus:ring-primary"
+                              id="q1_a"
+                              name="correct_q1"
+                              type="radio"
+                            />
+                            <label
+                              class="text-sm text-slate-500 dark:text-[#92a4c9] cursor-pointer"
+                              for="q1_a"
+                              >Correct</label
+                            >
+                          </div>
+                        </div>
+                      </div>
+                      <div class="relative group/option">
+                        <div class="flex items-center gap-3 mb-1.5">
+                          <div
+                            class="w-6 h-6 rounded-full border border-slate-300 dark:border-[#324467] flex items-center justify-center text-xs font-bold text-slate-500 dark:text-[#92a4c9] bg-slate-100 dark:bg-[#111722]"
+                          >
+                            B
+                          </div>
+                          <label
+                            class="text-xs font-bold text-slate-500 dark:text-[#92a4c9] uppercase tracking-wider"
+                            >Option 2</label
+                          >
+                        </div>
+                        <div class="flex items-center">
+                          <input
+                            class="flex-1 h-11 px-4 rounded-lg bg-slate-50 dark:bg-[#111722] border border-slate-200 dark:border-[#324467] text-slate-900 dark:text-white focus:ring-2 focus:ring-primary focus:border-transparent"
+                            placeholder="Answer for Option B"
+                            type="text"
+                          />
+                          <div class="ml-3 flex items-center gap-2">
+                            <input
+                              class="w-5 h-5 text-primary bg-slate-100 dark:bg-[#111722] border-slate-300 dark:border-[#324467] focus:ring-primary"
+                              id="q1_b"
+                              name="correct_q1"
+                              type="radio"
+                            />
+                            <label
+                              class="text-sm text-slate-500 dark:text-[#92a4c9] cursor-pointer"
+                              for="q1_b"
+                              >Correct</label
+                            >
+                          </div>
+                        </div>
+                      </div>
+                      <div class="relative group/option">
+                        <div class="flex items-center gap-3 mb-1.5">
+                          <div
+                            class="w-6 h-6 rounded-full border border-slate-300 dark:border-[#324467] flex items-center justify-center text-xs font-bold text-slate-500 dark:text-[#92a4c9] bg-slate-100 dark:bg-[#111722]"
+                          >
+                            C
+                          </div>
+                          <label
+                            class="text-xs font-bold text-slate-500 dark:text-[#92a4c9] uppercase tracking-wider"
+                            >Option 3</label
+                          >
+                        </div>
+                        <div class="flex items-center">
+                          <input
+                            class="flex-1 h-11 px-4 rounded-lg bg-slate-50 dark:bg-[#111722] border border-slate-200 dark:border-[#324467] text-slate-900 dark:text-white focus:ring-2 focus:ring-primary focus:border-transparent"
+                            placeholder="Answer for Option C"
+                            type="text"
+                          />
+                          <div class="ml-3 flex items-center gap-2">
+                            <input
+                              class="w-5 h-5 text-primary bg-slate-100 dark:bg-[#111722] border-slate-300 dark:border-[#324467] focus:ring-primary"
+                              id="q1_c"
+                              name="correct_q1"
+                              type="radio"
+                            />
+                            <label
+                              class="text-sm text-slate-500 dark:text-[#92a4c9] cursor-pointer"
+                              for="q1_c"
+                              >Correct</label
+                            >
+                          </div>
+                        </div>
+                      </div>
+                      <div class="relative group/option">
+                        <div class="flex items-center gap-3 mb-1.5">
+                          <div
+                            class="w-6 h-6 rounded-full border border-slate-300 dark:border-[#324467] flex items-center justify-center text-xs font-bold text-slate-500 dark:text-[#92a4c9] bg-slate-100 dark:bg-[#111722]"
+                          >
+                            D
+                          </div>
+                          <label
+                            class="text-xs font-bold text-slate-500 dark:text-[#92a4c9] uppercase tracking-wider"
+                            >Option 4</label
+                          >
+                        </div>
+                        <div class="flex items-center">
+                          <input
+                            class="flex-1 h-11 px-4 rounded-lg bg-slate-50 dark:bg-[#111722] border border-slate-200 dark:border-[#324467] text-slate-900 dark:text-white focus:ring-2 focus:ring-primary focus:border-transparent"
+                            placeholder="Answer for Option D"
+                            type="text"
+                          />
+                          <div class="ml-3 flex items-center gap-2">
+                            <input
+                              class="w-5 h-5 text-primary bg-slate-100 dark:bg-[#111722] border-slate-300 dark:border-[#324467] focus:ring-primary"
+                              id="q1_d"
+                              name="correct_q1"
+                              type="radio"
+                            />
+                            <label
+                              class="text-sm text-slate-500 dark:text-[#92a4c9] cursor-pointer"
+                              for="q1_d"
+                              >Correct</label
+                            >
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div
+                  class="group question-block relative bg-surface-light dark:bg-[#192233] rounded-xl border border-slate-200 dark:border-[#324467] overflow-hidden shadow-sm transition-all hover:border-primary/50 dark:hover:border-primary/50"
+                >
+                  <div
+                    class="absolute top-0 left-0 w-1.5 h-full bg-primary/40 group-hover:bg-primary transition-colors"
+                  ></div>
+                  <div class="p-6">
+                    <div class="flex justify-between items-start mb-6">
+                      <h3
+                        class="text-slate-900 dark:text-white text-lg font-bold flex items-center gap-2"
+                      >
+                        <span
+                          class="bg-slate-200 dark:bg-[#232f48] text-slate-600 dark:text-white w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold"
+                          >2</span
+                        >
+                        Question Setup
+                      </h3>
+                      <div class="flex gap-2">
+                        <button
+                          class="p-2 text-slate-400 hover:text-primary transition-colors"
+                          title="Duplicate"
+                        >
+                          <span class="material-symbols-outlined text-[20px]"
+                            >content_copy</span
+                          >
+                        </button>
+                        <button
+                          class="p-2 text-slate-400 hover:text-red-500 transition-colors"
+                          title="Delete"
+                        >
+                          <span class="material-symbols-outlined text-[20px]"
+                            >delete</span
+                          >
+                        </button>
+                      </div>
+                    </div>
+                    <div
+                      class="flex gap-6 mb-6 border-b border-slate-200 dark:border-[#324467]"
+                    >
+                      <label
+                        class="cursor-pointer pb-3 border-b-2 border-transparent text-slate-500 dark:text-[#92a4c9] hover:text-slate-700 dark:hover:text-white font-medium text-sm flex items-center gap-2 transition-colors"
+                      >
+                        <span class="material-symbols-outlined text-[18px]"
+                          >text_fields</span
+                        >
+                        Text Question
+                      </label>
+                      <label
+                        class="cursor-pointer pb-3 border-b-2 border-primary text-primary font-medium text-sm flex items-center gap-2"
+                      >
+                        <span class="material-symbols-outlined text-[18px]"
+                          >image</span
+                        >
+                        Image Upload
+                      </label>
+                    </div>
+                    <div class="mb-8">
+                      <label
+                        class="block mb-2 text-slate-900 dark:text-white text-sm font-medium"
+                        >Question Image</label
+                      >
+                      <div
+                        class="flex flex-col items-center justify-center w-full min-h-[160px] rounded-lg border-2 border-dashed border-slate-300 dark:border-[#324467] bg-slate-50 dark:bg-[#111722] hover:bg-slate-100 dark:hover:bg-[#1a2333] transition-colors cursor-pointer group/upload"
+                      >
+                        <div
+                          class="flex flex-col items-center justify-center pt-5 pb-6"
+                        >
+                          <div
+                            class="mb-3 p-3 rounded-full bg-primary/10 text-primary group-hover/upload:bg-primary group-hover/upload:text-white transition-colors"
+                          >
+                            <span class="material-symbols-outlined text-[24px]"
+                              >cloud_upload</span
+                            >
+                          </div>
+                          <p
+                            class="mb-2 text-sm text-slate-500 dark:text-[#92a4c9]"
+                          >
+                            <span class="font-semibold text-primary"
+                              >Click to upload</span
+                            >
+                            or drag and drop
+                          </p>
+                          <p class="text-xs text-slate-400 dark:text-[#64748b]">
+                            SVG, PNG, JPG or GIF (MAX. 800x400px)
+                          </p>
+                        </div>
+                        <input class="hidden" type="file" />
+                      </div>
+                    </div>
+                    <div
+                      class="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-4"
+                    >
+                      <div class="relative group/option">
+                        <div class="flex items-center gap-3 mb-1.5">
+                          <div
+                            class="w-6 h-6 rounded-full border border-slate-300 dark:border-[#324467] flex items-center justify-center text-xs font-bold text-slate-500 dark:text-[#92a4c9] bg-slate-100 dark:bg-[#111722]"
+                          >
+                            A
+                          </div>
+                          <label
+                            class="text-xs font-bold text-slate-500 dark:text-[#92a4c9] uppercase tracking-wider"
+                            >Option 1</label
+                          >
+                        </div>
+                        <div class="flex items-center">
+                          <input
+                            class="flex-1 h-11 px-4 rounded-lg bg-slate-50 dark:bg-[#111722] border border-slate-200 dark:border-[#324467] text-slate-900 dark:text-white focus:ring-2 focus:ring-primary focus:border-transparent"
+                            placeholder="Answer for Option A (or 'See Image')"
+                            type="text"
+                            value="Option A"
+                          />
+                          <div class="ml-3 flex items-center gap-2">
+                            <input
+                              class="w-5 h-5 text-primary bg-slate-100 dark:bg-[#111722] border-slate-300 dark:border-[#324467] focus:ring-primary"
+                              id="q2_a"
+                              name="correct_q2"
+                              type="radio"
+                            />
+                            <label
+                              class="text-sm text-slate-500 dark:text-[#92a4c9] cursor-pointer"
+                              for="q2_a"
+                              >Correct</label
+                            >
+                          </div>
+                        </div>
+                      </div>
+                      <div class="relative group/option">
+                        <div class="flex items-center gap-3 mb-1.5">
+                          <div
+                            class="w-6 h-6 rounded-full border border-slate-300 dark:border-[#324467] flex items-center justify-center text-xs font-bold text-slate-500 dark:text-[#92a4c9] bg-slate-100 dark:bg-[#111722]"
+                          >
+                            B
+                          </div>
+                          <label
+                            class="text-xs font-bold text-slate-500 dark:text-[#92a4c9] uppercase tracking-wider"
+                            >Option 2</label
+                          >
+                        </div>
+                        <div class="flex items-center">
+                          <input
+                            class="flex-1 h-11 px-4 rounded-lg bg-slate-50 dark:bg-[#111722] border border-slate-200 dark:border-[#324467] text-slate-900 dark:text-white focus:ring-2 focus:ring-primary focus:border-transparent"
+                            placeholder="Answer for Option B"
+                            type="text"
+                            value="Option B"
+                          />
+                          <div class="ml-3 flex items-center gap-2">
+                            <input
+                              class="w-5 h-5 text-primary bg-slate-100 dark:bg-[#111722] border-slate-300 dark:border-[#324467] focus:ring-primary"
+                              id="q2_b"
+                              name="correct_q2"
+                              type="radio"
+                            />
+                            <label
+                              class="text-sm text-slate-500 dark:text-[#92a4c9] cursor-pointer"
+                              for="q2_b"
+                              >Correct</label
+                            >
+                          </div>
+                        </div>
+                      </div>
+                      <div
+                        class="relative group/option col-span-1 md:col-span-2"
+                      >
+                        <div
+                          class="p-3 bg-primary/10 border border-primary/20 rounded-lg text-sm text-primary flex items-center gap-2"
+                        >
+                          <span class="material-symbols-outlined text-[20px]"
+                            >info</span
+                          >
+                          <span
+                            >For image questions, ensure the image contains
+                            clearly labeled options A, B, C, D.</span
+                          >
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <button
+                  class="w-full py-4 border-2 border-dashed border-slate-300 dark:border-[#324467] rounded-xl text-slate-500 dark:text-[#92a4c9] font-bold flex items-center justify-center gap-2 hover:border-primary hover:text-primary hover:bg-primary/5 transition-all group"
+                >
+                  <span
+                    class="material-symbols-outlined group-hover:scale-110 transition-transform"
+                    >add_circle</span
+                  >
+                  Add Another Question
+                </button>
+              </div>
+              <div
+                class="sticky bottom-6 z-40 bg-surface-light dark:bg-[#192233] p-4 rounded-xl shadow-xl border border-slate-200 dark:border-[#324467] flex items-center justify-between"
+              >
+                <div class="flex flex-col">
+                  <span class="text-slate-900 dark:text-white font-bold"
+                    >2 Questions Added</span
+                  >
+                  <span class="text-xs text-slate-500 dark:text-[#92a4c9]"
+                    >Last saved 2 mins ago</span
+                  >
+                </div>
+                <div class="flex gap-4">
+                  <button
+                    class="px-6 py-2.5 rounded-lg border border-slate-300 dark:border-[#324467] text-slate-700 dark:text-white font-bold hover:bg-slate-100 dark:hover:bg-[#232f48] transition-colors"
+                  >
+                    Preview
+                  </button>
+                  <button
+                    id="publish-quiz-btn"
+                    class="px-6 py-2.5 rounded-lg bg-primary text-white font-bold shadow-lg shadow-primary/30 hover:bg-primary-hover hover:scale-[1.02] transition-all flex items-center gap-2"
+                  >
+                    <span class="material-symbols-outlined text-[20px]"
+                      >rocket_launch</span
+                    >
+                    Publish Quiz
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </main>
+      </div>
+    </div>
+
+    <script type="module" src="/js/add-quiz.js"></script>
+    <script type="module" src="js/admin-layout.js"></script>
+  </body>
+</html>

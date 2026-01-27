@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>View Quiz Page (Admin)</title>
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <!-- Tailwind Config -->
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              primary: "#135bec",
+              "primary-hover": "#0f4bc2",
+              "background-light": "#f6f6f8",
+              "background-dark": "#101622",
+              "card-light": "#ffffff",
+              "card-dark": "#1a2332",
+              "border-light": "#e7ebf3",
+              "border-dark": "#2a3441",
+            },
+            fontFamily: {
+              display: ["Inter", "sans-serif"],
+            },
+            borderRadius: {
+              DEFAULT: "0.25rem",
+              lg: "0.5rem",
+              xl: "0.75rem",
+              full: "9999px",
+            },
+          },
+        },
+      };
+    </script>
+  </head>
+  <body
+    class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 font-display transition-colors duration-200"
+  >
+    <div class="flex h-screen overflow-hidden">
+      <!-- SideNavBar -->
+      <aside
+        class="w-64 flex-shrink-0 border-r border-border-light dark:border-border-dark bg-card-light dark:bg-card-dark hidden lg:flex flex-col z-20"
+      >
+        <div class="p-6 flex flex-col gap-1">
+          <div class="flex items-center gap-3 mb-8">
+            <div
+              class="size-8 rounded bg-primary flex items-center justify-center text-white"
+            >
+              <span class="material-symbols-outlined">calculate</span>
+            </div>
+            <h1
+              class="text-xl font-bold tracking-tight text-slate-900 dark:text-white"
+            >
+              Math Admin
+            </h1>
+          </div>
+          <div class="flex flex-col gap-1">
+            <p
+              class="px-3 text-xs font-semibold text-slate-400 dark:text-slate-500 uppercase tracking-wider mb-2"
+            >
+              Main Menu
+            </p>
+            <a
+              class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors group"
+              href="#"
+            >
+              <span
+                class="material-symbols-outlined text-slate-400 group-hover:text-primary transition-colors"
+                >dashboard</span
+              >
+              <span class="text-sm font-medium">Dashboard</span>
+            </a>
+            <a
+              class="flex items-center gap-3 px-3 py-2.5 rounded-lg bg-primary/10 text-primary dark:text-primary transition-colors group"
+              href="#"
+            >
+              <span
+                class="material-symbols-outlined text-primary"
+                style="font-variation-settings: 'FILL' 1"
+                >description</span
+              >
+              <span class="text-sm font-medium">Quizzes</span>
+            </a>
+            <a
+              class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors group"
+              href="#"
+            >
+              <span
+                class="material-symbols-outlined text-slate-400 group-hover:text-primary transition-colors"
+                >group</span
+              >
+              <span class="text-sm font-medium">Users</span>
+            </a>
+            <a
+              class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors group"
+              href="#"
+            >
+              <span
+                class="material-symbols-outlined text-slate-400 group-hover:text-primary transition-colors"
+                >analytics</span
+              >
+              <span class="text-sm font-medium">Reports</span>
+            </a>
+          </div>
+          <div class="mt-8 flex flex-col gap-1">
+            <p
+              class="px-3 text-xs font-semibold text-slate-400 dark:text-slate-500 uppercase tracking-wider mb-2"
+            >
+              System
+            </p>
+            <a
+              class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors group"
+              href="#"
+            >
+              <span
+                class="material-symbols-outlined text-slate-400 group-hover:text-primary transition-colors"
+                >settings</span
+              >
+              <span class="text-sm font-medium">Settings</span>
+            </a>
+          </div>
+        </div>
+        <div
+          class="mt-auto p-4 border-t border-border-light dark:border-border-dark"
+        >
+          <div class="flex items-center gap-3 px-2">
+            <div
+              class="bg-cover bg-center size-9 rounded-full bg-slate-200"
+              data-alt="Portrait of admin user"
+              style="
+                background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAAmaBi4AqRGaTn5frXbP4hEaR0R4mfhZQUzu_2vK9qg2g3_rJmRl1aXzpzUpFuquTGfizOfRXFl8OM-kF_EEc3Z6tdQ5wkViPBCUz5DNeYQ1qVJXv7Usxl4CW65XqU2Sa24C7Db4USeVaDiIswYZSINBPbkgBb8mpzWZD4M4BM28tA-2aCQIgd1jXO0J7v8wMPV7sdE3W9-xee94y022eaE2_s88qURAroaGFswFx3wjoYrC4yxZJjbHd5hW2WuxtLDKZu6CXOvZA');
+              "
+            ></div>
+            <div class="flex flex-col">
+              <p class="text-sm font-medium text-slate-900 dark:text-white">
+                Admin User
+              </p>
+              <p class="text-xs text-slate-500 dark:text-slate-400">
+                admin@mathadmin.com
+              </p>
+            </div>
+          </div>
+        </div>
+      </aside>
+      <!-- Main Content Wrapper -->
+      <div class="flex flex-1 flex-col h-full overflow-hidden relative">
+        <!-- TopNavBar -->
+        <header
+          class="h-16 flex items-center justify-between px-6 border-b border-border-light dark:border-border-dark bg-card-light dark:bg-card-dark z-10"
+        >
+          <div class="flex items-center gap-4 lg:hidden">
+            <button
+              class="p-2 -ml-2 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg"
+            >
+              <span class="material-symbols-outlined">menu</span>
+            </button>
+            <div
+              class="size-8 rounded bg-primary flex items-center justify-center text-white"
+            >
+              <span class="material-symbols-outlined text-xl">calculate</span>
+            </div>
+          </div>
+          <!-- Breadcrumbs (Desktop) -->
+          <div class="hidden lg:flex items-center text-sm">
+            <a
+              class="text-slate-500 dark:text-slate-400 hover:text-primary transition-colors"
+              href="#"
+              >Quizzes</a
+            >
+            <span
+              class="material-symbols-outlined text-slate-400 text-base mx-2"
+              >chevron_right</span
+            >
+            <span class="font-medium text-slate-900 dark:text-white"
+              >Calculus Mid-Term</span
+            >
+          </div>
+          <div class="flex items-center gap-3 ml-auto">
+            <!-- Theme Toggle -->
+            <button
+              class="flex size-10 items-center justify-center rounded-lg border border-border-light dark:border-border-dark bg-transparent text-slate-500 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors"
+              onclick="document.documentElement.classList.toggle('dark')"
+            >
+              <span class="material-symbols-outlined dark:hidden"
+                >light_mode</span
+              >
+              <span class="material-symbols-outlined hidden dark:block"
+                >dark_mode</span
+              >
+            </button>
+            <!-- Notifications -->
+            <button
+              class="flex size-10 items-center justify-center rounded-lg border border-border-light dark:border-border-dark bg-transparent text-slate-500 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors relative"
+            >
+              <span class="material-symbols-outlined">notifications</span>
+              <span
+                class="absolute top-2.5 right-2.5 size-2 bg-red-500 rounded-full border border-white dark:border-card-dark"
+              ></span>
+            </button>
+          </div>
+        </header>
+        <!-- Scrollable Content -->
+        <main class="flex-1 overflow-y-auto p-4 lg:p-8">
+          <div class="max-w-6xl mx-auto flex flex-col gap-6">
+            <!-- Breadcrumbs (Mobile) -->
+            <div class="lg:hidden flex items-center text-sm mb-2">
+              <a
+                class="text-slate-500 dark:text-slate-400 hover:text-primary transition-colors"
+                href="#"
+                >Quizzes</a
+              >
+              <span
+                class="material-symbols-outlined text-slate-400 text-base mx-2"
+                >chevron_right</span
+              >
+              <span class="font-medium text-slate-900 dark:text-white" id="quiz-title"
+                >Calculus Mid-Term</span
+              >
+            </div>
+            <!-- Page Heading & Metadata -->
+            <div
+              class="flex flex-col md:flex-row md:items-start justify-between gap-6"
+            >
+              <div class="flex flex-col gap-4">
+                <h1
+                  class="text-3xl md:text-4xl font-black tracking-tight text-slate-900 dark:text-white"
+                >
+                  Calculus Mid-Term
+                </h1>
+                <!-- Chips -->
+                <div class="flex flex-wrap gap-3">
+                  <div
+                    class="flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-100 dark:bg-emerald-500/10 text-emerald-700 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-500/20"
+                  >
+                    <span
+                      class="material-symbols-outlined text-[18px]"
+                      style="font-variation-settings: 'FILL' 1"
+                      >check_circle</span
+                    >
+                    <span class="text-sm font-semibold">Active</span>
+                  </div>
+                  <div
+                    class="flex items-center gap-2 px-3 py-1.5 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700"
+                  >
+                    <span class="material-symbols-outlined text-[18px]"
+                      >school</span
+                    >
+                    <span class="text-sm font-medium">Grade 11</span>
+                  </div>
+                  <div
+                    class="flex items-center gap-2 px-3 py-1.5 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700"
+                  >
+                    <span class="material-symbols-outlined text-[18px]"
+                      >quiz</span
+                    >
+                    <span class="text-sm font-medium">20 Questions</span>
+                  </div>
+                </div>
+              </div>
+              <div class="flex gap-3 mt-1">
+                <button
+                  class="flex items-center justify-center h-10 px-4 rounded-lg bg-primary hover:bg-primary-hover text-white text-sm font-bold shadow-sm shadow-blue-500/30 transition-all"
+                >
+                  <span class="material-symbols-outlined text-[20px] mr-2"
+                    >edit</span
+                  >
+                  Edit Quiz
+                </button>
+                <button
+                  class="flex items-center justify-center h-10 px-4 rounded-lg bg-white dark:bg-card-dark border border-border-light dark:border-border-dark hover:bg-slate-50 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-200 text-sm font-medium transition-all"
+                >
+                  <span class="material-symbols-outlined text-[20px]"
+                    >more_horiz</span
+                  >
+                </button>
+              </div>
+            </div>
+            <!-- Stats Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-2">
+              <div
+                class="bg-card-light dark:bg-card-dark p-5 rounded-xl border border-border-light dark:border-border-dark shadow-sm"
+              >
+                <div
+                  class="flex items-center gap-3 text-slate-500 dark:text-slate-400 mb-2"
+                >
+                  <span class="material-symbols-outlined">group</span>
+                  <span class="text-sm font-medium">Total Attempts</span>
+                </div>
+                <p class="text-3xl font-bold text-slate-900 dark:text-white">
+                  124
+                </p>
+              </div>
+              <div
+                class="bg-card-light dark:bg-card-dark p-5 rounded-xl border border-border-light dark:border-border-dark shadow-sm"
+              >
+                <div
+                  class="flex items-center gap-3 text-slate-500 dark:text-slate-400 mb-2"
+                >
+                  <span class="material-symbols-outlined">bar_chart</span>
+                  <span class="text-sm font-medium">Average Score</span>
+                </div>
+                <p class="text-3xl font-bold text-slate-900 dark:text-white">
+                  76%
+                </p>
+                <div
+                  class="w-full bg-slate-100 dark:bg-slate-700 rounded-full h-1.5 mt-3"
+                >
+                  <div
+                    class="bg-primary h-1.5 rounded-full"
+                    style="width: 76%"
+                  ></div>
+                </div>
+              </div>
+              <div
+                class="bg-card-light dark:bg-card-dark p-5 rounded-xl border border-border-light dark:border-border-dark shadow-sm"
+              >
+                <div
+                  class="flex items-center gap-3 text-slate-500 dark:text-slate-400 mb-2"
+                >
+                  <span class="material-symbols-outlined">emoji_events</span>
+                  <span class="text-sm font-medium">High Score</span>
+                </div>
+                <p class="text-3xl font-bold text-slate-900 dark:text-white">
+                  100%
+                </p>
+                <p class="text-xs text-slate-400 mt-1">
+                  Achieved by 5 students
+                </p>
+              </div>
+            </div>
+            <!-- User Results Section -->
+            <div class="flex flex-col gap-4 mt-4">
+              <div
+                class="flex flex-col sm:flex-row sm:items-center justify-between gap-4"
+              >
+                <h2 class="text-lg font-bold text-slate-900 dark:text-white">
+                  User Results
+                </h2>
+                <div class="relative max-w-xs w-full">
+                  <div
+                    class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none"
+                  >
+                    <span
+                      class="material-symbols-outlined text-slate-400 text-[20px]"
+                      >search</span
+                    >
+                  </div>
+                  <input
+                    class="block w-full pl-10 pr-3 py-2 border border-border-light dark:border-border-dark rounded-lg leading-5 bg-card-light dark:bg-card-dark text-slate-900 dark:text-white placeholder-slate-500 focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary sm:text-sm"
+                    placeholder="Search students or ID..."
+                    type="text"
+                  />
+                </div>
+              </div>
+              <!-- Table Card -->
+              <div
+                class="bg-card-light dark:bg-card-dark border border-border-light dark:border-border-dark rounded-xl shadow-sm overflow-hidden"
+              >
+                <div class="overflow-x-auto">
+                  <table
+                    class="min-w-full divide-y divide-border-light dark:divide-border-dark"
+                  >
+                    <thead>
+                      <tr class="border-b text-sm">
+                        <th class="py-2">Student</th>
+                        <th class="py-2">Email</th>
+                        <th class="py-2 text-center">Total Score</th>
+                        <th class="py-2 text-center">Quiz Score</th>
+                      </tr>
+                    </thead>
+                    <tbody id="quiz-results"></tbody>
+                  </table>
+                </div>
+                <!-- Pagination -->
+                <div
+                  class="bg-card-light dark:bg-card-dark px-4 py-3 flex items-center justify-between border-t border-border-light dark:border-border-dark sm:px-6"
+                >
+                  <div
+                    class="hidden sm:flex-1 sm:flex sm:items-center sm:justify-between"
+                  >
+                    <div>
+                      <p class="text-sm text-slate-700 dark:text-slate-400">
+                        Showing
+                        <span class="font-medium text-slate-900 dark:text-white"
+                          >1</span
+                        >
+                        to
+                        <span class="font-medium text-slate-900 dark:text-white"
+                          >4</span
+                        >
+                        of
+                        <span class="font-medium text-slate-900 dark:text-white"
+                          >42</span
+                        >
+                        results
+                      </p>
+                    </div>
+                    <div>
+                      <nav
+                        aria-label="Pagination"
+                        class="relative z-0 inline-flex rounded-md shadow-sm -space-x-px"
+                      >
+                        <a
+                          class="relative inline-flex items-center px-2 py-2 rounded-l-md border border-border-light dark:border-border-dark bg-card-light dark:bg-card-dark text-sm font-medium text-slate-500 hover:bg-slate-50 dark:hover:bg-slate-800"
+                          href="#"
+                        >
+                          <span class="sr-only">Previous</span>
+                          <span class="material-symbols-outlined text-[20px]"
+                            >chevron_left</span
+                          >
+                        </a>
+                        <a
+                          aria-current="page"
+                          class="z-10 bg-primary/10 border-primary text-primary relative inline-flex items-center px-4 py-2 border text-sm font-medium"
+                          href="#"
+                        >
+                          1
+                        </a>
+                        <a
+                          class="bg-card-light dark:bg-card-dark border-border-light dark:border-border-dark text-slate-500 hover:bg-slate-50 dark:hover:bg-slate-800 relative inline-flex items-center px-4 py-2 border text-sm font-medium"
+                          href="#"
+                        >
+                          2
+                        </a>
+                        <a
+                          class="bg-card-light dark:bg-card-dark border-border-light dark:border-border-dark text-slate-500 hover:bg-slate-50 dark:hover:bg-slate-800 relative inline-flex items-center px-4 py-2 border text-sm font-medium"
+                          href="#"
+                        >
+                          3
+                        </a>
+                        <span
+                          class="relative inline-flex items-center px-4 py-2 border border-border-light dark:border-border-dark bg-card-light dark:bg-card-dark text-sm font-medium text-slate-700 dark:text-slate-400"
+                        >
+                          ...
+                        </span>
+                        <a
+                          class="relative inline-flex items-center px-2 py-2 rounded-r-md border border-border-light dark:border-border-dark bg-card-light dark:bg-card-dark text-sm font-medium text-slate-500 hover:bg-slate-50 dark:hover:bg-slate-800"
+                          href="#"
+                        >
+                          <span class="sr-only">Next</span>
+                          <span class="material-symbols-outlined text-[20px]"
+                            >chevron_right</span
+                          >
+                        </a>
+                      </nav>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </main>
+      </div>
+    </div>
+    <script src="js/view-quiz.js" type="module"></script>
+  </body>
+</html>

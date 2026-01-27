@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Manage Lessons - Math Admin</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Tailwind -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms"></script>
+    <script>
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              primary: "#135bec",
+              "primary-hover": "#1d6bf5",
+              "background-light": "#f6f6f8",
+              "background-dark": "#101622",
+              "surface-dark": "#1A2432",
+              "surface-light": "#ffffff",
+              "border-dark": "#232f48",
+              "border-light": "#e2e8f0",
+              "text-secondary-dark": "#92a4c9",
+            },
+            fontFamily: {
+              display: ["Inter", "sans-serif"],
+            },
+          },
+        },
+      };
+    </script>
+
+    <style>
+      body {
+        font-family: "Inter", sans-serif;
+      }
+      .material-symbols-outlined {
+        font-variation-settings: "FILL" 0, "wght" 400;
+      }
+      ::-webkit-scrollbar {
+        width: 8px;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #334155;
+        border-radius: 4px;
+      }
+    </style>
+  </head>
+
+  <body
+    class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-white h-screen overflow-hidden"
+  >
+    <div class="flex h-full w-full overflow-hidden">
+      <!-- Sidebar -->
+      <aside
+        class="hidden md:flex w-64 flex-col border-r border-slate-200 dark:border-slate-800 bg-surface-light dark:bg-[#111722]"
+      >
+        <div
+          class="flex h-16 items-center gap-3 px-6 border-b border-slate-200 dark:border-slate-800"
+        >
+          <div
+            class="flex h-8 w-8 items-center justify-center rounded bg-primary text-white"
+          >
+            <span class="material-symbols-outlined">calculate</span>
+          </div>
+          <h1 class="text-lg font-bold">Math Admin</h1>
+        </div>
+
+        <nav class="flex-1 overflow-y-auto px-4 py-6 space-y-2">
+          <a
+            href="/admin-dashboard.html"
+            class="flex items-center gap-3 rounded-lg px-3 py-2 text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800"
+          >
+            <span class="material-symbols-outlined">dashboard</span>
+            Dashboard
+          </a>
+
+          <a
+            href="/manage-lessons.html"
+            class="flex items-center gap-3 rounded-lg bg-primary/10 px-3 py-2 text-primary dark:bg-[#232f48]"
+          >
+            <span class="material-symbols-outlined">book_2</span>
+            Manage Lessons
+          </a>
+        </nav>
+      </aside>
+
+      <!-- Main -->
+      <main class="flex flex-1 flex-col overflow-hidden">
+        <!-- Top Header -->
+        <header
+          class="flex h-16 items-center justify-between border-b border-slate-200 bg-surface-light px-6 dark:border-slate-800 dark:bg-[#111722]"
+        >
+          <h2 class="font-bold">Manage Lessons</h2>
+          <button
+            onclick="document.documentElement.classList.toggle('dark')"
+            class="h-10 w-10 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800"
+          >
+            <span class="material-symbols-outlined dark:hidden">dark_mode</span>
+            <span class="material-symbols-outlined hidden dark:block"
+              >light_mode</span
+            >
+          </button>
+        </header>
+
+        <!-- Page Content -->
+        <div class="flex-1 overflow-hidden p-6">
+          <div class="mx-auto max-w-6xl h-full flex flex-col gap-6">
+            <!-- Page Header -->
+            <div class="flex items-center justify-between">
+              <div>
+                <h3 class="text-2xl font-bold">Manage Lessons</h3>
+                <p class="text-sm text-slate-500">
+                  View and manage curriculum lessons
+                </p>
+              </div>
+              <button
+                class="h-11 px-5 rounded-lg bg-primary text-white font-bold hover:bg-primary-hover"
+              >
+                + Add Lesson
+              </button>
+            </div>
+
+            <!-- Table Card -->
+            <div
+              class="rounded-xl border border-border-light dark:border-border-dark bg-surface-light dark:bg-surface-dark flex flex-col h-full"
+            >
+              <!-- Scrollable container (no overflow-hidden here!) -->
+              <div class="overflow-y-auto flex-1">
+                <table class="min-w-full border-collapse text-left table-fixed">
+                  <thead>
+                    <tr>
+                      <th class="sticky top-0 z-50 px-6 py-4 bg-slate-50 dark:bg-[#111722]">Icon</th>
+                      <th class="sticky top-0 z-50 px-6 py-4 bg-slate-50 dark:bg-[#111722]">Lesson</th>
+                      <th class="sticky top-0 z-50 px-6 py-4 bg-slate-50 dark:bg-[#111722]">Grade</th>
+                      <th class="sticky top-0 z-50 px-6 py-4 bg-slate-50 dark:bg-[#111722]">Updated</th>
+                      <th class="sticky top-0 z-50 px-6 py-4 text-right bg-slate-50 dark:bg-[#111722]">
+                        Actions
+                      </th>
+                    </tr>
+                  </thead>
+
+                  <tbody
+                    class="divide-y divide-border-light dark:divide-border-dark"
+                  >
+                    <!-- Example row -->
+                    <tr>
+                      <td class="px-6 py-4">Decimals - intro</td>
+                      <td class="px-6 py-4">7</td>
+                      <td class="px-6 py-4 text-right">12/23/2025</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <script type="module" src="js/admin-layout.js"></script>
+    <script type="module" src="js/admin-lessons.js"></script>
+  </body>
+</html>

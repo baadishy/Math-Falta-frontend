@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Manage Quizzes - Math Admin</title>
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script>
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              primary: "#135bec",
+              "background-light": "#f6f6f8",
+              "background-dark": "#101622",
+            },
+            fontFamily: {
+              display: ["Inter", "sans-serif"],
+            },
+            borderRadius: {
+              DEFAULT: "0.25rem",
+              lg: "0.5rem",
+              xl: "0.75rem",
+              full: "9999px",
+            },
+          },
+        },
+      };
+    </script>
+  </head>
+  <body
+    class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-white h-screen overflow-hidden"
+  >
+    <div class="flex h-full w-full overflow-hidden">
+      <!-- Sidebar -->
+      <aside
+        class="hidden md:flex w-64 flex-col border-r border-slate-200 dark:border-slate-800 bg-surface-light dark:bg-[#111722]"
+      >
+        <div
+          class="flex h-16 items-center gap-3 px-6 border-b border-slate-200 dark:border-slate-800"
+        >
+          <div
+            class="flex h-8 w-8 items-center justify-center rounded bg-primary text-white"
+          >
+            <span class="material-symbols-outlined">calculate</span>
+          </div>
+          <h1 class="text-lg font-bold">Math Admin</h1>
+        </div>
+
+        <nav class="flex-1 overflow-y-auto px-4 py-6 space-y-2">
+          <a
+            href="/admin-dashboard.html"
+            class="flex items-center gap-3 rounded-lg px-3 py-2 text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800"
+          >
+            <span class="material-symbols-outlined">dashboard</span>
+            Dashboard
+          </a>
+
+          <a
+            href="/manage-lessons.html"
+            class="flex items-center gap-3 rounded-lg bg-primary/10 px-3 py-2 text-primary dark:bg-[#232f48]"
+          >
+            <span class="material-symbols-outlined">book_2</span>
+            Manage Lessons
+          </a>
+        </nav>
+      </aside>
+
+      <main class="flex flex-1 flex-col overflow-hidden">
+        <header
+          class="flex h-16 items-center justify-between border-b border-slate-200 bg-surface-light px-6 dark:border-slate-800 dark:bg-[#111722]"
+        >
+          <div class="flex items-center gap-4 lg:hidden">
+            <button
+              class="text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-white"
+            >
+              <span class="material-symbols-outlined">menu</span>
+            </button>
+            <span class="font-bold text-slate-900 dark:text-white"
+              >Math Admin</span
+            >
+          </div>
+          <div class="hidden max-w-md flex-1 lg:flex">
+            <div class="relative w-full">
+              <span
+                class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400"
+                >search</span
+              >
+              <input
+                class="h-10 w-full rounded-lg border border-slate-200 bg-slate-50 pl-10 text-sm outline-none focus:border-primary focus:ring-1 focus:ring-primary dark:border-slate-700 dark:bg-[#232f48] dark:text-white dark:placeholder-slate-400"
+                placeholder="Search lessons, students, or quizzes..."
+                type="text"
+              />
+            </div>
+          </div>
+          <div class="flex items-center gap-4">
+            <button
+              class="flex h-10 w-10 items-center justify-center rounded-lg text-slate-500 hover:bg-slate-100 dark:text-slate-400 dark:hover:bg-slate-800"
+            >
+              <span class="material-symbols-outlined">notifications</span>
+            </button>
+            <button
+              class="flex h-10 w-10 items-center justify-center rounded-lg text-slate-500 hover:bg-slate-100 dark:text-slate-400 dark:hover:bg-slate-800"
+              onclick="document.documentElement.classList.toggle('dark')"
+            >
+              <span class="material-symbols-outlined dark:hidden"
+                >dark_mode</span
+              >
+              <span class="material-symbols-outlined hidden dark:block"
+                >light_mode</span
+              >
+            </button>
+            <div class="relative group">
+              <button class="flex items-center gap-3 pl-2">
+                <div class="text-right hidden md:block">
+                  <p class="text-sm font-medium text-slate-900 dark:text-white">
+                    Admin User
+                  </p>
+                  <p class="text-xs text-slate-500 dark:text-slate-400">
+                    admin@mathfalta.com
+                  </p>
+                </div>
+                <div
+                  class="h-10 w-10 overflow-hidden rounded-full bg-slate-200 dark:bg-slate-700 bg-center bg-cover"
+                  style="
+                    background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAlXYaEVeHoTogkCqsZ_nXsz6ywYFxdgP7aZWCHthY3w5fZs9HHaSNaXuxeHWYJbEIVRE7bmsOQIYKAwmNG-E_3_wfuouNkfHptc_5ydKAP2EntLhYyABTcNcw6Nt84BGkJ_-yIgX_LJxdObkax6cvtV5CsLnM4JqNNMomVSQ1qXEwP-nWQLG8m70fwZqy5Ew4qYE30yiDpA7TENm84Rpa2wz-ydRiXLuP1wLpriQgE8giZyEyhO-Q5QjyHtQpRkEfQlDfiZ5_06nc');
+                  "
+                ></div>
+              </button>
+              <div
+                class="absolute right-0 top-full mt-2 w-64 origin-top-right rounded-xl border border-slate-200 bg-white p-2 shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 dark:border-slate-700 dark:bg-[#1e293b] z-50"
+              >
+                <div
+                  class="px-3 py-2 border-b border-slate-100 dark:border-slate-700 mb-2"
+                >
+                  <p
+                    class="text-sm font-semibold text-slate-900 dark:text-white"
+                  >
+                    Jane Admin
+                  </p>
+                  <p class="text-xs text-slate-500 dark:text-slate-400">
+                    +1 (555) 123-4567
+                  </p>
+                  <p class="text-xs text-slate-500 dark:text-slate-400">
+                    admin@mathfalta.com
+                  </p>
+                </div>
+                <a
+                  class="flex w-full items-center gap-2 rounded-lg px-3 py-2 text-sm text-slate-600 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-slate-800"
+                  href="/manage-users.html"
+                >
+                  <span class="material-symbols-outlined text-[20px]"
+                    >person</span
+                  >
+                  Profile
+                </a>
+                <a
+                  id="admin-signout-2"
+                  class="flex w-full items-center gap-2 rounded-lg px-3 py-2 text-sm text-red-600 hover:bg-red-50 dark:text-red-400 dark:hover:bg-red-900/20"
+                  href="#"
+                >
+                  <span class="material-symbols-outlined text-[20px]"
+                    >logout</span
+                  >
+                  Sign out
+                </a>
+              </div>
+            </div>
+          </div>
+        </header>
+        <div class="px-4 py-8 sm:px-6 lg:px-8">
+          <div class="mx-auto flex w-full max-w-[1200px] flex-col gap-6">
+            <div class="flex flex-wrap items-end justify-between gap-4">
+              <div class="flex min-w-[280px] flex-col gap-2">
+                <h1
+                  class="text-3xl font-black leading-tight tracking-tight text-slate-900 dark:text-white"
+                >
+                  Manage Quizzes
+                </h1>
+                <p class="text-base text-slate-500 dark:text-slate-400">
+                  Create, update, or remove mathematics assessments.
+                </p>
+              </div>
+              <button
+                id="add-new-quiz-btn"
+                class="flex h-10 items-center gap-2 rounded-lg bg-primary px-4 text-sm font-bold text-white shadow-md transition-transform hover:scale-105 hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 dark:focus:ring-offset-[#101622]"
+              >
+                <span class="material-symbols-outlined !text-[20px]">add</span>
+                <span>Add New Quiz</span>
+              </button>
+            </div>
+
+            <div
+              class="rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-[#192233] flex flex-col h-full"
+            >
+              <!-- Scrollable container -->
+              <div class="overflow-y-auto flex-1">
+                <table class="min-w-full border-collapse text-left table-fixed">
+                  <thead
+                    class="bg-slate-50 text-slate-500 dark:bg-[#111722] dark:text-slate-400 border-b border-slate-200 dark:border-slate-700"
+                  >
+                    <tr>
+                      <th class="sticky top-0 z-50 px-6 py-4 font-semibold">
+                        Quiz Title
+                      </th>
+                      <th class="sticky top-0 z-50 px-6 py-4 font-semibold">
+                        Grade Level
+                      </th>
+                      <th class="sticky top-0 z-50 px-6 py-4 font-semibold">
+                        Status
+                      </th>
+                      <th class="sticky top-0 z-50 px-6 py-4 font-semibold">
+                        Last Updated
+                      </th>
+                      <th
+                        class="sticky top-0 z-50 px-6 py-4 font-semibold text-right"
+                      >
+                        Actions
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody
+                    class="divide-y divide-slate-200 dark:divide-slate-700"
+                  >
+                    <!-- Populated by js/admin-quizzes.js -->
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <script type="module" src="/js/admin-quizzes.js"></script>
+    <script type="module" src="js/admin-layout.js"></script>
+  </body>
+</html>

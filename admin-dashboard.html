@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Math Admin Dashboard</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700&amp;family=Noto+Sans:wght@400;500;700&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              primary: "#135bec",
+              "background-light": "#f6f6f8",
+              "background-dark": "#101622",
+              "surface-dark": "#1e293b",
+              "surface-light": "#ffffff",
+            },
+            fontFamily: {
+              display: ["Lexend", "Noto Sans", "sans-serif"],
+              body: ["Noto Sans", "sans-serif"],
+            },
+            borderRadius: {
+              DEFAULT: "0.25rem",
+              lg: "0.5rem",
+              xl: "0.75rem",
+              "2xl": "1rem",
+              full: "9999px",
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      .material-symbols-outlined {
+        font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24;
+      }
+      .icon-fill {
+        font-variation-settings: "FILL" 1, "wght" 400, "GRAD" 0, "opsz" 24;
+      }
+      ::-webkit-scrollbar {
+        width: 8px;
+        height: 8px;
+      }
+      ::-webkit-scrollbar-track {
+        background: #111722;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #324467;
+        border-radius: 4px;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: #4b6696;
+      }
+    </style>
+  </head>
+  <body
+    class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-white font-display overflow-hidden transition-colors duration-300"
+  >
+    <div class="flex h-screen w-full overflow-hidden">
+      <aside
+        class="hidden w-64 flex-col border-r border-slate-200 dark:border-slate-800 bg-surface-light dark:bg-[#111722] md:flex"
+      >
+        <div
+          class="flex h-16 items-center gap-3 px-6 border-b border-slate-200 dark:border-slate-800"
+        >
+          <div
+            class="flex h-8 w-8 items-center justify-center rounded bg-primary text-white"
+          >
+            <span class="material-symbols-outlined">calculate</span>
+          </div>
+          <h1
+            class="text-lg font-bold tracking-tight text-slate-900 dark:text-white"
+          >
+            Math Admin
+          </h1>
+        </div>
+        <div
+          class="flex flex-1 flex-col justify-between overflow-y-auto px-4 py-6"
+        >
+          <nav class="flex flex-col gap-2">
+            <a
+              class="flex items-center gap-3 rounded-lg bg-primary/10 px-3 py-2 text-primary dark:bg-[#232f48] dark:text-white"
+              href="/admin-dashboard.html"
+            >
+              <span class="material-symbols-outlined icon-fill">dashboard</span>
+              <span class="text-sm font-medium">Dashboard</span>
+            </a>
+            <a
+              class="group flex items-center gap-3 rounded-lg px-3 py-2 text-slate-600 hover:bg-slate-100 dark:text-slate-400 dark:hover:bg-slate-800 dark:hover:text-white transition-colors"
+              href="/manage-lessons.html"
+            >
+              <span class="material-symbols-outlined">book_2</span>
+              <span class="text-sm font-medium">Manage Lessons</span>
+            </a>
+            <a
+              class="group flex items-center gap-3 rounded-lg px-3 py-2 text-slate-600 hover:bg-slate-100 dark:text-slate-400 dark:hover:bg-slate-800 dark:hover:text-white transition-colors"
+              href="/manage-quizzes.html"
+            >
+              <span class="material-symbols-outlined">quiz</span>
+              <span class="text-sm font-medium">Manage Quizzes</span>
+            </a>
+            <a
+              class="group flex items-center gap-3 rounded-lg px-3 py-2 text-slate-600 hover:bg-slate-100 dark:text-slate-400 dark:hover:bg-slate-800 dark:hover:text-white transition-colors"
+              href="/manage-users.html"
+            >
+              <span class="material-symbols-outlined">group</span>
+              <span class="text-sm font-medium">Users Management</span>
+            </a>
+            <a
+              class="group flex items-center gap-3 rounded-lg px-3 py-2 text-slate-600 hover:bg-slate-100 dark:text-slate-400 dark:hover:bg-slate-800 dark:hover:text-white transition-colors"
+              href="/admin-leaderboard.html"
+            >
+              <span class="material-symbols-outlined">leaderboard</span>
+              <span class="text-sm font-medium">Leaderboard</span>
+            </a>
+          </nav>
+          <nav
+            class="flex flex-col gap-2 border-t border-slate-200 pt-6 dark:border-slate-800"
+          >
+            <a
+              class="group flex items-center gap-3 rounded-lg px-3 py-2 text-slate-600 hover:bg-slate-100 dark:text-slate-400 dark:hover:bg-slate-800 dark:hover:text-white transition-colors"
+              href="/admin-dashboard.html#settings"
+            >
+              <span class="material-symbols-outlined">settings</span>
+              <span class="text-sm font-medium">Settings</span>
+            </a>
+            <a
+              id="admin-signout"
+              class="group flex items-center gap-3 rounded-lg px-3 py-2 text-slate-600 hover:bg-slate-100 dark:text-slate-400 dark:hover:bg-slate-800 dark:hover:text-white transition-colors"
+              href="#"
+            >
+              <span class="material-symbols-outlined">logout</span>
+              <span class="text-sm font-medium">Logout</span>
+            </a>
+          </nav>
+        </div>
+      </aside>
+      <main
+        class="flex flex-1 flex-col overflow-hidden bg-background-light dark:bg-background-dark relative"
+      >
+        <header
+          class="flex h-16 items-center justify-between border-b border-slate-200 bg-surface-light px-6 dark:border-slate-800 dark:bg-[#111722]"
+        >
+          <div class="flex items-center gap-4 lg:hidden">
+            <button
+              class="text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-white"
+            >
+              <span class="material-symbols-outlined">menu</span>
+            </button>
+            <span class="font-bold text-slate-900 dark:text-white"
+              >Math Admin</span
+            >
+          </div>
+          <div class="hidden max-w-md flex-1 lg:flex">
+            <div class="relative w-full">
+              <span
+                class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400"
+                >search</span
+              >
+              <input
+                class="h-10 w-full rounded-lg border border-slate-200 bg-slate-50 pl-10 text-sm outline-none focus:border-primary focus:ring-1 focus:ring-primary dark:border-slate-700 dark:bg-[#232f48] dark:text-white dark:placeholder-slate-400"
+                placeholder="Search lessons, students, or quizzes..."
+                type="text"
+              />
+            </div>
+          </div>
+          <div class="flex items-center gap-4">
+            <button
+              class="flex h-10 w-10 items-center justify-center rounded-lg text-slate-500 hover:bg-slate-100 dark:text-slate-400 dark:hover:bg-slate-800"
+            >
+              <span class="material-symbols-outlined">notifications</span>
+            </button>
+            <button
+              class="flex h-10 w-10 items-center justify-center rounded-lg text-slate-500 hover:bg-slate-100 dark:text-slate-400 dark:hover:bg-slate-800"
+              onclick="document.documentElement.classList.toggle('dark')"
+            >
+              <span class="material-symbols-outlined dark:hidden"
+                >dark_mode</span
+              >
+              <span class="material-symbols-outlined hidden dark:block"
+                >light_mode</span
+              >
+            </button>
+            <div class="relative group">
+              <button class="flex items-center gap-3 pl-2">
+                <div class="text-right hidden md:block">
+                  <p class="text-sm font-medium text-slate-900 dark:text-white">
+                    Admin User
+                  </p>
+                  <p class="text-xs text-slate-500 dark:text-slate-400">
+                    admin@mathfalta.com
+                  </p>
+                </div>
+                <div
+                  class="h-10 w-10 overflow-hidden rounded-full bg-slate-200 dark:bg-slate-700 bg-center bg-cover"
+                  data-alt="Admin user profile picture showing a placeholder avatar"
+                  style="
+                    background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAlXYaEVeHoTogkCqsZ_nXsz6ywYFxdgP7aZWCHthY3w5fZs9HHaSNaXuxeHWYJbEIVRE7bmsOQIYKAwmNG-E_3_wfuouNkfHptc_5ydKAP2EntLhYyABTcNcw6Nt84BGkJ_-yIgX_LJxdObkax6cvtV5CsLnM4JqNNMomVSQ1qXEwP-nWQLG8m70fwZqy5Ew4qYE30yiDpA7TENm84Rpa2wz-ydRiXLuP1wLpriQgE8giZyEyhO-Q5QjyHtQpRkEfQlDfiZ5_06nc');
+                  "
+                ></div>
+              </button>
+              <div
+                class="absolute right-0 top-full mt-2 w-64 origin-top-right rounded-xl border border-slate-200 bg-white p-2 shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 dark:border-slate-700 dark:bg-[#1e293b] z-50"
+              >
+                <div
+                  class="px-3 py-2 border-b border-slate-100 dark:border-slate-700 mb-2"
+                >
+                  <p
+                    class="text-sm font-semibold text-slate-900 dark:text-white"
+                  >
+                    Jane Admin
+                  </p>
+                  <p class="text-xs text-slate-500 dark:text-slate-400">
+                    +1 (555) 123-4567
+                  </p>
+                  <p class="text-xs text-slate-500 dark:text-slate-400">
+                    admin@mathfalta.com
+                  </p>
+                </div>
+                <a
+                  class="flex w-full items-center gap-2 rounded-lg px-3 py-2 text-sm text-slate-600 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-slate-800"
+                  href="/manage-users.html"
+                >
+                  <span class="material-symbols-outlined text-[20px]"
+                    >person</span
+                  >
+                  Profile
+                </a>
+                <a
+                  id="admin-signout-2"
+                  class="flex w-full items-center gap-2 rounded-lg px-3 py-2 text-sm text-red-600 hover:bg-red-50 dark:text-red-400 dark:hover:bg-red-900/20"
+                  href="#"
+                >
+                  <span class="material-symbols-outlined text-[20px]"
+                    >logout</span
+                  >
+                  Sign out
+                </a>
+              </div>
+            </div>
+          </div>
+        </header>
+        <div class="flex-1 overflow-y-auto p-6 md:p-8">
+          <div class="mx-auto max-w-6xl space-y-8">
+            <div class="flex flex-col gap-2">
+              <h2 class="text-2xl font-bold text-slate-900 dark:text-white">
+                Dashboard Overview
+              </h2>
+              <p class="text-slate-500 dark:text-slate-400">
+                Welcome back! Here's what's happening with your students today.
+              </p>
+            </div>
+            <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+              <div
+                class="flex flex-col gap-1 rounded-xl border border-slate-200 bg-surface-light p-6 shadow-sm dark:border-[#324467] dark:bg-[#1e293b]"
+              >
+                <div class="flex items-center justify-between">
+                  <span
+                    class="text-sm font-medium text-slate-500 dark:text-slate-400"
+                    >Total Students</span
+                  >
+                  <div
+                    class="flex h-8 w-8 items-center justify-center rounded-lg bg-blue-50 text-primary dark:bg-blue-900/20 dark:text-blue-400"
+                  >
+                    <span class="material-symbols-outlined">group</span>
+                  </div>
+                </div>
+                <div class="mt-4 flex items-baseline gap-2">
+                  <span
+                    id="stat-total-students"
+                    class="text-3xl font-bold text-slate-900 dark:text-white"
+                    >1,204</span
+                  >
+                  
+                </div>
+                <p class="text-xs text-slate-400 mt-1">Currently active</p>
+              </div>
+              <div
+                class="flex flex-col gap-1 rounded-xl border border-slate-200 bg-surface-light p-6 shadow-sm dark:border-[#324467] dark:bg-[#1e293b]"
+              >
+                <div class="flex items-center justify-between">
+                  <span
+                    class="text-sm font-medium text-slate-500 dark:text-slate-400"
+                    >Active Quizzes</span
+                  >
+                  <div
+                    class="flex h-8 w-8 items-center justify-center rounded-lg bg-purple-50 text-purple-600 dark:bg-purple-900/20 dark:text-purple-400"
+                  >
+                    <span class="material-symbols-outlined">assignment</span>
+                  </div>
+                </div>
+                <div class="mt-4 flex items-baseline gap-2">
+                  <span
+                    id="stat-active-quizzes"
+                    class="text-3xl font-bold text-slate-900 dark:text-white"
+                    >8</span
+                  >
+                  
+                </div>
+                <p class="text-xs text-slate-400 mt-1">Currently live</p>
+              </div>
+              <div
+                class="flex flex-col gap-1 rounded-xl border border-slate-200 bg-surface-light p-6 shadow-sm dark:border-[#324467] dark:bg-[#1e293b]"
+              >
+                <div class="flex items-center justify-between">
+                  <span
+                    class="text-sm font-medium text-slate-500 dark:text-slate-400"
+                    >Active Lessons</span
+                  >
+                  <div
+                    class="flex h-8 w-8 items-center justify-center rounded-lg bg-orange-50 text-orange-600 dark:bg-orange-900/20 dark:text-orange-400"
+                  >
+                    <span class="material-symbols-outlined">check_circle</span>
+                  </div>
+                </div>
+                <div class="mt-4 flex items-baseline gap-2">
+                  <span
+                    id="stat-lessons-completed"
+                    class="text-3xl font-bold text-slate-900 dark:text-white"
+                    >420</span
+                  >
+                  
+                </div>
+                <p class="text-xs text-slate-400 mt-1">Currently live</p>
+              </div>
+            </div>
+            <div class="grid gap-8 lg:grid-cols-3">
+              <div class="flex flex-col gap-8 lg:col-span-2">
+                <div
+                  class="rounded-xl border border-slate-200 bg-surface-light shadow-sm dark:border-[#324467] dark:bg-[#1e293b]"
+                >
+                  <div
+                    class="flex items-center justify-between border-b border-slate-200 px-6 py-4 dark:border-slate-700"
+                  >
+                    <h3 class="font-bold text-slate-900 dark:text-white">
+                      Manage Lessons
+                    </h3>
+                    <button
+                      class="flex items-center gap-2 rounded-lg bg-primary px-3 py-1.5 text-sm font-medium text-white hover:bg-blue-600 transition-colors" id="add-new-lesson"
+                    >
+                      <span class="material-symbols-outlined text-[18px]"
+                        >add</span
+                      >
+                      Add New
+                    </button>
+                  </div>
+                  <div
+                    id="admin-manage-lessons-list"
+                    class="flex flex-col divide-y divide-slate-100 dark:divide-slate-700"
+                  >
+                    <div
+                      class="flex items-center justify-between gap-4 p-4 hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors"
+                    >
+                      <div class="flex items-center gap-4">
+                        <div
+                          class="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-blue-100 text-primary dark:bg-[#232f48] dark:text-white"
+                        >
+                          <span class="material-symbols-outlined"
+                            >functions</span
+                          >
+                        </div>
+                        <div class="flex flex-col">
+                          <p class="font-medium text-slate-900 dark:text-white">
+                            Algebra II - Quadratic Functions
+                          </p>
+                          <p class="text-sm text-slate-500 dark:text-[#92a4c9]">
+                            Updated 2 hours ago • Published
+                          </p>
+                        </div>
+                      </div>
+                      <button
+                        class="flex h-8 w-8 items-center justify-center rounded-lg hover:bg-slate-200 dark:text-white dark:hover:bg-slate-700"
+                      >
+                        <span class="material-symbols-outlined text-[20px]"
+                          >edit</span
+                        >
+                      </button>
+                    </div>
+                    <div
+                      class="flex items-center justify-between gap-4 p-4 hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors"
+                    >
+                      <div class="flex items-center gap-4">
+                        <div
+                          class="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-indigo-100 text-indigo-600 dark:bg-[#232f48] dark:text-indigo-400"
+                        >
+                          <span class="material-symbols-outlined"
+                            >change_history</span
+                          >
+                        </div>
+                        <div class="flex flex-col">
+                          <p class="font-medium text-slate-900 dark:text-white">
+                            Geometry - Triangle Theorems
+                          </p>
+                          <p class="text-sm text-slate-500 dark:text-[#92a4c9]">
+                            Updated yesterday • Draft
+                          </p>
+                        </div>
+                      </div>
+                      <button
+                        class="flex h-8 w-8 items-center justify-center rounded-lg hover:bg-slate-200 dark:text-white dark:hover:bg-slate-700"
+                      >
+                        <span class="material-symbols-outlined text-[20px]"
+                          >edit</span
+                        >
+                      </button>
+                    </div>
+                    <div
+                      class="flex items-center justify-between gap-4 p-4 hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors"
+                    >
+                      <div class="flex items-center gap-4">
+                        <div
+                          class="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-teal-100 text-teal-600 dark:bg-[#232f48] dark:text-teal-400"
+                        >
+                          <span class="material-symbols-outlined"
+                            >calculate</span
+                          >
+                        </div>
+                        <div class="flex flex-col">
+                          <p class="font-medium text-slate-900 dark:text-white">
+                            Calculus I - Limits
+                          </p>
+                          <p class="text-sm text-slate-500 dark:text-[#92a4c9]">
+                            Updated 3 days ago • Published
+                          </p>
+                        </div>
+                      </div>
+                      <button
+                        class="flex h-8 w-8 items-center justify-center rounded-lg hover:bg-slate-200 dark:text-white dark:hover:bg-slate-700"
+                      >
+                        <span class="material-symbols-outlined text-[20px]"
+                          >edit</span
+                        >
+                      </button>
+                    </div>
+                  </div>
+                  <div
+                    class="border-t border-slate-200 p-3 text-center dark:border-slate-700"
+                  >
+                    <button
+                      class="text-sm font-medium text-primary hover:underline" id="view-all-lessons"
+                    >
+                      View all lessons
+                    </button>
+                  </div>
+                </div>
+                <div
+                  class="rounded-xl border border-slate-200 bg-surface-light shadow-sm dark:border-[#324467] dark:bg-[#1e293b]"
+                >
+                  <div
+                    class="flex items-center justify-between border-b border-slate-200 px-6 py-4 dark:border-slate-700"
+                  >
+                    <h3 class="font-bold text-slate-900 dark:text-white">
+                      Student Leaderboard
+                    </h3>
+                    <button
+                      class="text-sm text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-white" id="admin-view-full-leaderboard"
+                    >
+                      View Full List
+                    </button>
+                  </div>
+                  <div class="overflow-x-auto">
+                    <table
+                      class="w-full text-left text-sm text-slate-500 dark:text-slate-400"
+                    >
+                      <thead
+                        class="bg-slate-50 text-xs uppercase text-slate-700 dark:bg-[#232f48] dark:text-slate-300"
+                      >
+                        <tr>
+                          <th class="px-6 py-3" scope="col">Rank</th>
+                          <th class="px-6 py-3" scope="col">Student</th>
+                          <th class="px-6 py-3" scope="col">Grade</th>
+                          <th class="px-6 py-3" scope="col">Score</th>
+                        </tr>
+                      </thead>
+                      <tbody
+                        class="divide-y divide-slate-100 dark:divide-slate-700"
+                        id="admin-leaderboard-list"
+                      ></tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+              <div class="flex flex-col gap-8" id="admin-quiz-control-list">
+                <div
+                  class="rounded-xl border border-slate-200 bg-surface-light shadow-sm dark:border-[#324467] dark:bg-[#1e293b]"
+                >
+                  <div
+                    class="flex items-center justify-between border-b border-slate-200 px-6 py-4 dark:border-slate-700"
+                  >
+                    <h3 class="font-bold text-slate-900 dark:text-white">
+                      Quiz Control
+                    </h3>
+                    <button
+                      class="text-primary hover:text-blue-700 dark:hover:text-blue-300"
+                    >
+                      <span class="material-symbols-outlined">add_circle</span>
+                    </button>
+                  </div>
+                  <!-- <div class="p-4 flex flex-col gap-4">
+                    <div
+                      class="rounded-lg border border-slate-100 bg-slate-50 p-4 dark:border-slate-700 dark:bg-[#232f48]"
+                    >
+                      <div class="flex items-start justify-between mb-2">
+                        <div>
+                          <span
+                            class="inline-flex items-center rounded-full bg-green-100 px-2 py-0.5 text-xs font-medium text-green-800 dark:bg-green-900/30 dark:text-green-400"
+                            >Active</span
+                          >
+                          <h4
+                            class="mt-1 font-bold text-slate-900 dark:text-white"
+                          >
+                            Mid-term Exam
+                          </h4>
+                        </div>
+                        <span class="material-symbols-outlined text-slate-400"
+                          >more_vert</span
+                        >
+                      </div>
+                      <div
+                        class="flex justify-between text-xs text-slate-500 dark:text-slate-400"
+                      >
+                        <span>245 Participants</span>
+                        <span>Ends in 2d</span>
+                      </div>
+                      <div class="mt-3">
+                        <button
+                          class="w-full rounded bg-white py-1.5 text-xs font-medium text-slate-700 shadow-sm border border-slate-200 hover:bg-slate-50 dark:bg-slate-700 dark:border-slate-600 dark:text-white dark:hover:bg-slate-600"
+                        >
+                          View Results
+                        </button>
+                      </div>
+                    </div>
+                    <div
+                      class="rounded-lg border border-slate-100 bg-slate-50 p-4 dark:border-slate-700 dark:bg-[#232f48]"
+                    >
+                      <div class="flex items-start justify-between mb-2">
+                        <div>
+                          <span
+                            class="inline-flex items-center rounded-full bg-yellow-100 px-2 py-0.5 text-xs font-medium text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-400"
+                            >Draft</span
+                          >
+                          <h4
+                            class="mt-1 font-bold text-slate-900 dark:text-white"
+                          >
+                            Pop Quiz: Functions
+                          </h4>
+                        </div>
+                        <span class="material-symbols-outlined text-slate-400"
+                          >more_vert</span
+                        >
+                      </div>
+                      <div
+                        class="flex justify-between text-xs text-slate-500 dark:text-slate-400"
+                      >
+                        <span>10 Questions</span>
+                        <span>Unscheduled</span>
+                      </div>
+                      <div class="mt-3 flex gap-2">
+                        <button
+                          class="flex-1 rounded bg-primary py-1.5 text-xs font-medium text-white shadow-sm hover:bg-blue-600"
+                        >
+                          Publish
+                        </button>
+                        <button
+                          class="flex-1 rounded bg-white py-1.5 text-xs font-medium text-slate-700 shadow-sm border border-slate-200 hover:bg-slate-50 dark:bg-slate-700 dark:border-slate-600 dark:text-white dark:hover:bg-slate-600"
+                        >
+                          Edit
+                        </button>
+                      </div>
+                    </div>
+                    <div
+                      class="rounded-lg border border-slate-100 bg-slate-50 p-4 dark:border-slate-700 dark:bg-[#232f48]"
+                    >
+                      <div class="flex items-start justify-between mb-2">
+                        <div>
+                          <span
+                            class="inline-flex items-center rounded-full bg-slate-200 px-2 py-0.5 text-xs font-medium text-slate-800 dark:bg-slate-700 dark:text-slate-300"
+                            >Ended</span
+                          >
+                          <h4
+                            class="mt-1 font-bold text-slate-900 dark:text-white"
+                          >
+                            Calculus Basics
+                          </h4>
+                        </div>
+                        <span class="material-symbols-outlined text-slate-400"
+                          >more_vert</span
+                        >
+                      </div>
+                      <div
+                        class="flex justify-between text-xs text-slate-500 dark:text-slate-400"
+                      >
+                        <span>Avg Score: 78%</span>
+                        <span>Closed yesterday</span>
+                      </div>
+                    </div>
+                  </div> -->
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+    <script type="module" src="js/admin-dashboard.js"></script>
+    <script type="module" src="js/admin-layout.js"></script>
+  </body>
+</html>

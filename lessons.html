@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Math-Falta - Lessons</title>
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&amp;family=Noto+Sans:wght@300..900&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              primary: "#135bec",
+              "background-light": "#f6f6f8",
+              "background-dark": "#101622",
+            },
+            fontFamily: {
+              display: ["Lexend", "Noto Sans", "sans-serif"],
+              body: ["Noto Sans", "sans-serif"],
+            },
+            borderRadius: {
+              DEFAULT: "0.25rem",
+              lg: "0.5rem",
+              xl: "0.75rem",
+              full: "9999px",
+            },
+          },
+        },
+      };
+    </script>
+  </head>
+  <body
+    class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-white font-display overflow-x-hidden antialiased"
+  >
+    <div class="relative flex min-h-screen flex-col">
+      <div
+        class="absolute inset-0 z-0 opacity-5 pointer-events-none overflow-hidden"
+      >
+        <svg height="100%" width="100%" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <pattern
+              height="100"
+              id="math-pattern"
+              patternUnits="userSpaceOnUse"
+              width="100"
+              x="0"
+              y="0"
+            >
+              <text fill="currentColor" font-size="20" x="20" y="30">∑</text>
+              <text fill="currentColor" font-size="20" x="60" y="70">π</text>
+              <text fill="currentColor" font-size="20" x="10" y="80">√</text>
+              <text fill="currentColor" font-size="16" x="70" y="20">x²</text>
+            </pattern>
+          </defs>
+          <rect fill="url(#math-pattern)" height="100%" width="100%"></rect>
+        </svg>
+      </div>
+      <header data-inject-header></header>
+      <script type="module" src="js/header.js"></script>
+      <script type="module" src="js/lessons.js"></script>
+      <noscript><style>header{display:block}</style></noscript>
+      <main class="relative z-10 flex-1 py-8 px-4 md:px-6">
+        <div class="max-w-[1000px] w-full mx-auto flex flex-col gap-8">
+          <div
+            class="flex flex-col md:flex-row md:items-center justify-between gap-4"
+          >
+            <div>
+              <h1
+                class="text-slate-900 dark:text-white text-3xl md:text-4xl font-black tracking-tight mb-2"
+              >
+                My Lessons
+              </h1>
+              <p class="text-slate-500 dark:text-[#92a4c9] text-base">
+                Watch videos and download materials to master your topics.
+              </p>
+            </div>
+            <div class="flex items-center gap-3">
+              <span
+                class="text-sm font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wide"
+                >Filters:</span
+              >
+              <select
+                class="form-select bg-white dark:bg-[#192233] border-slate-200 dark:border-[#232f48] text-slate-700 dark:text-slate-200 rounded-lg text-sm py-2 px-7 shadow-sm focus:border-primary focus:ring-primary"
+              >
+                <option>All Topics</option>
+                <option>Algebra</option>
+                <option>Geometry</option>
+                <option>Calculus</option>
+              </select>
+            </div>
+          </div>
+          <div class="flex flex-col gap-10" id="lessons-list">
+            <div class="text-center p-8 text-slate-500 dark:text-slate-400">Loading lessons...</div>
+          </div>
+          </div>
+        </div>
+      </main>
+    </div>
+  </body>
+</html>

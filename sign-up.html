@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Math-Falta - Sign Up</title>
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&amp;family=Noto+Sans:wght@300..900&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              primary: "#135bec",
+              "background-light": "#f6f6f8",
+              "background-dark": "#101622",
+            },
+            fontFamily: {
+              display: ["Lexend", "Noto Sans", "sans-serif"],
+              body: ["Noto Sans", "sans-serif"],
+            },
+            borderRadius: {
+              DEFAULT: "0.25rem",
+              lg: "0.5rem",
+              xl: "0.75rem",
+              full: "9999px",
+            },
+          },
+        },
+      };
+    </script>
+  </head>
+  <body
+    class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-white font-display overflow-x-hidden antialiased"
+  >
+    <div class="relative flex min-h-screen flex-col">
+      <div
+        class="absolute inset-0 z-0 opacity-5 pointer-events-none overflow-hidden"
+      >
+        <svg height="100%" width="100%" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <pattern
+              height="100"
+              id="math-pattern"
+              patternUnits="userSpaceOnUse"
+              width="100"
+              x="0"
+              y="0"
+            >
+              <text fill="currentColor" font-size="20" x="20" y="30">∑</text>
+              <text fill="currentColor" font-size="20" x="60" y="70">π</text>
+              <text fill="currentColor" font-size="20" x="10" y="80">√</text>
+              <text fill="currentColor" font-size="16" x="70" y="20">x²</text>
+            </pattern>
+          </defs>
+          <rect fill="url(#math-pattern)" height="100%" width="100%"></rect>
+        </svg>
+      </div>
+      <header
+        class="relative z-10 flex items-center justify-between whitespace-nowrap border-b border-solid border-slate-200 dark:border-[#232f48] px-4 md:px-10 py-4 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md"
+      >
+        <div class="flex items-center gap-4 text-slate-900 dark:text-white">
+          <div
+            class="flex items-center justify-center size-8 rounded bg-primary text-white"
+          >
+            <span class="material-symbols-outlined text-xl">function</span>
+          </div>
+          <h2
+            class="text-slate-900 dark:text-white text-lg font-bold leading-tight tracking-[-0.015em]"
+          >
+            Math-Falta
+          </h2>
+        </div>
+        <div class="flex flex-1 justify-end items-center gap-6">
+          <div class="hidden md:flex items-center gap-8">
+            <a
+              class="text-slate-600 dark:text-slate-300 hover:text-primary dark:hover:text-white transition-colors text-sm font-medium leading-normal"
+              href="./index.html"
+              >Home</a
+            >
+          </div>
+          <button
+            aria-label="Toggle theme"
+            class="flex items-center justify-center size-9 rounded-lg text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors"
+            onclick="document.documentElement.classList.toggle('dark')"
+          >
+            <span class="material-symbols-outlined block dark:hidden text-xl"
+              >dark_mode</span
+            >
+            <span class="material-symbols-outlined hidden dark:block text-xl"
+              >light_mode</span
+            >
+          </button>
+          <div class="md:hidden">
+            <span
+              class="material-symbols-outlined cursor-pointer text-slate-900 dark:text-white"
+              >menu</span
+            >
+          </div>
+        </div>
+      </header>
+      <main class="relative z-10 flex-1 flex justify-center py-10 px-4 md:px-0">
+        <div class="flex flex-col max-w-[960px] w-full">
+          <div class="flex flex-wrap justify-between gap-3 px-4 pb-8">
+            <div class="flex min-w-72 flex-col gap-3">
+              <h1
+                class="text-slate-900 dark:text-white text-4xl font-black leading-tight tracking-[-0.033em]"
+              >
+                Sign Up
+              </h1>
+              <p
+                class="text-slate-500 dark:text-[#92a4c9] text-base font-normal leading-normal"
+              >
+                Start learning math today.
+              </p>
+            </div>
+          </div>
+          <div class="flex flex-col md:flex-row gap-10 px-4">
+            <div
+              class="hidden md:flex flex-1 flex-col justify-center items-center rounded-2xl bg-gradient-to-br from-primary/5 to-primary/20 p-8 border border-slate-200 dark:border-[#232f48]"
+            >
+              <div
+                class="relative w-full aspect-square max-w-[300px] flex items-center justify-center"
+              >
+                <div
+                  class="absolute inset-0 bg-primary/20 rounded-full blur-3xl"
+                ></div>
+                <img
+                  alt="3D geometric shapes"
+                  class="relative z-10 w-full h-full object-contain drop-shadow-2xl opacity-90 hover:scale-105 transition-transform duration-500"
+                  data-alt="Abstract 3D shapes representing mathematics geometry"
+                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuADDdy58VmWWP3ucXdO8FAW_MUiRm6VQ6spD7hmNyn0vKGEk2qqXEraF-BtW938pBh0WqidJyWp1bm4K1qYtDKDTB4dvFb_zigCkrW3F3IDiNN4DsmrJ9Z7Hely9XUPXSD-uFFbvV1JF09cL_60b71gjqyEwJoi3XLPu6F4L7JwPctYEpHgoPjJCjvj_OCrjnbxNL6YpXmPCb9op_VdQfOfB4-L44OBFdhS8cJNIGdQz94kzZ65y2vxQ1CP-Ppy_fhazfAqJSub9Cw"
+                />
+              </div>
+              <div class="mt-8 text-center">
+                <h3
+                  class="text-xl font-bold text-slate-900 dark:text-white mb-2"
+                >
+                  Learn and Grow
+                </h3>
+                <p class="text-slate-500 dark:text-[#92a4c9]">
+                  Practice many math problems and see how you improve. Great for
+                  Grades 5 to 9.
+                </p>
+              </div>
+            </div>
+            <div class="flex-1 max-w-[480px]">
+              <form id="signUpForm" class="flex flex-col gap-5">
+                <label class="flex flex-col w-full">
+                  <p
+                    class="text-slate-700 dark:text-white text-base font-medium leading-normal pb-2"
+                  >
+                    Student Name
+                  </p>
+                  <input
+                    id="signup-name"
+                    class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-slate-900 dark:text-white focus:outline-0 focus:ring-2 focus:ring-primary/50 border border-slate-200 dark:border-[#324467] bg-white dark:bg-[#192233] focus:border-primary h-14 placeholder:text-slate-400 dark:placeholder:text-[#92a4c9] p-[15px] text-base font-normal leading-normal transition-all"
+                    placeholder="Enter your full name"
+                    required=""
+                    value=""
+                  />
+                </label>
+                <div class="flex flex-col w-full">
+                  <label class="flex flex-col w-full">
+                    <p
+                      class="text-slate-700 dark:text-white text-base font-medium leading-normal pb-2"
+                    >
+                      Email
+                    </p>
+                    <input
+                      id="signup-email"
+                      class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-slate-900 dark:text-white focus:outline-0 focus:ring-2 focus:ring-primary/50 border border-slate-200 dark:border-[#324467] bg-white dark:bg-[#192233] focus:border-primary h-14 placeholder:text-slate-400 dark:placeholder:text-[#92a4c9] p-[15px] text-base font-normal leading-normal transition-all"
+                      placeholder="student@example.com"
+                      required=""
+                      type="email"
+                      value=""
+                    />
+                  </label>
+                  <p
+                    class="text-slate-500 dark:text-[#92a4c9] text-xs font-normal leading-normal pt-2 flex items-center gap-1"
+                  >
+                    <span class="material-symbols-outlined text-[16px]"
+                      >info</span
+                    >
+                    Please use a real email address.
+                  </p>
+                </div>
+                <label class="flex flex-col w-full relative">
+                  <p
+                    class="text-slate-700 dark:text-white text-base font-medium leading-normal pb-2"
+                  >
+                    Password
+                  </p>
+                  <div class="relative">
+                    <input
+                      id="signup-password"
+                      class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-slate-900 dark:text-white focus:outline-0 focus:ring-2 focus:ring-primary/50 border border-slate-200 dark:border-[#324467] bg-white dark:bg-[#192233] focus:border-primary h-14 placeholder:text-slate-400 dark:placeholder:text-[#92a4c9] p-[15px] pr-12 text-base font-normal leading-normal transition-all"
+                      placeholder="Create a password"
+                      required=""
+                      type="password"
+                      value=""
+                    />
+                    <button
+                      class="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 dark:text-[#92a4c9] hover:text-primary transition-colors"
+                      type="button"
+                    >
+                      <span class="material-symbols-outlined">visibility</span>
+                    </button>
+                  </div>
+                </label>
+                <label class="flex flex-col w-full">
+                  <p
+                    class="text-slate-700 dark:text-white text-base font-medium leading-normal pb-2"
+                  >
+                    Parent Phone Number
+                  </p>
+                  <div class="relative">
+                    <div
+                      class="absolute left-4 top-1/2 -translate-y-1/2 flex items-center gap-2 border-r border-slate-200 dark:border-[#324467] pr-3"
+                    >
+                      <img
+                        alt="Egypt Flag"
+                        class="w-5 h-auto shadow-sm"
+                        data-alt="Egypt Flag"
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuC39G6cqsbQ5rVDNBJJ-E9VIXpspUvN_0A01euGLunF_wEixjUmaot-f0OJ8q55mbGXe0HKdrDOB-HSDAECG9-U6rupcFYzhvxt3D8PCmbWZvGs2INparVq11xCc-h6RL7sD_dLKLp4HkEZtvwKeTQTARULpubOyydjU7bb8Af0VJ21xvomPRva9pPUY3aecXtjx4qv_e7J0HpvX5R0Sle4gu7uVXZ1Tq2echEen_ZR9zNRjAdfA0ldqpAiFyKGdy0XYOm8KW1GZFk"
+                      />
+                      <span class="text-slate-500 dark:text-[#92a4c9] text-sm"
+                        >+20</span
+                      >
+                    </div>
+                    <input
+                      id="signup-parent"
+                      class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-slate-900 dark:text-white focus:outline-0 focus:ring-2 focus:ring-primary/50 border border-slate-200 dark:border-[#324467] bg-white dark:bg-[#192233] focus:border-primary h-14 placeholder:text-slate-400 dark:placeholder:text-[#92a4c9] pl-[100px] p-[15px] text-base font-normal leading-normal transition-all"
+                      pattern="01[0-9]{9}"
+                      placeholder="01X XXXX XXXX"
+                      required=""
+                      type="tel"
+                      value=""
+                    />
+                  </div>
+                </label>
+                <div class="flex flex-col w-full">
+                  <p
+                    class="text-slate-700 dark:text-white text-base font-medium leading-normal pb-3"
+                  >
+                    Choose Grade
+                  </p>
+                  <div class="grid grid-cols-5 gap-2">
+                    <label class="cursor-pointer group">
+                      <input
+                        class="peer sr-only"
+                        name="grade"
+                        type="radio"
+                        value="5"
+                      />
+                      <div
+                        class="h-12 flex items-center justify-center rounded-lg border border-slate-200 dark:border-[#324467] bg-white dark:bg-[#192233] text-slate-600 dark:text-[#92a4c9] peer-checked:bg-primary peer-checked:border-primary peer-checked:text-white peer-checked:font-bold transition-all hover:border-primary hover:text-primary dark:hover:text-white"
+                      >
+                        5
+                      </div>
+                    </label>
+                    <label class="cursor-pointer group">
+                      <input
+                        class="peer sr-only"
+                        name="grade"
+                        type="radio"
+                        value="6"
+                      />
+                      <div
+                        class="h-12 flex items-center justify-center rounded-lg border border-slate-200 dark:border-[#324467] bg-white dark:bg-[#192233] text-slate-600 dark:text-[#92a4c9] peer-checked:bg-primary peer-checked:border-primary peer-checked:text-white peer-checked:font-bold transition-all hover:border-primary hover:text-primary dark:hover:text-white"
+                      >
+                        6
+                      </div>
+                    </label>
+                    <label class="cursor-pointer group">
+                      <input
+                        class="peer sr-only"
+                        name="grade"
+                        type="radio"
+                        value="7"
+                      />
+                      <div
+                        class="h-12 flex items-center justify-center rounded-lg border border-slate-200 dark:border-[#324467] bg-white dark:bg-[#192233] text-slate-600 dark:text-[#92a4c9] peer-checked:bg-primary peer-checked:border-primary peer-checked:text-white peer-checked:font-bold transition-all hover:border-primary hover:text-primary dark:hover:text-white"
+                      >
+                        7
+                      </div>
+                    </label>
+                    <label class="cursor-pointer group">
+                      <input
+                        class="peer sr-only"
+                        name="grade"
+                        type="radio"
+                        value="8"
+                      />
+                      <div
+                        class="h-12 flex items-center justify-center rounded-lg border border-slate-200 dark:border-[#324467] bg-white dark:bg-[#192233] text-slate-600 dark:text-[#92a4c9] peer-checked:bg-primary peer-checked:border-primary peer-checked:text-white peer-checked:font-bold transition-all hover:border-primary hover:text-primary dark:hover:text-white"
+                      >
+                        8
+                      </div>
+                    </label>
+                    <label class="cursor-pointer group">
+                      <input
+                        class="peer sr-only"
+                        name="grade"
+                        type="radio"
+                        value="9"
+                      />
+                      <div
+                        class="h-12 flex items-center justify-center rounded-lg border border-slate-200 dark:border-[#324467] bg-white dark:bg-[#192233] text-slate-600 dark:text-[#92a4c9] peer-checked:bg-primary peer-checked:border-primary peer-checked:text-white peer-checked:font-bold transition-all hover:border-primary hover:text-primary dark:hover:text-white"
+                      >
+                        9
+                      </div>
+                    </label>
+                  </div>
+                </div>
+                <div class="pt-4">
+                  <button
+                    class="w-full flex cursor-pointer items-center justify-center overflow-hidden rounded-xl h-14 px-4 bg-primary hover:bg-blue-600 text-white text-base font-bold leading-normal tracking-[0.015em] shadow-lg shadow-primary/20 transition-all active:scale-[0.98]"
+                    type="submit"
+                  >
+                    Sign Up
+                  </button>
+                </div>
+                <div class="text-center pt-2">
+                  <p class="text-slate-500 dark:text-[#92a4c9] text-sm">
+                    Already have an account?
+                    <a
+                      class="text-primary font-bold hover:underline ml-1"
+                      href="./sign-in.html"
+                      >Sign In</a
+                    >
+                  </p>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <script type="module" src="/js/theme.js"></script>
+    <script type="module" src="/js/app.js"></script>
+    <script type="module" src="/js/auth.js"></script>
+  </body>
+</html>

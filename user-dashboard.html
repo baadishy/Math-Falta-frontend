@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Math-Falta - Student Dashboard</title>
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&amp;family=Noto+Sans:wght@300..900&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              primary: "#135bec",
+              "background-light": "#f6f6f8",
+              "background-dark": "#101622",
+            },
+            fontFamily: {
+              display: ["Lexend", "Noto Sans", "sans-serif"],
+              body: ["Noto Sans", "sans-serif"],
+            },
+            borderRadius: {
+              DEFAULT: "0.25rem",
+              lg: "0.5rem",
+              xl: "0.75rem",
+              full: "9999px",
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      @keyframes glowPulse {
+        0% {
+          box-shadow: 0 0 0 rgba(19, 91, 236, 0);
+        }
+        50% {
+          box-shadow: 0 0 25px rgba(19, 91, 236, 0.7);
+        }
+        100% {
+          box-shadow: 0 0 0 rgba(19, 91, 236, 0);
+        }
+      }
+
+      .animate-glow {
+        animation: glowPulse 1.2s ease-out 2;
+      }
+    </style>
+  </head>
+  <body
+    class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-white font-display overflow-x-hidden antialiased"
+  >
+    <div class="relative flex min-h-screen flex-col">
+      <div
+        class="absolute inset-0 z-0 opacity-5 pointer-events-none overflow-hidden"
+      >
+        <svg height="100%" width="100%" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <pattern
+              height="100"
+              id="math-pattern"
+              patternUnits="userSpaceOnUse"
+              width="100"
+              x="0"
+              y="0"
+            >
+              <text fill="currentColor" font-size="20" x="20" y="30">∑</text>
+              <text fill="currentColor" font-size="20" x="60" y="70">π</text>
+              <text fill="currentColor" font-size="20" x="10" y="80">√</text>
+              <text fill="currentColor" font-size="16" x="70" y="20">x²</text>
+            </pattern>
+          </defs>
+          <rect fill="url(#math-pattern)" height="100%" width="100%"></rect>
+        </svg>
+      </div>
+      <header data-inject-header></header>
+      <script type="module" src="js/header.js"></script>
+      <noscript
+        ><style>
+          header {
+            display: block;
+          }
+        </style></noscript
+      >
+      <main class="relative z-10 flex-1 py-8 px-4 md:px-6">
+        <div class="max-w-[1200px] w-full mx-auto flex flex-col gap-8">
+          <div
+            class="flex flex-col md:flex-row md:items-end justify-between gap-4"
+          >
+            <div>
+              <h1
+                class="text-slate-900 dark:text-white text-3xl md:text-4xl font-black tracking-tight mb-2"
+              >
+                Hello, <span class="profile-name">Student</span>! 👋
+              </h1>
+              <p class="text-slate-500 dark:text-[#92a4c9] text-base">
+                Ready to learn some new math today?
+              </p>
+            </div>
+            <div
+              class="hidden md:flex items-center gap-2 text-sm text-slate-500 dark:text-[#92a4c9] bg-white dark:bg-[#192233] px-4 py-2 rounded-lg border border-slate-200 dark:border-[#232f48] shadow-sm"
+            >
+              <span class="material-symbols-outlined text-yellow-500"
+                >calendar_today</span
+              >
+              <span>Today is a great day to practice.</span>
+            </div>
+          </div>
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+            <div class="lg:col-span-8 flex flex-col gap-8">
+              <div
+                class="relative overflow-hidden rounded-2xl bg-white dark:bg-[#192233] border border-slate-200 dark:border-[#232f48] shadow-sm transition-all hover:shadow-md group"
+              >
+                <div
+                  class="absolute right-0 top-0 bottom-0 w-2/3 bg-gradient-to-l from-primary/5 to-transparent pointer-events-none"
+                ></div>
+                <div
+                  class="relative z-10 p-6 md:p-8 flex flex-col md:flex-row items-center gap-8"
+                >
+                  <div class="flex-1 w-full">
+                    <div class="flex items-center gap-2 mb-3">
+                      <span
+                        class="px-2.5 py-1 rounded-md bg-primary/10 text-primary text-xs font-bold uppercase tracking-wider"
+                        >In Progress</span
+                      >
+                      <span
+                        class="text-xs text-slate-500 dark:text-slate-400 font-medium"
+                      >
+                        • Grade 7</span
+                      >
+                    </div>
+                    <h3
+                      id="last-lesson-title"
+                      class="text-2xl font-bold text-slate-900 dark:text-white mb-2"
+                    >
+                      Geometry: 3D Shapes
+                    </h3>
+                    <p
+                      id="last-lesson-desc"
+                      class="text-slate-500 dark:text-[#92a4c9] text-sm mb-2"
+                    >
+                      Continue where you left off. You are learning about volume
+                      and surface area.
+                    </p>
+                    <p
+                      id="last-lesson-meta"
+                      class="text-xs text-slate-400 dark:text-slate-500 mb-4"
+                    >
+                      Last opened: —
+                    </p>
+                    <a
+                      id="continue-lesson-btn"
+                      href="/lessons.html"
+                      class="inline-flex items-center justify-center gap-2 rounded-xl bg-primary hover:bg-blue-600 text-white text-sm font-bold h-11 px-6 shadow-lg shadow-primary/20 transition-all active:scale-95"
+                    >
+                      Continue Lesson
+                      <span class="material-symbols-outlined text-lg"
+                        >arrow_forward</span
+                      >
+                    </a>
+                  </div>
+                  <div
+                    class="w-full max-w-[200px] aspect-square flex items-center justify-center relative"
+                  >
+                    <div
+                      class="absolute inset-0 bg-primary/20 rounded-full blur-3xl opacity-50"
+                    ></div>
+                    <img
+                      id="last-lesson-image"
+                      alt="Last opened lesson"
+                      class="relative z-10 w-full h-full object-contain drop-shadow-xl group-hover:scale-110 transition-transform duration-500"
+                      src="https://picsum.photos/seed/default-lesson/800/800"
+                    />
+                  </div>
+                </div>
+              </div>
+              <div>
+                <!-- Recommended quizzes (populated from backend) -->
+                <div class="mt-6">
+                  <div class="flex items-center justify-between mb-4">
+                    <h3
+                      class="text-xl font-bold text-slate-900 dark:text-white"
+                    >
+                      Recommended For You
+                    </h3>
+                    <a
+                      class="text-sm font-bold text-primary hover:text-blue-500 transition-colors"
+                      href="/quizzes.html"
+                      >View All</a
+                    >
+                  </div>
+                  <div
+                    id="recommended-quizzes"
+                    class="grid grid-cols-1 sm:grid-cols-2 gap-4"
+                  >
+                    <!-- Filled by js/dashboard.js or shows empty state -->
+                    <div
+                      class="col-span-1 text-center text-slate-500 dark:text-slate-400 p-6"
+                      id="recommended-placeholder"
+                    >
+                      Loading recommendations...
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="lg:col-span-4 flex flex-col gap-6">
+              <div
+                class="bg-white dark:bg-[#192233] rounded-2xl border border-slate-200 dark:border-[#232f48] p-6 shadow-sm"
+              >
+                <h3
+                  class="text-lg font-bold text-slate-900 dark:text-white mb-6"
+                >
+                  Your Progress
+                </h3>
+                <div
+                  class="flex items-center gap-4 mb-6 pb-6 border-b border-slate-100 dark:border-[#232f48]"
+                >
+                  <div
+                    class="size-12 rounded-full bg-yellow-100 dark:bg-yellow-900/20 text-yellow-600 dark:text-yellow-400 flex items-center justify-center"
+                  >
+                    <span class="material-symbols-outlined">emoji_events</span>
+                  </div>
+                  <div>
+                    <p
+                      class="text-2xl font-black text-slate-900 dark:text-white"
+                    >
+                      <span class="total-points">1,240</span>
+                    </p>
+                    <p
+                      class="text-xs text-slate-500 dark:text-slate-400 uppercase tracking-wider font-bold"
+                    >
+                      Total Points
+                    </p>
+                  </div>
+                </div>
+                <div class="space-y-4">
+                  <div class="flex items-center justify-between">
+                    <div class="flex items-center gap-3">
+                      <span class="material-symbols-outlined text-slate-400"
+                        >check_circle</span
+                      >
+                      <span
+                        class="text-sm font-medium text-slate-700 dark:text-slate-200"
+                        >Lessons Completed</span
+                      >
+                    </div>
+                    <span
+                      class="text-sm font-bold text-slate-900 dark:text-white lessons-completed"
+                      >12</span
+                    >
+                  </div>
+                  <div class="flex items-center justify-between">
+                    <div class="flex items-center gap-3">
+                      <span class="material-symbols-outlined text-slate-400"
+                        >assignment_turned_in</span
+                      >
+                      <span
+                        class="text-sm font-medium text-slate-700 dark:text-slate-200"
+                        >Quizzes Completed</span
+                      >
+                    </div>
+                    <span
+                      class="text-sm font-bold text-slate-900 dark:text-white quizzes-completed"
+                      >8</span
+                    >
+                  </div>
+                </div>
+              </div>
+              <div
+                class="bg-white dark:bg-[#192233] rounded-2xl border border-slate-200 dark:border-[#232f48] p-6 shadow-sm flex-1"
+              >
+                <div class="flex items-center justify-between mb-5">
+                  <h3 class="text-lg font-bold text-slate-900 dark:text-white">
+                    Recent Activity
+                  </h3>
+                </div>
+                <div class="space-y-6" id="recent-activity-list">
+                  <!-- Recent activity skeleton -->
+                  <div
+                    class="text-center text-slate-500 dark:text-slate-400 p-6"
+                  >
+                    Loading recent activity...
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            class="bg-white dark:bg-[#192233] rounded-2xl border border-slate-200 dark:border-[#232f48] shadow-sm overflow-hidden"
+          >
+            <div
+              class="p-6 flex items-center justify-between border-b border-slate-100 dark:border-[#232f48]"
+            >
+              <h3 class="text-xl font-bold text-slate-900 dark:text-white">
+                Class Leaderboard
+              </h3>
+              <div class="flex gap-2">
+                <span
+                  class="px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-bold uppercase tracking-wide"
+                  >Weekly</span
+                >
+              </div>
+            </div>
+            <div class="overflow-x-auto">
+              <table class="w-full text-left border-collapse">
+                <thead>
+                  <tr
+                    class="bg-slate-50/50 dark:bg-[#111722]/50 border-b border-slate-100 dark:border-[#232f48]"
+                  >
+                    <th
+                      class="px-6 py-4 text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider"
+                    >
+                      Rank
+                    </th>
+                    <th
+                      class="px-6 py-4 text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider"
+                    >
+                      Student
+                    </th>
+                    <th
+                      class="px-6 py-4 text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider hidden sm:table-cell"
+                    >
+                      Grade
+                    </th>
+                    <th
+                      class="px-6 py-4 text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider text-right"
+                    >
+                      Points
+                    </th>
+                  </tr>
+                </thead>
+                <tbody class="divide-y divide-slate-100 dark:divide-[#232f48]">
+                  <tr
+                    class="group hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors"
+                  >
+                    <td class="px-6 py-4">
+                      <div
+                        class="size-8 rounded-full bg-yellow-100 dark:bg-yellow-500/20 text-yellow-600 dark:text-yellow-400 flex items-center justify-center"
+                      >
+                        <span class="material-symbols-outlined text-lg"
+                          >emoji_events</span
+                        >
+                      </div>
+                    </td>
+                    <td class="px-6 py-4">
+                      <div class="flex items-center gap-3">
+                        <div
+                          class="size-8 rounded-full bg-indigo-100 dark:bg-indigo-900 text-indigo-600 dark:text-indigo-300 flex items-center justify-center text-xs font-bold"
+                        >
+                          JD
+                        </div>
+                        <span class="font-bold text-slate-900 dark:text-white"
+                          >Jane Doe</span
+                        >
+                      </div>
+                    </td>
+                    <td
+                      class="px-6 py-4 text-sm font-medium text-slate-600 dark:text-slate-400 hidden sm:table-cell"
+                    >
+                      7th Grade
+                    </td>
+                    <td
+                      class="px-6 py-4 text-right font-bold text-slate-900 dark:text-white"
+                    >
+                      2,850
+                    </td>
+                  </tr>
+                  <tr
+                    class="group hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors"
+                  >
+                    <td class="px-6 py-4">
+                      <div
+                        class="size-8 rounded-full bg-slate-100 dark:bg-slate-700 text-slate-500 dark:text-slate-300 flex items-center justify-center"
+                      >
+                        <span class="material-symbols-outlined text-lg"
+                          >emoji_events</span
+                        >
+                      </div>
+                    </td>
+                    <td class="px-6 py-4">
+                      <div class="flex items-center gap-3">
+                        <div
+                          class="size-8 rounded-full bg-pink-100 dark:bg-pink-900 text-pink-600 dark:text-pink-300 flex items-center justify-center text-xs font-bold"
+                        >
+                          EM
+                        </div>
+                        <span class="font-bold text-slate-900 dark:text-white"
+                          >Emma Miller</span
+                        >
+                      </div>
+                    </td>
+                    <td
+                      class="px-6 py-4 text-sm font-medium text-slate-600 dark:text-slate-400 hidden sm:table-cell"
+                    >
+                      8th Grade
+                    </td>
+                    <td
+                      class="px-6 py-4 text-right font-bold text-slate-900 dark:text-white"
+                    >
+                      2,720
+                    </td>
+                  </tr>
+                  <tr
+                    class="group hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors"
+                  >
+                    <td class="px-6 py-4">
+                      <div
+                        class="size-8 rounded-full bg-orange-100 dark:bg-orange-900/40 text-orange-600 dark:text-orange-400 flex items-center justify-center"
+                      >
+                        <span class="material-symbols-outlined text-lg"
+                          >emoji_events</span
+                        >
+                      </div>
+                    </td>
+                    <td class="px-6 py-4">
+                      <div class="flex items-center gap-3">
+                        <div
+                          class="size-8 rounded-full bg-emerald-100 dark:bg-emerald-900 text-emerald-600 dark:text-emerald-300 flex items-center justify-center text-xs font-bold"
+                        >
+                          LC
+                        </div>
+                        <span class="font-bold text-slate-900 dark:text-white"
+                          >Liam Chen</span
+                        >
+                      </div>
+                    </td>
+                    <td
+                      class="px-6 py-4 text-sm font-medium text-slate-600 dark:text-slate-400 hidden sm:table-cell"
+                    >
+                      7th Grade
+                    </td>
+                    <td
+                      class="px-6 py-4 text-right font-bold text-slate-900 dark:text-white"
+                    >
+                      2,580
+                    </td>
+                  </tr>
+                  <tr
+                    class="group hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors"
+                  >
+                    <td class="px-6 py-4">
+                      <div
+                        class="size-8 flex items-center justify-center font-bold text-slate-500 dark:text-slate-400"
+                      >
+                        4
+                      </div>
+                    </td>
+                    <td class="px-6 py-4">
+                      <div class="flex items-center gap-3">
+                        <div
+                          class="size-8 rounded-full bg-blue-100 dark:bg-blue-900 text-blue-600 dark:text-blue-300 flex items-center justify-center text-xs font-bold"
+                        >
+                          OA
+                        </div>
+                        <span
+                          class="font-medium text-slate-700 dark:text-slate-200"
+                          >Olivia Adams</span
+                        >
+                      </div>
+                    </td>
+                    <td
+                      class="px-6 py-4 text-sm font-medium text-slate-600 dark:text-slate-400 hidden sm:table-cell"
+                    >
+                      7th Grade
+                    </td>
+                    <td
+                      class="px-6 py-4 text-right font-bold text-slate-600 dark:text-slate-400"
+                    >
+                      2,100
+                    </td>
+                  </tr>
+                  <tr
+                    class="bg-primary/5 dark:bg-primary/10 border-l-2 border-primary"
+                  >
+                    <td class="px-6 py-4">
+                      <div
+                        class="size-8 flex items-center justify-center font-bold text-primary"
+                      >
+                        5
+                      </div>
+                    </td>
+                    <td class="px-6 py-4">
+                      <div class="flex items-center gap-3">
+                        <div
+                          class="size-8 rounded-full bg-primary text-white flex items-center justify-center text-xs font-bold"
+                        >
+                          YOU
+                        </div>
+                        <span class="font-bold text-primary"
+                          >Student (You)</span
+                        >
+                      </div>
+                    </td>
+                    <td
+                      class="px-6 py-4 text-sm font-medium text-slate-600 dark:text-slate-400 hidden sm:table-cell"
+                    >
+                      7th Grade
+                    </td>
+                    <td class="px-6 py-4 text-right font-bold text-primary">
+                      1,240
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <script type="module" src="./js/theme.js"></script>
+    <script type="module" src="./js/app.js"></script>
+    <script type="module" src="./js/dashboard.js"></script>
+  </body>
+</html>
