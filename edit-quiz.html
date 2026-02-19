@@ -62,9 +62,9 @@
     </style>
   </head>
   <body
-    class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-white antialiased overflow-hidden"
+    class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-white antialiased overflow-hidden h-screen flex"
   >
-    <div class="flex h-screen w-full overflow-hidden">
+    <div class="flex h-full w-full overflow-hidden">
       <aside
         class="w-64 flex-shrink-0 bg-[#111722] border-r border-[#232f48] flex flex-col h-full hidden md:flex z-20"
       >
@@ -84,6 +84,7 @@
               Administrator
             </p>
           </div>
+          <div class="h-56"></div>
         </div>
         <nav class="flex-1 overflow-y-auto px-4 py-2 flex flex-col gap-2">
           <a
@@ -144,210 +145,199 @@
             <span class="text-sm font-medium">Log Out</span>
           </button>
         </div>
-<aside class="hidden w-64 flex-col border-r border-slate-200 dark:border-slate-800 bg-surface-light dark:bg-[#111722] md:flex">
-<div class="flex h-16 items-center gap-3 px-6 border-b border-slate-200 dark:border-slate-800">
-<div class="flex h-8 w-8 items-center justify-center rounded bg-primary text-white">
-<span class="material-symbols-outlined">calculate</span>
-</div>
-<h1 class="text-lg font-bold tracking-tight text-slate-900 dark:text-white">Math Admin</h1>
-</div>
-<div class="flex flex-1 flex-col justify-between overflow-y-auto px-4 py-6">
-<nav class="flex flex-col gap-2">
-<a class="flex items-center gap-3 rounded-lg bg-primary/10 px-3 py-2 text-primary dark:bg-[#232f48] dark:text-white" href="/admin-dashboard.html">
-<span class="material-symbols-outlined icon-fill">dashboard</span>
-<span class="text-sm font-medium">Dashboard</span>
-</a>
-<a class="group flex items-center gap-3 rounded-lg px-3 py-2 text-slate-600 hover:bg-slate-100 dark:text-slate-400 dark:hover:bg-slate-800 dark:hover:text-white transition-colors" href="/manage-lessons.html">
-<span class="material-symbols-outlined">book_2</span>
-<span class="text-sm font-medium">Manage Lessons</span>
-</a>
-<a class="group flex items-center gap-3 rounded-lg px-3 py-2 text-slate-600 hover:bg-slate-100 dark:text-slate-400 dark:hover:bg-slate-800 dark:hover:text-white transition-colors" href="/manage-quizzes.html">
-<span class="material-symbols-outlined">quiz</span>
-<span class="text-sm font-medium">Manage Quizzes</span>
-</a>
-<a class="group flex items-center gap-3 rounded-lg px-3 py-2 text-slate-600 hover:bg-slate-100 dark:text-slate-400 dark:hover:bg-slate-800 dark:hover:text-white transition-colors" href="/manage-users.html">
-<span class="material-symbols-outlined">group</span>
-<span class="text-sm font-medium">Users Management</span>
-</a>
-<a class="group flex items-center gap-3 rounded-lg px-3 py-2 text-slate-600 hover:bg-slate-100 dark:text-slate-400 dark:hover:bg-slate-800 dark:hover:text-white transition-colors" href="/admin-leaderboard.html">
-<span class="material-symbols-outlined">leaderboard</span>
-<span class="text-sm font-medium">Leaderboard</span>
-</a>
-</nav>
-<nav class="flex flex-col gap-2 border-t border-slate-200 pt-6 dark:border-slate-800">
-<a class="group flex items-center gap-3 rounded-lg px-3 py-2 text-slate-600 hover:bg-slate-100 dark:text-slate-400 dark:hover:bg-slate-800 dark:hover:text-white transition-colors" href="/admin-dashboard.html#settings">
-<span class="material-symbols-outlined">settings</span>
-<span class="text-sm font-medium">Settings</span>
-</a>
-<a id="admin-signout" class="group flex items-center gap-3 rounded-lg px-3 py-2 text-slate-600 hover:bg-slate-100 dark:text-slate-400 dark:hover:bg-slate-800 dark:hover:text-white transition-colors" href="#">
-<span class="material-symbols-outlined">logout</span>
-<span class="text-sm font-medium">Logout</span>
-</a>
-</nav>
-</div>
-</aside>
-<header class="flex h-16 items-center justify-between border-b border-slate-200 bg-surface-light px-6 dark:border-slate-800 dark:bg-[#111722]">
-<div class="flex items-center gap-4 lg:hidden">
-<button class="text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-white">
-<span class="material-symbols-outlined">menu</span>
-</button>
-<span class="font-bold text-slate-900 dark:text-white">Math Admin</span>
-</div>
-<div class="hidden max-w-md flex-1 lg:flex">
-<div class="relative w-full">
-<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400">search</span>
-<input class="h-10 w-full rounded-lg border border-slate-200 bg-slate-50 pl-10 text-sm outline-none focus:border-primary focus:ring-1 focus:ring-primary dark:border-slate-700 dark:bg-[#232f48] dark:text-white dark:placeholder-slate-400" placeholder="Search lessons, students, or quizzes..." type="text"/>
-</div>
-</div>
-<div class="flex items-center gap-4">
-<button class="flex h-10 w-10 items-center justify-center rounded-lg text-slate-500 hover:bg-slate-100 dark:text-slate-400 dark:hover:bg-slate-800">
-<span class="material-symbols-outlined">notifications</span>
-</button>
-<button class="flex h-10 w-10 items-center justify-center rounded-lg text-slate-500 hover:bg-slate-100 dark:text-slate-400 dark:hover:bg-slate-800" onclick="document.documentElement.classList.toggle('dark')">
-<span class="material-symbols-outlined dark:hidden">dark_mode</span>
-<span class="material-symbols-outlined hidden dark:block">light_mode</span>
-</button>
-<div class="relative group">
-<button class="flex items-center gap-3 pl-2">
-<div class="text-right hidden md:block">
-<p class="text-sm font-medium text-slate-900 dark:text-white">Admin User</p>
-<p class="text-xs text-slate-500 dark:text-slate-400">admin@mathfalta.com</p>
-</div>
-<div class="h-10 w-10 overflow-hidden rounded-full bg-slate-200 dark:bg-slate-700 bg-center bg-cover" data-alt="Admin user profile picture showing a placeholder avatar" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAlXYaEVeHoTogkCqsZ_nXsz6ywYFxdgP7aZWCHthY3w5fZs9HHaSNaXuxeHWYJbEIVRE7bmsOQIYKAwmNG-E_3_wfuouNkfHptc_5ydKAP2EntLhYyABTcNcw6Nt84BGkJ_-yIgX_LJxdObkax6cvtV5CsLnM4JqNNMomVSQ1qXEwP-nWQLG8m70fwZqy5Ew4qYE30yiDpA7TENm84Rpa2wz-ydRiXLuP1wLpriQgE8giZyEyhO-Q5QjyHtQpRkEfQlDfiZ5_06nc");'></div>
-</button>
-<div class="absolute right-0 top-full mt-2 w-64 origin-top-right rounded-xl border border-slate-200 bg-white p-2 shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 dark:border-slate-700 dark:bg-[#1e293b] z-50">
-<div class="px-3 py-2 border-b border-slate-100 dark:border-slate-700 mb-2">
-<p class="text-sm font-semibold text-slate-900 dark:text-white">Jane Admin</p>
-<p class="text-xs text-slate-500 dark:text-slate-400">+1 (555) 123-4567</p>
-<p class="text-xs text-slate-500 dark:text-slate-400">admin@mathfalta.com</p>
-</div>
-<a class="flex w-full items-center gap-2 rounded-lg px-3 py-2 text-sm text-slate-600 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-slate-800" href="/manage-users.html">
-<span class="material-symbols-outlined text-[20px]">person</span>
-                            Profile
-                        </a>
-<a id="admin-signout-2" class="flex w-full items-center gap-2 rounded-lg px-3 py-2 text-sm text-red-600 hover:bg-red-50 dark:text-red-400 dark:hover:bg-red-900/20" href="#">
-<span class="material-symbols-outlined text-[20px]">logout</span>
-                            Sign out
-                        </a>
-</div>
-</div>
-</div>
-</header>
+      </aside>
+      <main class="flex flex-1 flex-col overflow-hidden">
+        <header
+          class="h-16 flex items-center justify-between px-6 lg:px-8 border-b border-slate-200 dark:border-slate-800 bg-surface-light/80 dark:bg-[#111722]/80 backdrop-blur-sm z-10"
+        >
+          <div class="hidden md:flex flex-1 max-w-md">
+            <div class="relative w-full">
+              <span
+                class="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 dark:text-slate-500"
+              >
+                <span class="material-symbols-outlined text-[20px]"
+                  >search</span
+                >
+              </span>
+              <input
+                class="w-full bg-slate-100 dark:bg-slate-800/50 border-none rounded-lg py-2 pl-10 pr-4 text-sm text-slate-900 dark:text-white placeholder:text-slate-400 focus:ring-2 focus:ring-primary/50"
+                placeholder="Search for lessons, users, or topics..."
+                type="text"
+              />
+            </div>
+          </div>
+          <button class="md:hidden p-2 text-slate-600 dark:text-white">
+            <span class="material-symbols-outlined">menu</span>
+          </button>
+          <div class="flex items-center gap-4 ml-auto">
+            <button
+              class="flex items-center justify-center rounded-lg h-9 w-9 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-500 dark:text-slate-400 transition-colors"
+            >
+              <span class="material-symbols-outlined text-[20px]"
+                >light_mode</span
+              >
+            </button>
+            <button
+              class="flex items-center justify-center rounded-lg h-9 w-9 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-500 dark:text-slate-400 transition-colors relative"
+            >
+              <span class="material-symbols-outlined text-[20px]"
+                >notifications</span
+              >
+              <span
+                class="absolute top-2 right-2.5 w-2 h-2 bg-red-500 rounded-full border-2 border-white dark:border-[#111722]"
+              ></span>
+            </button>
+            <div class="h-8 w-px bg-slate-200 dark:bg-slate-700 mx-2"></div>
+            <button
+              class="flex items-center gap-3 hover:bg-slate-50 dark:hover:bg-slate-800/50 rounded-full pl-1 pr-3 py-1 transition-colors border border-transparent hover:border-slate-200 dark:hover:border-slate-700"
+            >
               <div
-                class="flex w-full flex-1 items-stretch rounded-lg h-full bg-[#232f48] border border-transparent group-focus-within:border-primary/50 transition-colors"
-              >
-                <div
-                  class="text-[#92a4c9] flex border-none items-center justify-center pl-3"
+                class="bg-center bg-no-repeat bg-cover rounded-full size-8 border border-slate-200 dark:border-slate-700 shadow-sm"
+                style="
+                  background-image: url(&quot;https://lh3.googleusercontent.com/aida-public/AB6AXuDb5RUo_0GsFFqVX_ermJe-MjZS5E_hJ36xTzi830pIerkSR1_OFUsklCmmY_YNoV7pIzjneYjNEEptT5lIKtA6aVyYUsjKUPb4GB_hdF3RQb_y5-FmK9cqRjzZZ0KBlVO1xVlhxFbBrfKEwC6o45XmaWGgZZKyq874AxSjMswHutMt6ubHOo7dmGL6QXw7Hbg4Xi8dVVdHaqdHtzDBuuj96I4msprIyycnVo83-KL_0BUQbZh_PrZ1lNUkzwPuVMkRcrJsZSv5qBU&quot;);
+                "
+              ></div>
+              <div class="hidden lg:flex flex-col items-start text-xs">
+                <span class="font-semibold text-slate-900 dark:text-white"
+                  >Admin User</span
                 >
-                  <span class="material-symbols-outlined text-[20px]"
-                    >search</span
-                  >
-                </div>
-                <input
-                  class="flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-white focus:outline-0 focus:ring-0 border-none bg-transparent h-full placeholder:text-[#92a4c9] px-3 text-sm font-normal"
-                  placeholder="Search..."
-                  value=""
-                />
+                <span class="text-slate-500 dark:text-slate-400"
+                  >Administrator</span
+                >
               </div>
-            </label>
-            <div class="flex gap-2">
-              <button
-                class="flex items-center justify-center rounded-lg h-10 w-10 bg-[#232f48] text-[#92a4c9] hover:text-white hover:bg-[#2d3b55] transition-colors"
-                onclick="document.documentElement.classList.toggle('dark')"
+              <span class="material-symbols-outlined text-[16px] text-slate-400"
+                >expand_more</span
               >
-                <span class="material-symbols-outlined text-[20px]"
-                  >light_mode</span
-                >
-              </button>
-              <button
-                class="flex items-center justify-center rounded-lg h-10 w-10 bg-[#232f48] text-[#92a4c9] hover:text-white hover:bg-[#2d3b55] transition-colors relative"
+            </button>
+          </div>
+        </header>
+        <div class="flex-1 overflow-y-auto p-4 md:p-8 pb-[220px]">
+          <div
+            class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4"
+          >
+            <div class="flex flex-col gap-1">
+              <h1
+                id="quiz-title-header"
+                class="text-slate-900 dark:text-white text-3xl font-black tracking-tight"
               >
-                <span class="material-symbols-outlined text-[20px]"
-                  >notifications</span
-                >
-                <span
-                  class="absolute top-2.5 right-2.5 w-2 h-2 bg-red-500 rounded-full border border-[#232f48]"
-                ></span>
-              </button>
-              <button
-                class="flex items-center gap-2 h-10 px-3 bg-[#135bec] hover:bg-[#135bec]/90 text-white rounded-lg transition-colors"
+                Edit Quiz: Algebra Basics
+              </h1>
+              <p
+                id="quiz-last-modified"
+                class="text-slate-500 dark:text-[#92a4c9] text-sm"
               >
-                <div
-                  class="w-6 h-6 rounded-full bg-white/20 flex items-center justify-center text-xs font-bold"
+                Last modified: --
+              </p>
+            </div>
+            <div class="flex gap-3">
+              <button
+                id="delete-quiz-btn"
+                class="flex items-center justify-center h-10 px-4 rounded-lg bg-red-500/10 text-red-600 dark:text-red-400 hover:bg-red-500/20 text-sm font-bold transition-colors"
+              >
+                <span class="material-symbols-outlined text-[18px] mr-2"
+                  >delete</span
                 >
-                  MA
-                </div>
-                <span class="text-sm font-bold hidden lg:block">Profile</span>
+                Delete
               </button>
             </div>
           </div>
-        </header>
-        <main class="flex-1 overflow-y-auto p-4 md:p-8 relative">
-          <div class="max-w-5xl mx-auto flex flex-col gap-6 pb-24">
+          <div
+            class="rounded-xl bg-white dark:bg-[#1c2536] border border-slate-200 dark:border-[#232f48] p-6 shadow-sm"
+          >
             <div
-              class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4"
+              class="flex items-center gap-2 mb-6 border-b border-slate-200 dark:border-[#232f48] pb-4"
             >
-              <div class="flex flex-col gap-1">
-                <h1
-                  class="text-slate-900 dark:text-white text-3xl font-black tracking-tight"
-                >
-                  Edit Quiz: Algebra Basics
-                </h1>
-                <p class="text-slate-500 dark:text-[#92a4c9] text-sm">
-                  Last modified: Today at 10:42 AM by Admin
-                </p>
-              </div>
-              <div class="flex gap-3">
-                <button
-                  class="flex items-center justify-center h-10 px-4 rounded-lg bg-red-500/10 text-red-600 dark:text-red-400 hover:bg-red-500/20 text-sm font-bold transition-colors"
-                >
-                  <span class="material-symbols-outlined text-[18px] mr-2"
-                    >delete</span
-                  >
-                  Delete
-                </button>
-                <button
-                  class="flex items-center justify-center h-10 px-4 rounded-lg border border-slate-300 dark:border-[#232f48] text-slate-700 dark:text-white hover:bg-slate-100 dark:hover:bg-[#232f48] text-sm font-bold transition-colors"
-                >
-                  Preview
-                </button>
-              </div>
+              <span class="material-symbols-outlined text-primary">tune</span>
+              <h3 class="text-lg font-bold text-slate-900 dark:text-white">
+                General Information
+              </h3>
             </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div class="col-span-1 md:col-span-2">
+                <label
+                  class="block text-slate-500 dark:text-[#92a4c9] text-sm font-medium mb-2"
+                  >Quiz Title</label
+                >
+                <input
+                  id="quiz-title"
+                  class="w-full bg-slate-50 dark:bg-[#232f48] border-slate-200 dark:border-none rounded-lg text-slate-900 dark:text-white px-4 py-3 focus:ring-2 focus:ring-primary placeholder-slate-400 dark:placeholder-[#586b8f] title"
+                  type="text"
+                  
+                />
+              </div>
+              <div>
+                <label
+                  class="block text-slate-500 dark:text-[#92a4c9] text-sm font-medium mb-2"
+                  >Grade Level</label
+                >
+                <div class="relative">
+                  <select
+                    id="quiz-grade"
+                    class="w-full bg-slate-50 dark:bg-[#232f48] border-slate-200 dark:border-none rounded-lg text-slate-900 dark:text-white px-4 py-3 pr-10 appearance-none focus:ring-2 focus:ring-primary"
+                  >
+                    <option value="5">Grade 5</option>
+                    <option value="6">Grade 6</option>
+                    <option value="7">Grade 7</option>
+                    <option value="8">Grade 8</option>
+                    <option value="9" selected>Grade 9</option>
+                  </select>
+                  <span
+                    class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 dark:text-[#92a4c9] pointer-events-none"
+                    >expand_more</span
+                  >
+                </div>
+              </div>
+
+            </div>
+          </div>
+          <div class="flex flex-col gap-4 mt-6">
+            <div class="flex justify-between items-end px-1">
+              <h3
+                class="text-xl font-bold text-slate-900 dark:text-white flex items-center gap-2"
+              >
+                <span class="material-symbols-outlined text-primary"
+                  >format_list_numbered</span
+                >
+                <span id="question-count">Questions (0)</span>
+              </h3>
+              <a
+                href="#new-question-panel"
+                class="text-primary text-sm font-bold hover:text-primary/80 transition-colors flex items-center gap-1"
+              >
+                <span class="material-symbols-outlined text-[18px]"
+                  >add_circle</span
+                >
+                Add New Question
+              </a>
+            </div>
+            <div id="existing-questions" class="flex flex-col gap-4"></div>
             <div
+              id="new-question-panel"
               class="rounded-xl bg-white dark:bg-[#1c2536] border border-slate-200 dark:border-[#232f48] p-6 shadow-sm"
             >
               <div
                 class="flex items-center gap-2 mb-6 border-b border-slate-200 dark:border-[#232f48] pb-4"
               >
-                <span class="material-symbols-outlined text-primary">tune</span>
+                <span class="material-symbols-outlined text-primary"
+                  >add_circle</span
+                >
                 <h3 class="text-lg font-bold text-slate-900 dark:text-white">
-                  General Information
+                  Add New Question
                 </h3>
               </div>
-              <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div class="col-span-1 md:col-span-2">
-                  <label
-                    class="block text-slate-500 dark:text-[#92a4c9] text-sm font-medium mb-2"
-                    >Quiz Title</label
-                  >
-                  <input
-                    class="w-full bg-slate-50 dark:bg-[#232f48] border-slate-200 dark:border-none rounded-lg text-slate-900 dark:text-white px-4 py-3 focus:ring-2 focus:ring-primary placeholder-slate-400 dark:placeholder-[#586b8f]"
-                    type="text"
-                    value="Algebra Basics: Linear Equations"
-                  />
-                </div>
+              <div class="flex flex-col gap-6">
                 <div>
                   <label
-                    class="block text-slate-500 dark:text-[#92a4c9] text-sm font-medium mb-2"
-                    >Subject</label
+                    class="block text-slate-500 dark:text-[#92a4c9] text-xs uppercase font-bold tracking-wider mb-2"
+                    >Question Type</label
                   >
                   <div class="relative">
                     <select
-                      class="w-full bg-slate-50 dark:bg-[#232f48] border-slate-200 dark:border-none rounded-lg text-slate-900 dark:text-white px-4 py-3 pr-10 appearance-none focus:ring-2 focus:ring-primary"
+                      id="new-question-type"
+                      class="w-full bg-slate-50 dark:bg-[#232f48] border border-slate-200 dark:border-[#232f48] rounded-lg text-slate-900 dark:text-white px-4 py-3 pr-10 appearance-none focus:ring-2 focus:ring-primary"
                     >
-                      <option>Mathematics</option>
-                      <option>Physics</option>
-                      <option>Chemistry</option>
+                      <option value="text" selected>Text Question</option>
+                      <option value="image">Image Question</option>
                     </select>
                     <span
                       class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 dark:text-[#92a4c9] pointer-events-none"
@@ -355,413 +345,228 @@
                     >
                   </div>
                 </div>
-                <div>
+                <div id="new-text-wrapper">
                   <label
-                    class="block text-slate-500 dark:text-[#92a4c9] text-sm font-medium mb-2"
-                    >Grade Level</label
-                  >
-                  <div class="relative">
-                    <select
-                      class="w-full bg-slate-50 dark:bg-[#232f48] border-slate-200 dark:border-none rounded-lg text-slate-900 dark:text-white px-4 py-3 pr-10 appearance-none focus:ring-2 focus:ring-primary"
-                    >
-                      <option value="5">Grade 5</option>
-                      <option value="6">Grade 6</option>
-                      <option value="7">Grade 7</option>
-                      <option value="8">Grade 8</option>
-                      <option value="9" selected>Grade 9</option>
-                    </select>
-                    <span
-                      class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 dark:text-[#92a4c9] pointer-events-none"
-                      >expand_more</span
-                    >
-                  </div>
-                </div>
-                <div class="col-span-1 md:col-span-2">
-                  <label
-                    class="block text-slate-500 dark:text-[#92a4c9] text-sm font-medium mb-2"
-                    >Description (Optional)</label
+                    class="block text-slate-500 dark:text-[#92a4c9] text-xs uppercase font-bold tracking-wider mb-2"
+                    >Question Text</label
                   >
                   <textarea
-                    class="w-full bg-slate-50 dark:bg-[#232f48] border-slate-200 dark:border-none rounded-lg text-slate-900 dark:text-white px-4 py-3 focus:ring-2 focus:ring-primary placeholder-slate-400 dark:placeholder-[#586b8f]"
+                    id="new-question-text"
+                    class="w-full bg-slate-50 dark:bg-[#111722] border border-slate-200 dark:border-[#232f48] rounded-lg text-slate-900 dark:text-white px-4 py-3 focus:ring-1 focus:ring-primary focus:border-primary placeholder-slate-400 dark:placeholder-[#586b8f] font-mono text-sm leading-relaxed"
                     rows="3"
-                  >
-A fundamental quiz covering single variable equations, focusing on isolating the variable and basic arithmetic operations.</textarea
-                  >
+                    placeholder="Type the new question here..."
+                  ></textarea>
                 </div>
-              </div>
-            </div>
-            <div class="flex flex-col gap-4">
-              <div class="flex justify-between items-end px-1">
-                <h3
-                  class="text-xl font-bold text-slate-900 dark:text-white flex items-center gap-2"
-                >
-                  <span class="material-symbols-outlined text-primary"
-                    >format_list_numbered</span
-                  >
-                  Questions (12)
-                </h3>
-                <button
-                  class="text-primary text-sm font-bold hover:text-primary/80 transition-colors flex items-center gap-1"
-                >
-                  <span class="material-symbols-outlined text-[18px]"
-                    >add_circle</span
-                  >
-                  Add New Question
-                </button>
-              </div>
-              <div
-                class="rounded-xl bg-white dark:bg-[#1c2536] border border-primary/50 shadow-[0_0_15px_rgba(19,91,236,0.1)] overflow-hidden"
-              >
                 <div
-                  class="bg-slate-50 dark:bg-[#232f48] px-6 py-3 flex justify-between items-center border-b border-slate-200 dark:border-[#232f48]"
+                  id="new-image-wrapper"
+                  class="hidden rounded-lg bg-slate-50 dark:bg-[#111722] border border-dashed border-slate-300 dark:border-[#232f48] p-6"
                 >
-                  <div class="flex items-center gap-3">
-                    <span
-                      class="material-symbols-outlined text-slate-400 dark:text-[#92a4c9] cursor-move"
-                      >drag_indicator</span
-                    >
-                    <span class="text-slate-900 dark:text-white font-bold"
-                      >Question 1</span
-                    >
-                    <span
-                      class="bg-primary/10 dark:bg-primary/20 text-primary text-xs px-2 py-0.5 rounded font-medium"
-                      >Multiple Choice</span
-                    >
-                  </div>
-                  <div class="flex gap-2">
-                    <button
-                      class="text-slate-500 dark:text-[#92a4c9] hover:text-slate-900 dark:hover:text-white p-1 rounded hover:bg-slate-200 dark:hover:bg-[#34425e] transition-colors"
-                    >
-                      <span class="material-symbols-outlined text-[20px]"
-                        >content_copy</span
-                      >
-                    </button>
-                    <button
-                      class="text-red-400 hover:text-red-300 p-1 rounded hover:bg-red-500/10 transition-colors"
-                    >
-                      <span class="material-symbols-outlined text-[20px]"
-                        >delete</span
-                      >
-                    </button>
-                    <button
-                      class="text-slate-500 dark:text-[#92a4c9] hover:text-slate-900 dark:hover:text-white p-1 rounded hover:bg-slate-200 dark:hover:bg-[#34425e] transition-colors"
-                    >
-                      <span class="material-symbols-outlined text-[20px]"
-                        >expand_less</span
-                      >
-                    </button>
-                  </div>
-                </div>
-                <div class="p-6 flex flex-col gap-6">
-                  <div>
-                    <label
-                      class="block text-slate-500 dark:text-[#92a4c9] text-xs uppercase font-bold tracking-wider mb-2"
-                      >Question Text</label
-                    >
-                    <div class="relative">
-                      <div
-                        class="absolute top-2 right-2 flex gap-1 bg-white dark:bg-[#1c2536] rounded p-1 border border-slate-200 dark:border-[#34425e]"
-                      >
-                        <button
-                          class="p-1 hover:text-slate-900 dark:hover:text-white text-slate-400 dark:text-[#92a4c9]"
+                  <div class="flex flex-col gap-4">
+                    <div class="flex items-center justify-between">
+                      <div>
+                        <p
+                          class="text-slate-900 dark:text-white text-sm font-medium"
                         >
-                          <span class="material-symbols-outlined text-[18px]"
-                            >format_bold</span
-                          >
-                        </button>
-                        <button
-                          class="p-1 hover:text-slate-900 dark:hover:text-white text-slate-400 dark:text-[#92a4c9]"
-                        >
-                          <span class="material-symbols-outlined text-[18px]"
-                            >format_italic</span
-                          >
-                        </button>
-                        <button
-                          class="p-1 hover:text-slate-900 dark:hover:text-white text-slate-400 dark:text-[#92a4c9]"
-                        >
-                          <span class="material-symbols-outlined text-[18px]"
-                            >functions</span
-                          >
-                        </button>
-                        <button
-                          class="p-1 hover:text-slate-900 dark:hover:text-white text-slate-400 dark:text-[#92a4c9]"
-                        >
-                          <span class="material-symbols-outlined text-[18px]"
+                          Image Question
+                        </p>
+                        <p class="text-slate-500 dark:text-[#92a4c9] text-xs">
+                          Upload a clear image or diagram for this question.
+                        </p>
+                      </div>
+                      <button
+                        id="new-image-trigger"
+                        type="button"
+                        class="text-primary text-xs font-bold hover:underline"
+                      >
+                        Upload Image
+                      </button>
+                      <input
+                        id="new-image"
+                        type="file"
+                        accept="image/*"
+                        class="hidden"
+                      />
+                    </div>
+                    <div
+                      class="w-full rounded-xl border border-slate-200 dark:border-[#232f48] bg-white/60 dark:bg-[#0f1724] overflow-hidden"
+                    >
+                      <button
+                        id="new-image-empty"
+                        type="button"
+                        class="h-64 md:h-72 w-full flex items-center justify-center text-slate-400 dark:text-[#92a4c9]"
+                      >
+                        <div class="flex flex-col items-center gap-2">
+                          <span class="material-symbols-outlined text-3xl"
                             >image</span
                           >
-                        </button>
-                      </div>
-                      <textarea
-                        class="w-full bg-slate-50 dark:bg-[#111722] border border-slate-200 dark:border-[#232f48] rounded-lg text-slate-900 dark:text-white px-4 py-3 focus:ring-1 focus:ring-primary focus:border-primary placeholder-slate-400 dark:placeholder-[#586b8f] font-mono text-sm leading-relaxed"
-                        rows="3"
-                      >
-Solve for x: 2x + 4 = 12</textarea
-                      >
-                    </div>
-                  </div>
-                  <div
-                    class="flex items-start gap-4 p-4 rounded-lg bg-slate-50 dark:bg-[#111722] border border-dashed border-slate-300 dark:border-[#232f48]"
-                  >
-                    <div
-                      class="size-16 bg-slate-200 dark:bg-[#232f48] rounded flex items-center justify-center text-slate-400 dark:text-[#92a4c9]"
-                    >
-                      <span class="material-symbols-outlined">image</span>
-                    </div>
-                    <div class="flex flex-col gap-1">
-                      <p
-                        class="text-slate-900 dark:text-white text-sm font-medium"
-                      >
-                        Question Image (Optional)
-                      </p>
-                      <p class="text-slate-500 dark:text-[#92a4c9] text-xs">
-                        Upload a graph or diagram to accompany this question.
-                      </p>
-                      <button
-                        class="text-primary text-xs font-bold hover:underline self-start mt-1"
-                      >
-                        Browse Files
+                          <span class="text-xs font-medium"
+                            >No image selected</span
+                          >
+                        </div>
                       </button>
-                    </div>
-                  </div>
-                  <div>
-                    <div class="flex justify-between items-center mb-3">
-                      <label
-                        class="block text-slate-500 dark:text-[#92a4c9] text-xs uppercase font-bold tracking-wider"
-                        >Answer Options</label
-                      >
-                      <span class="text-slate-500 dark:text-[#92a4c9] text-xs"
-                        >Select the radio button to mark correct answer</span
-                      >
-                    </div>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                      <div
-                        class="flex items-center gap-3 bg-slate-50 dark:bg-[#111722] p-3 rounded-lg border border-slate-200 dark:border-[#232f48] group focus-within:border-primary/50 transition-colors"
-                      >
-                        <div class="flex items-center justify-center h-full">
-                          <input
-                            class="w-5 h-5 text-primary bg-white dark:bg-[#232f48] border-slate-300 dark:border-[#586b8f] focus:ring-primary focus:ring-offset-slate-50 dark:focus:ring-offset-[#111722]"
-                            name="q1_correct"
-                            type="radio"
-                          />
-                        </div>
-                        <div class="flex-1">
-                          <span
-                            class="text-slate-500 dark:text-[#586b8f] text-xs font-bold mb-1 block"
-                            >Option A</span
-                          >
-                          <input
-                            class="w-full bg-transparent border-none text-slate-900 dark:text-white p-0 focus:ring-0 placeholder-slate-400 dark:placeholder-[#34425e] font-medium"
-                            type="text"
-                            value="2"
-                          />
-                        </div>
-                      </div>
-                      <div
-                        class="flex items-center gap-3 bg-slate-50 dark:bg-[#111722] p-3 rounded-lg border border-primary group transition-colors"
-                      >
-                        <div class="flex items-center justify-center h-full">
-                          <input
-                            checked=""
-                            class="w-5 h-5 text-primary bg-white dark:bg-[#232f48] border-slate-300 dark:border-[#586b8f] focus:ring-primary focus:ring-offset-slate-50 dark:focus:ring-offset-[#111722]"
-                            name="q1_correct"
-                            type="radio"
-                          />
-                        </div>
-                        <div class="flex-1">
-                          <span
-                            class="text-primary text-xs font-bold mb-1 block"
-                            >Option B</span
-                          >
-                          <input
-                            class="w-full bg-transparent border-none text-slate-900 dark:text-white p-0 focus:ring-0 placeholder-slate-400 dark:placeholder-[#34425e] font-medium"
-                            type="text"
-                            value="4"
-                          />
-                        </div>
-                        <span
-                          class="material-symbols-outlined text-primary text-sm"
-                          >check_circle</span
-                        >
-                      </div>
-                      <div
-                        class="flex items-center gap-3 bg-slate-50 dark:bg-[#111722] p-3 rounded-lg border border-slate-200 dark:border-[#232f48] group focus-within:border-primary/50 transition-colors"
-                      >
-                        <div class="flex items-center justify-center h-full">
-                          <input
-                            class="w-5 h-5 text-primary bg-white dark:bg-[#232f48] border-slate-300 dark:border-[#586b8f] focus:ring-primary focus:ring-offset-slate-50 dark:focus:ring-offset-[#111722]"
-                            name="q1_correct"
-                            type="radio"
-                          />
-                        </div>
-                        <div class="flex-1">
-                          <span
-                            class="text-slate-500 dark:text-[#586b8f] text-xs font-bold mb-1 block"
-                            >Option C</span
-                          >
-                          <input
-                            class="w-full bg-transparent border-none text-slate-900 dark:text-white p-0 focus:ring-0 placeholder-slate-400 dark:placeholder-[#34425e] font-medium"
-                            type="text"
-                            value="6"
-                          />
-                        </div>
-                      </div>
-                      <div
-                        class="flex items-center gap-3 bg-slate-50 dark:bg-[#111722] p-3 rounded-lg border border-slate-200 dark:border-[#232f48] group focus-within:border-primary/50 transition-colors"
-                      >
-                        <div class="flex items-center justify-center h-full">
-                          <input
-                            class="w-5 h-5 text-primary bg-white dark:bg-[#232f48] border-slate-300 dark:border-[#586b8f] focus:ring-primary focus:ring-offset-slate-50 dark:focus:ring-offset-[#111722]"
-                            name="q1_correct"
-                            type="radio"
-                          />
-                        </div>
-                        <div class="flex-1">
-                          <span
-                            class="text-slate-500 dark:text-[#586b8f] text-xs font-bold mb-1 block"
-                            >Option D</span
-                          >
-                          <input
-                            class="w-full bg-transparent border-none text-slate-900 dark:text-white p-0 focus:ring-0 placeholder-slate-400 dark:placeholder-[#34425e] font-medium"
-                            type="text"
-                            value="8"
-                          />
-                        </div>
-                      </div>
+                      <img
+                        id="new-image-preview"
+                        alt="Selected question"
+                        class="hidden h-64 md:h-72 w-full object-contain bg-white dark:bg-[#0f1724]"
+                      />
                     </div>
                   </div>
                 </div>
-              </div>
-              <div
-                class="rounded-xl bg-white dark:bg-[#1c2536] border border-slate-200 dark:border-[#232f48] overflow-hidden hover:border-slate-400 dark:hover:border-[#586b8f] transition-colors group"
-              >
-                <div
-                  class="px-6 py-4 flex justify-between items-center cursor-pointer"
-                >
-                  <div class="flex items-center gap-4 flex-1">
+                <div>
+                  <div class="flex justify-between items-center mb-3">
+                    <label
+                      class="block text-slate-500 dark:text-[#92a4c9] text-xs uppercase font-bold tracking-wider"
+                      >Answer Options</label
+                    >
                     <span
-                      class="material-symbols-outlined text-slate-400 dark:text-[#92a4c9] cursor-move opacity-0 group-hover:opacity-100 transition-opacity"
-                      >drag_indicator</span
+                      id="new-options-help"
+                      class="text-slate-500 dark:text-[#92a4c9] text-xs"
+                      >Options are editable (Text Question)</span
                     >
-                    <div class="flex flex-col gap-1">
-                      <div class="flex items-center gap-2">
+                  </div>
+                  <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <button
+                      data-answer="A"
+                      class="new-answer-option w-full text-left flex items-center gap-3 bg-slate-50 dark:bg-[#111722] p-3 rounded-lg border border-primary ring-2 ring-primary/30 transition-colors"
+                    >
+                      <div class="flex-1">
                         <span
-                          class="text-slate-900 dark:text-white font-bold text-sm"
-                          >Question 2</span
+                          class="text-primary text-xs font-bold mb-1 block"
+                          >Option A</span
                         >
-                        <span
-                          class="text-slate-500 dark:text-[#92a4c9] text-xs px-2 py-0.5 rounded bg-slate-100 dark:bg-[#232f48] border border-slate-200 dark:border-[#34425e]"
-                          >Graph Analysis</span
+                        <input
+                          id="opt-a"
+                          class="new-option-input w-full bg-transparent border-none text-slate-900 dark:text-white p-0 focus:ring-0 placeholder-slate-400 dark:placeholder-[#34425e] font-medium"
+                          type="text"
+                          placeholder="Option A"
+                        />
+                        <div
+                          id="opt-a-fixed"
+                          class="hidden text-slate-900 dark:text-white font-medium"
                         >
+                          A
+                        </div>
                       </div>
-                      <p
-                        class="text-slate-500 dark:text-[#92a4c9] text-sm truncate max-w-lg"
+                      <span class="material-symbols-outlined text-primary text-sm"
+                        >check_circle</span
                       >
-                        Which equation best represents the line shown in the
-                        graph below?
-                      </p>
+                    </button>
+                    <button
+                      data-answer="B"
+                      class="new-answer-option w-full text-left flex items-center gap-3 bg-slate-50 dark:bg-[#111722] p-3 rounded-lg border border-slate-200 dark:border-[#232f48] transition-colors"
+                    >
+                      <div class="flex-1">
+                        <span
+                          class="text-slate-500 dark:text-[#586b8f] text-xs font-bold mb-1 block"
+                          >Option B</span
+                        >
+                        <input
+                          id="opt-b"
+                          class="new-option-input w-full bg-transparent border-none text-slate-900 dark:text-white p-0 focus:ring-0 placeholder-slate-400 dark:placeholder-[#34425e] font-medium"
+                          type="text"
+                          placeholder="Option B"
+                        />
+                        <div
+                          id="opt-b-fixed"
+                          class="hidden text-slate-900 dark:text-white font-medium"
+                        >
+                          B
+                        </div>
+                      </div>
+                    </button>
+                    <button
+                      data-answer="C"
+                      class="new-answer-option w-full text-left flex items-center gap-3 bg-slate-50 dark:bg-[#111722] p-3 rounded-lg border border-slate-200 dark:border-[#232f48] transition-colors"
+                    >
+                      <div class="flex-1">
+                        <span
+                          class="text-slate-500 dark:text-[#586b8f] text-xs font-bold mb-1 block"
+                          >Option C</span
+                        >
+                        <input
+                          id="opt-c"
+                          class="new-option-input w-full bg-transparent border-none text-slate-900 dark:text-white p-0 focus:ring-0 placeholder-slate-400 dark:placeholder-[#34425e] font-medium"
+                          type="text"
+                          placeholder="Option C"
+                        />
+                        <div
+                          id="opt-c-fixed"
+                          class="hidden text-slate-900 dark:text-white font-medium"
+                        >
+                          C
+                        </div>
+                      </div>
+                    </button>
+                    <button
+                      data-answer="D"
+                      class="new-answer-option w-full text-left flex items-center gap-3 bg-slate-50 dark:bg-[#111722] p-3 rounded-lg border border-slate-200 dark:border-[#232f48] transition-colors"
+                    >
+                      <div class="flex-1">
+                        <span
+                          class="text-slate-500 dark:text-[#586b8f] text-xs font-bold mb-1 block"
+                          >Option D</span
+                        >
+                        <input
+                          id="opt-d"
+                          class="new-option-input w-full bg-transparent border-none text-slate-900 dark:text-white p-0 focus:ring-0 placeholder-slate-400 dark:placeholder-[#34425e] font-medium"
+                          type="text"
+                          placeholder="Option D"
+                        />
+                        <div
+                          id="opt-d-fixed"
+                          class="hidden text-slate-900 dark:text-white font-medium"
+                        >
+                          D
+                        </div>
+                      </div>
                     </div>
                   </div>
-                  <div class="flex gap-2">
-                    <button
-                      class="text-slate-400 dark:text-[#92a4c9] hover:text-slate-900 dark:hover:text-white p-2 rounded hover:bg-slate-200 dark:hover:bg-[#34425e] transition-colors"
-                    >
-                      <span class="material-symbols-outlined text-[20px]"
-                        >edit</span
-                      >
-                    </button>
-                    <button
-                      class="text-slate-400 dark:text-[#92a4c9] hover:text-slate-900 dark:hover:text-white p-2 rounded hover:bg-slate-200 dark:hover:bg-[#34425e] transition-colors"
-                    >
-                      <span class="material-symbols-outlined text-[20px]"
-                        >delete</span
-                      >
-                    </button>
-                    <button
-                      class="text-slate-400 dark:text-[#92a4c9] hover:text-slate-900 dark:hover:text-white p-2 rounded hover:bg-slate-200 dark:hover:bg-[#34425e] transition-colors"
-                    >
-                      <span class="material-symbols-outlined text-[20px]"
-                        >expand_more</span
-                      >
-                    </button>
-                  </div>
+                </div>
+                <input id="new-answer-select" type="hidden" value="A" />
+                <div class="flex justify-end">
+                  <button
+                    id="add-question-btn"
+                    class="h-10 px-6 rounded-lg bg-primary hover:bg-primary/90 text-white font-bold text-sm shadow-lg shadow-primary/20 transition-all transform active:scale-95"
+                  >
+                    Add Question
+                  </button>
                 </div>
               </div>
-              <div
-                class="rounded-xl bg-white dark:bg-[#1c2536] border border-slate-200 dark:border-[#232f48] overflow-hidden hover:border-slate-400 dark:hover:border-[#586b8f] transition-colors group"
-              >
-                <div
-                  class="px-6 py-4 flex justify-between items-center cursor-pointer"
-                >
-                  <div class="flex items-center gap-4 flex-1">
-                    <span
-                      class="material-symbols-outlined text-slate-400 dark:text-[#92a4c9] cursor-move opacity-0 group-hover:opacity-100 transition-opacity"
-                      >drag_indicator</span
-                    >
-                    <div class="flex flex-col gap-1">
-                      <div class="flex items-center gap-2">
-                        <span
-                          class="text-slate-900 dark:text-white font-bold text-sm"
-                          >Question 3</span
-                        >
-                        <span
-                          class="text-slate-500 dark:text-[#92a4c9] text-xs px-2 py-0.5 rounded bg-slate-100 dark:bg-[#232f48] border border-slate-200 dark:border-[#34425e]"
-                          >Multiple Choice</span
-                        >
-                      </div>
-                      <p
-                        class="text-slate-500 dark:text-[#92a4c9] text-sm truncate max-w-lg"
-                      >
-                        Evaluate the expression: 3(x - 2) when x = 5.
-                      </p>
-                    </div>
-                  </div>
-                  <div class="flex gap-2">
-                    <button
-                      class="text-slate-400 dark:text-[#92a4c9] hover:text-slate-900 dark:hover:text-white p-2 rounded hover:bg-slate-200 dark:hover:bg-[#34425e] transition-colors"
-                    >
-                      <span class="material-symbols-outlined text-[20px]"
-                        >edit</span
-                      >
-                    </button>
-                    <button
-                      class="text-slate-400 dark:text-[#92a4c9] hover:text-slate-900 dark:hover:text-white p-2 rounded hover:bg-slate-200 dark:hover:bg-[#34425e] transition-colors"
-                    >
-                      <span class="material-symbols-outlined text-[20px]"
-                        >delete</span
-                      >
-                    </button>
-                    <button
-                      class="text-slate-400 dark:text-[#92a4c9] hover:text-slate-900 dark:hover:text-white p-2 rounded hover:bg-slate-200 dark:hover:bg-[#34425e] transition-colors"
-                    >
-                      <span class="material-symbols-outlined text-[20px]"
-                        >expand_more</span
-                      >
-                    </button>
-                  </div>
-                </div>
-              </div>
+          </div>
+          </div>
+        </div>
+        <div
+          class="fixed bottom-0 left-0 right-0 md:left-64 bg-white/95 dark:bg-[#1c2536]/95 border-t border-slate-200 dark:border-[#232f48] p-4 flex items-center justify-between gap-4 z-40 shadow-[0_-5px_20px_rgba(0,0,0,0.05)] dark:shadow-[0_-5px_20px_rgba(0,0,0,0.3)] backdrop-blur"
+        >
+          <div class="flex flex-col">
+            <div
+              id="quiz-save-status"
+              class="text-xs text-slate-500 dark:text-[#92a4c9]"
+            >
+              All changes saved
+            </div>
+            <div
+              id="quiz-last-saved"
+              class="text-[11px] text-slate-400 dark:text-[#7f91b3]"
+            >
+              Last saved: --
             </div>
           </div>
-        </main>
-        <div
-          class="absolute bottom-0 left-0 w-full bg-white dark:bg-[#1c2536] border-t border-slate-200 dark:border-[#232f48] p-4 flex justify-end gap-4 z-30 shadow-[0_-5px_20px_rgba(0,0,0,0.05)] dark:shadow-[0_-5px_20px_rgba(0,0,0,0.3)]"
-        >
-          <button
-            class="h-10 px-6 rounded-lg bg-slate-100 dark:bg-[#232f48] hover:bg-slate-200 dark:hover:bg-[#2d3b55] text-slate-700 dark:text-white font-bold text-sm transition-colors"
-          >
-            Cancel
-          </button>
-          <button
-            id="save-quiz-changes"
-            class="h-10 px-6 rounded-lg bg-primary hover:bg-primary/90 text-white font-bold text-sm shadow-lg shadow-primary/20 transition-all transform active:scale-95"
-          >
-            Save Changes
-          </button>
+          <div class="flex gap-4">
+            <button
+              id="save-quiz-changes"
+              class="h-10 px-6 rounded-lg bg-primary hover:bg-primary/90 text-white font-bold text-sm shadow-lg shadow-primary/20 transition-all transform active:scale-95"
+            >
+              Save Changes
+            </button>
+          </div>
         </div>
-      </div>
+      </main>
     </div>
 
-    <script type="module" src="/js/edit-quiz.js"></script>
-  <script type="module" src="js/admin-layout.js"></script>
+    <script type="module" src="./js/admin-layout.js"></script>
+    <script type="module" src="./js/edit-quiz.js"></script>
+      <script type="module" src="/js/theme.js"></script>
   </body>
 </html>
+

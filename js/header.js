@@ -3,129 +3,122 @@ import { toggleTheme, applySavedTheme } from "./theme.js";
 // Build standard header HTML for student pages
 function makeHeader() {
   const html = `
-  <div class="max-w-[1200px] mx-auto w-full flex items-center justify-between whitespace-nowrap">
-    <div class="flex items-center gap-3 text-slate-900 dark:text-white cursor-pointer">
-      <div class="size-9 flex items-center justify-center text-primary bg-primary/10 rounded-lg">
-        <span class="material-symbols-outlined !text-2xl">calculate</span>
+  <div class="max-w-[1200px] mx-auto w-full">
+    <div class="flex items-center justify-between h-16">
+      <div class="flex items-center gap-3 text-slate-900 dark:text-white cursor-pointer">
+        <div class="size-9 flex items-center justify-center text-primary bg-primary/10 rounded-lg">
+          <span class="material-symbols-outlined !text-2xl">calculate</span>
+        </div>
+        <h2 class="text-slate-900 dark:text-white text-lg font-bold leading-tight tracking-[-0.015em] hidden sm:block">Math-Falta</h2>
       </div>
-      <h2 class="text-slate-900 dark:text-white text-lg font-bold leading-tight tracking-[-0.015em] hidden sm:block">Math-Falta</h2>
-    </div>
-    <!-- Desktop nav -->
-   <nav class="hidden md:flex items-center gap-8">
-  <a data-nav="dashboard" href="/user-dashboard.html"
-     class="nav-link text-sm font-medium flex items-center gap-2 px-3 py-1.5 rounded-lg transition-colors">
-    <span class="material-symbols-outlined !text-xl">dashboard</span>
-    Dashboard
-  </a>
-
-  <a data-nav="lessons" href="/lessons.html"
-     class="nav-link text-sm font-medium flex items-center gap-2 px-3 py-1.5 rounded-lg transition-colors">
-    <span class="material-symbols-outlined !text-xl">school</span>
-    My Lessons
-  </a>
-
-  <a data-nav="practice" href="/quizzes.html"
-     class="nav-link text-sm font-medium flex items-center gap-2 px-3 py-1.5 rounded-lg transition-colors">
-    <span class="material-symbols-outlined !text-xl">edit_note</span>
-    Practice
-  </a>
-
-  <a data-nav="results" href="/quiz-result.html"
-     class="nav-link text-sm font-medium flex items-center gap-2 px-3 py-1.5 rounded-lg transition-colors">
-    <span class="material-symbols-outlined !text-xl">bar_chart</span>
-    Results
-  </a>
-</nav>
-
-
-    <!-- Mobile actions & profile -->
-    <div class="flex items-center gap-4">
-      <button aria-label="Toggle Theme" data-theme-toggle class="flex items-center justify-center size-10 rounded-full text-slate-600 dark:text-white hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors" type="button">
-        <span id="theme-icon" class="material-symbols-outlined">light_mode</span>
-      </button>
-      <div class="h-6 w-px bg-slate-200 dark:bg-slate-700 mx-1"></div>
-      <div class="relative group">
-        <button class="flex items-center gap-3 hover:bg-slate-100 dark:hover:bg-slate-800 p-1 pr-3 rounded-full transition-colors">
-          <div class="size-9 rounded-full bg-indigo-100 dark:bg-indigo-900/50 text-primary dark:text-indigo-200 flex items-center justify-center border border-indigo-200 dark:border-indigo-800">
-            <!-- Initials placeholder (animates while loading). Replace with real initials when loaded -->
-            <span class="profile-initials-placeholder inline-block w-6 h-6 rounded-full bg-indigo-200 dark:bg-indigo-900/60 animate-pulse"></span>
-            <span class="text-sm font-bold profile-initials real hidden">ST</span>
-          </div>
-          <div class="flex flex-col items-start leading-none">
-            <span class="hidden sm:block text-sm font-medium text-slate-700 dark:text-slate-200 group-hover:text-primary transition-colors">
-              <span class="profile-display-placeholder inline-block animate-pulse bg-slate-200 dark:bg-slate-700 rounded w-28 h-4"></span>
-              <span class="profile-display-name real hidden">Student</span>
-            </span>
-          </div>
-          <span class="material-symbols-outlined text-slate-400 group-hover:text-primary transition-colors text-lg">expand_more</span>
+      <nav class="hidden min-[500px]:flex items-center gap-2">
+        <a data-nav="dashboard" href="/user-dashboard.html"
+          class="nav-link text-sm font-medium flex items-center gap-2 px-3 py-2 rounded-lg transition-colors">
+          <span class="material-symbols-outlined !text-xl">dashboard</span>
+          <span class="hidden md:inline">Dashboard</span>
+        </a>
+        <a data-nav="lessons" href="/lessons.html"
+          class="nav-link text-sm font-medium flex items-center gap-2 px-3 py-2 rounded-lg transition-colors">
+          <span class="material-symbols-outlined !text-xl">school</span>
+          <span class="hidden md:inline">My Lessons</span>
+        </a>
+        <a data-nav="practice" href="/quizzes.html"
+          class="nav-link text-sm font-medium flex items-center gap-2 px-3 py-2 rounded-lg transition-colors">
+          <span class="material-symbols-outlined !text-xl">edit_note</span>
+          <span class="hidden md:inline">Practice</span>
+        </a>
+        <a data-nav="results" href="/quiz-result.html"
+          class="nav-link text-sm font-medium flex items-center gap-2 px-3 py-2 rounded-lg transition-colors">
+          <span class="material-symbols-outlined !text-xl">bar_chart</span>
+          <span class="hidden md:inline">Results</span>
+        </a>
+      </nav>
+      <div class="flex items-center gap-3">
+        <button aria-label="Toggle Theme" data-theme-toggle class="flex items-center justify-center size-10 rounded-lg text-slate-600 dark:text-white hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors" type="button">
+          <span id="theme-icon" class="material-symbols-outlined">light_mode</span>
         </button>
-        <div class="absolute right-0 top-full mt-2 w-72 bg-white dark:bg-[#192233] border border-slate-200 dark:border-[#232f48] rounded-xl shadow-xl shadow-slate-200/20 dark:shadow-black/40 overflow-hidden invisible opacity-0 group-hover:visible group-hover:opacity-100 transition-all duration-200 transform origin-top-right z-50">
-          <div class="p-4 border-b border-slate-100 dark:border-[#232f48] bg-slate-50/50 dark:bg-[#111722]/50">
-            <p class="text-sm font-bold text-slate-900 dark:text-white profile-name">
-              <span class="profile-name-placeholder inline-block w-36 h-4 rounded bg-slate-200 dark:bg-slate-700 animate-pulse"></span>
-              <span class="profile-name-real real hidden">Student Name</span>
-            </p>
-            <p class="text-xs text-slate-500 dark:text-slate-400 font-mono mt-0.5 profile-email">
-              <span class="profile-email-placeholder inline-block w-40 h-3 rounded bg-slate-200 dark:bg-slate-700 animate-pulse"></span>
-              <span class="profile-email-real real hidden">student@math-falta.edu</span>
-            </p>
-          </div>
-          <div class="p-4 border-b border-slate-100 dark:border-[#232f48]">
-            <p class="text-[10px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-wider mb-2">Emergency Contact</p>
-            <div class="flex items-center gap-3 text-sm text-slate-700 dark:text-slate-300">
-              <div class="size-8 rounded-full bg-green-100 dark:bg-green-900/30 text-green-600 dark:text-green-400 flex items-center justify-center flex-shrink-0">
-                <span class="material-symbols-outlined text-lg">phone</span>
-              </div>
-              <div>
-                <p class="font-medium">Parent's Phone</p>
-                <p class="text-xs text-slate-500 dark:text-slate-400 profile-parent">
-                  <span class="profile-parent-placeholder inline-block w-32 h-3 rounded bg-slate-200 dark:bg-slate-700 animate-pulse"></span>
-                  <span class="profile-parent-real real hidden">+1 (555) 123-4567</span>
-                </p>
+        <div class="relative">
+          <button data-profile-toggle class="group flex items-center gap-3 hover:bg-slate-100 dark:hover:bg-slate-800 px-2 py-1 rounded-full transition-colors" aria-expanded="false" aria-haspopup="true">
+            <div class="size-8 rounded-full bg-indigo-100 dark:bg-indigo-900/50 text-primary dark:text-indigo-200 flex items-center justify-center border border-indigo-200 dark:border-indigo-800">
+              <span class="profile-initials-placeholder inline-block w-5 h-5 rounded-full bg-indigo-200 dark:bg-indigo-900/60 animate-pulse"></span>
+              <span class="text-xs font-bold profile-initials real hidden">ST</span>
+            </div>
+            <div class="hidden lg:flex flex-col items-start leading-none">
+              <span class="text-[11px] text-slate-500 dark:text-slate-400">Student</span>
+              <span class="text-sm font-semibold text-slate-800 dark:text-slate-100">
+                <span class="profile-display-placeholder inline-block animate-pulse bg-slate-200 dark:bg-slate-700 rounded w-20 h-3"></span>
+                <span class="profile-display-name real hidden">Student</span>
+              </span>
+            </div>
+            <span class="material-symbols-outlined text-slate-400 group-hover:text-primary transition-colors text-lg">expand_more</span>
+          </button>
+          <div data-profile-menu class="absolute right-0 top-full mt-2 w-64 md:w-72 max-w-[calc(100vw-2rem)] bg-white dark:bg-[#192233] border border-slate-200 dark:border-[#232f48] rounded-xl shadow-xl shadow-slate-200/20 dark:shadow-black/40 opacity-0 pointer-events-none transition-all duration-200 transform origin-top-right z-50 max-h-[70vh] overflow-y-auto">
+            <div class="p-4 border-b border-slate-100 dark:border-[#232f48] bg-slate-50/50 dark:bg-[#111722]/50">
+              <p class="text-sm font-bold text-slate-900 dark:text-white profile-name">
+                <span class="profile-name-placeholder inline-block w-36 h-4 rounded bg-slate-200 dark:bg-slate-700 animate-pulse"></span>
+                <span class="profile-name-real real hidden">Student Name</span>
+              </p>
+              <p class="text-xs text-slate-500 dark:text-slate-400 font-mono mt-0.5 profile-email">
+                <span class="profile-email-placeholder inline-block w-40 h-3 rounded bg-slate-200 dark:bg-slate-700 animate-pulse"></span>
+                <span class="profile-email-real real hidden">student@math-falta.edu</span>
+              </p>
+            </div>
+            <div class="p-4 border-b border-slate-100 dark:border-[#232f48]">
+              <p class="text-[10px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-wider mb-2">Emergency Contact</p>
+              <div class="flex items-center gap-3 text-sm text-slate-700 dark:text-slate-300">
+                <div class="size-8 rounded-full bg-green-100 dark:bg-green-900/30 text-green-600 dark:text-green-400 flex items-center justify-center flex-shrink-0">
+                  <span class="material-symbols-outlined text-lg">phone</span>
+                </div>
+                <div>
+                  <p class="font-medium">Parent's Phone</p>
+                  <p class="text-xs text-slate-500 dark:text-slate-400 profile-parent">
+                    <span class="profile-parent-placeholder inline-block w-32 h-3 rounded bg-slate-200 dark:bg-slate-700 animate-pulse"></span>
+                    <span class="profile-parent-real real hidden">+1 (555) 123-4567</span>
+                  </p>
+                </div>
               </div>
             </div>
-          </div>
-          <div class="p-2">
-            <a class="flex items-center gap-3 px-3 py-2.5 text-sm font-medium text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 hover:text-primary dark:hover:text-primary rounded-lg transition-colors" href="/index.html">
-              <span class="material-symbols-outlined text-xl">home</span>
-              Home
-            </a>
-            <a class="flex items-center gap-3 px-3 py-2.5 text-sm font-medium text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 hover:text-primary dark:hover:text-primary rounded-lg transition-colors" href="/user-dashboard.html">
-              <span class="material-symbols-outlined text-xl">settings</span>
-              Settings
-            </a>
-            <div class="h-px bg-slate-100 dark:bg-[#232f48] my-1"></div>
-            <a id="signin-btn" class="flex items-center gap-3 px-3 py-2.5 text-sm font-medium text-primary dark:text-primary hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg transition-colors hidden" href="/sign-in.html">
-              <span class="material-symbols-outlined text-xl">login</span>
-              Sign In
-            </a>
-            <a id="signout-btn" class="flex items-center gap-3 px-3 py-2.5 text-sm font-medium text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-lg transition-colors" href="#">
-              <span class="material-symbols-outlined text-xl">logout</span>
-              Sign Out
-            </a>
+            <div class="p-2">
+              <a class="flex items-center gap-3 px-3 py-2.5 text-sm font-medium text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 hover:text-primary dark:hover:text-primary rounded-lg transition-colors" href="/index.html">
+                <span class="material-symbols-outlined text-xl">home</span>
+                Home
+              </a>
+              <a class="flex items-center gap-3 px-3 py-2.5 text-sm font-medium text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 hover:text-primary dark:hover:text-primary rounded-lg transition-colors" href="/user-dashboard.html">
+                <span class="material-symbols-outlined text-xl">settings</span>
+                Settings
+              </a>
+              <div class="h-px bg-slate-100 dark:bg-[#232f48] my-1"></div>
+              <a id="signin-btn" class="flex items-center gap-3 px-3 py-2.5 text-sm font-medium text-primary dark:text-primary hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg transition-colors hidden" href="/sign-in.html">
+                <span class="material-symbols-outlined text-xl">login</span>
+                Sign In
+              </a>
+              <a id="signout-btn" class="flex items-center gap-3 px-3 py-2.5 text-sm font-medium text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-lg transition-colors" href="#">
+                <span class="material-symbols-outlined text-xl">logout</span>
+                Sign Out
+              </a>
+            </div>
           </div>
         </div>
       </div>
-
-      <!-- Mobile menu toggle (visible on small screens) -->
-      <button id="mobile-menu-btn" class="md:hidden p-2 rounded-lg ml-2 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800">
-        <span class="material-symbols-outlined">menu</span>
-      </button>
     </div>
-
-    <!-- Mobile menu content (will be toggled) -->
-    <div id="mobile-menu" class="hidden md:hidden absolute left-0 right-0 mt-2 bg-white dark:bg-[#111722] border-t border-slate-100 dark:border-[#232f48] z-40">
-      <div class="px-4 pt-4 pb-6 space-y-2">
-        <a class="block px-3 py-2 rounded-md text-base font-medium text-slate-700 dark:text-slate-200 hover:bg-violet-50 dark:hover:bg-slate-800 hover:text-primary" href="/index.html">Home</a>
-        <a class="block px-3 py-2 rounded-md text-base font-medium text-slate-700 dark:text-slate-200 hover:bg-violet-50 dark:hover:bg-slate-800 hover:text-primary" href="/lessons.html">Lessons</a>
-        <a class="block px-3 py-2 rounded-md text-base font-medium text-slate-700 dark:text-slate-200 hover:bg-violet-50 dark:hover:bg-slate-800 hover:text-primary" href="/quizzes.html">Practice</a>
-        <div class="flex items-center justify-between px-3 pt-4 border-t border-slate-100 dark:border-slate-800">
-          <span class="text-sm text-slate-500">Switch Theme</span>
-          <button class="p-2 rounded-full text-primary bg-violet-100 dark:bg-slate-800" id="mobile-theme-toggle">
-            <i class="ph ph-sun dark:block hidden"></i>
-            <i class="ph ph-moon block dark:hidden"></i>
-          </button>
-        </div>
+    <div class="min-[500px]:hidden border-t border-slate-200 dark:border-[#232f48] pt-2 pb-1">
+      <div class="flex items-center gap-2 overflow-x-auto pb-2">
+        <a data-nav="dashboard" class="mobile-nav-link flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-medium text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 hover:text-primary" href="/user-dashboard.html">
+          <span class="material-symbols-outlined !text-lg">dashboard</span>
+          Dashboard
+        </a>
+        <a data-nav="lessons" class="mobile-nav-link flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-medium text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 hover:text-primary" href="/lessons.html">
+          <span class="material-symbols-outlined !text-lg">school</span>
+          Lessons
+        </a>
+        <a data-nav="practice" class="mobile-nav-link flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-medium text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 hover:text-primary" href="/quizzes.html">
+          <span class="material-symbols-outlined !text-lg">edit_note</span>
+          Practice
+        </a>
+        <a data-nav="results" class="mobile-nav-link flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-medium text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 hover:text-primary" href="/quiz-result.html">
+          <span class="material-symbols-outlined !text-lg">bar_chart</span>
+          Results
+        </a>
       </div>
     </div>
   `;
@@ -155,7 +148,7 @@ function insertHeader() {
     }
   }
   header.className =
-    "relative z-50 border-b border-solid border-[#e5e7eb] dark:border-[#232f48] px-4 md:px-10 py-3 bg-background-light/90 dark:bg-[#111722]/90 backdrop-blur-sm sticky top-0";
+    "relative z-50 border-b border-solid border-[#e5e7eb] dark:border-[#232f48] px-4 md:px-10 bg-white/90 dark:bg-[#111722]/90 backdrop-blur-sm sticky top-0";
   header.innerHTML = makeHeader();
 
   // Wire theme icon
@@ -373,6 +366,19 @@ function highlightActiveNav() {
     activeEl.classList.remove("text-slate-600", "dark:text-slate-300");
     activeEl.classList.add("text-primary", "bg-primary/5", "font-bold");
   }
+
+  // Mobile sidebar active state
+  document.querySelectorAll(".mobile-nav-link").forEach((link) => {
+    link.classList.remove("text-primary", "bg-primary/10", "font-semibold");
+    link.classList.add("text-slate-700", "dark:text-slate-200");
+  });
+  const activeMobile = document.querySelector(
+    `.mobile-nav-link[data-nav="${activeNav}"]`,
+  );
+  if (activeMobile) {
+    activeMobile.classList.remove("text-slate-700", "dark:text-slate-200");
+    activeMobile.classList.add("text-primary", "bg-primary/10", "font-semibold");
+  }
 }
 
 // Auto-run on module load
@@ -399,13 +405,45 @@ if (legacyMobileThemeBtn) {
     document.dispatchEvent(new Event("theme-changed"));
   });
 }
-// Wire mobile menu button (index page)
-const menuBtn = document.getElementById("mobile-menu-btn");
-const mobileMenu = document.getElementById("mobile-menu");
-if (menuBtn && mobileMenu) {
-  menuBtn.addEventListener("click", () =>
-    mobileMenu.classList.toggle("hidden")
-  );
-}
 
+// Profile dropdown (all screen sizes)
+const profileToggle = document.querySelector("[data-profile-toggle]");
+const profileMenu = document.querySelector("[data-profile-menu]");
+
+const closeProfileMenu = () => {
+  if (!profileMenu || !profileToggle) return;
+  profileMenu.classList.remove("opacity-100", "pointer-events-auto");
+  profileMenu.classList.add("opacity-0", "pointer-events-none");
+  profileToggle.setAttribute("aria-expanded", "false");
+};
+
+const openProfileMenu = () => {
+  if (!profileMenu || !profileToggle) return;
+  profileMenu.classList.add("opacity-100", "pointer-events-auto");
+  profileMenu.classList.remove("opacity-0", "pointer-events-none");
+  profileToggle.setAttribute("aria-expanded", "true");
+};
+
+if (profileToggle && profileMenu) {
+  profileToggle.addEventListener("click", (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    if (profileMenu.classList.contains("opacity-100")) closeProfileMenu();
+    else openProfileMenu();
+  });
+
+  document.addEventListener("click", (e) => {
+    if (!profileMenu.contains(e.target) && !profileToggle.contains(e.target)) {
+      closeProfileMenu();
+    }
+  });
+
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") closeProfileMenu();
+  });
+
+  profileMenu.querySelectorAll("a, button").forEach((el) => {
+    el.addEventListener("click", closeProfileMenu);
+  });
+}
 export { insertHeader, updateThemeIcon };

@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html class="dark" lang="en">
   <head>
     <meta charset="utf-8" />
@@ -158,6 +158,19 @@
                     >
                       Last opened: —
                     </p>
+                    <div class="last-lesson-progress-container mt-2 mb-4">
+                      <div
+                        class="progress-bar bg-slate-200 dark:bg-slate-700 rounded-full h-2 overflow-hidden"
+                      >
+                        <div
+                          class="progress-fill bg-primary h-2 w-0 transition-all duration-1000 transtition-timing-function:cubic-bezier(0.4, 0, 0.2, 1)" 
+                        ></div>
+                      </div>
+                      <span
+                        class="progress-text text-xs text-slate-500 dark:text-slate-400 mt-1 block"
+                        >Progress: 0%</span
+                      >
+                    </div>
                     <a
                       id="continue-lesson-btn"
                       href="/lessons.html"
@@ -305,12 +318,12 @@
               <h3 class="text-xl font-bold text-slate-900 dark:text-white">
                 Class Leaderboard
               </h3>
-              <div class="flex gap-2">
+              <!-- <div class="flex gap-2">
                 <span
                   class="px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-bold uppercase tracking-wide"
                   >Weekly</span
                 >
-              </div>
+              </div> -->
             </div>
             <div class="overflow-x-auto">
               <table class="w-full text-left border-collapse">

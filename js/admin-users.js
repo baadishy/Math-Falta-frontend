@@ -1,4 +1,5 @@
 import { getJSON, deleteJSON } from "./app.js";
+import { showToast } from "./ui.js";
 
 let allUsers = [];
 
@@ -86,16 +87,16 @@ function renderTable(users) {
       if (!confirmed) return;
       try {
         await deleteJSON(`/admin/users/${id}`);
-        // Refetch all users to ensure data is fresh
-        const res = await getJSON("/admin/users");
-        allUsers = res.data || [];
+        allUsers = allUsers.filter((user) => user._id !== id);
         applyFilters(); // Re-apply filters and render
+        showToast("User deleted successfully.", "success");
       } catch (err) {
         console.error("Delete failed:", err);
-        alert(
+        showToast(
           `Failed to delete user: ${
             err.payload?.message || err.message || "Unknown error"
-          }`
+          }`,
+          "error",
         );
       }
     } else {

@@ -1,4 +1,5 @@
 import { getJSON, postJSON } from "./app.js";
+import { showToast } from "./ui.js";
 
 function getQueryParam(name) {
   const url = new URL(window.location.href);
@@ -69,7 +70,10 @@ function renderQuestion(q, idx) {
 
 async function initQuiz() {
   const id = getQueryParam("id");
-  if (!id) return alert("Quiz id is required");
+  if (!id) {
+    showToast("Quiz id is required", "error");
+    return;
+  }
 
   // show skeletons while loading
   const heading = document.getElementById("quiz-heading");
@@ -135,17 +139,22 @@ async function initQuiz() {
           if (created && created._id) {
             window.location.href = `/quiz-result.html?answersId=${created._id}`;
           } else {
-            alert("Submitted");
+            showToast("Submitted", "success");
           }
         } catch (err) {
-          alert(err.payload?.msg || err.message || "Submission failed");
+          showToast(
+            err.payload?.msg || err.message || "Submission failed",
+            "error",
+          );
         }
       });
     }
   } catch (err) {
     console.error(err);
     if (err.status === 401) window.location.href = "/sign-in.html";
-    else alert(err.payload?.msg || err.message || "Could not load quiz");
+    else {
+      showToast(err.payload?.msg || err.message || "Could not load quiz", "error");
+    }
   }
 }
 

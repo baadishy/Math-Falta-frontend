@@ -1,11 +1,12 @@
 import { getJSON } from "./app.js";
+import { toggleTheme } from "./theme.js";
 
 async function prepareHeader() {
   const data = (await getJSON("/admin/me")).data;
   const nameElem = document.querySelector("header .text-sm.font-medium");
   const emailElem = document.querySelector("header .text-xs.text-slate-500");
   const phoneElem = document.querySelector(
-    "header .text-xs.text-slate-500:nth-of-type(2)"
+    "header .text-xs.text-slate-500:nth-of-type(2)",
   );
   const name = document.getElementById("admin-name");
   const phone = document.getElementById("admin-phone");
@@ -35,7 +36,7 @@ function updateSidebarActiveLink(sidebar) {
       "bg-primary/10",
       "text-primary",
       "dark:bg-[#232f48]",
-      "dark:text-white"
+      "dark:text-white",
     );
     link.classList.add(
       "group",
@@ -43,7 +44,7 @@ function updateSidebarActiveLink(sidebar) {
       "hover:bg-slate-100",
       "dark:text-slate-400",
       "dark:hover:bg-slate-800",
-      "dark:hover:text-white"
+      "dark:hover:text-white",
     );
     if (icon) {
       icon.classList.remove("icon-fill");
@@ -55,7 +56,7 @@ function updateSidebarActiveLink(sidebar) {
         "bg-primary/10",
         "text-primary",
         "dark:bg-[#232f48]",
-        "dark:text-white"
+        "dark:text-white",
       );
       link.classList.remove(
         "group",
@@ -63,7 +64,7 @@ function updateSidebarActiveLink(sidebar) {
         "hover:bg-slate-100",
         "dark:text-slate-400",
         "dark:hover:bg-slate-800",
-        "dark:hover:text-white"
+        "dark:hover:text-white",
       );
       if (icon) {
         icon.classList.add("icon-fill");
@@ -95,6 +96,10 @@ const asideHtml = `
         <span class="material-symbols-outlined">quiz</span>
         <span class="text-sm font-medium">Manage Quizzes</span>
       </a>
+      <a class="group flex items-center gap-3 rounded-lg px-3 py-2 text-slate-600 hover:bg-slate-100 dark:text-slate-400 dark:hover:bg-slate-800 dark:hover:text-white transition-colors" href="/admin-trash.html">
+        <span class="material-symbols-outlined">delete</span>
+        <span class="text-sm font-medium">Trash</span>
+      </a>
       <a class="group flex items-center gap-3 rounded-lg px-3 py-2 text-slate-600 hover:bg-slate-100 dark:text-slate-400 dark:hover:bg-slate-800 dark:hover:text-white transition-colors" href="/manage-users.html">
         <span class="material-symbols-outlined">group</span>
         <span class="text-sm font-medium">Users Management</span>
@@ -116,23 +121,21 @@ const asideHtml = `
 
 const headerHtml = `
 <header class="flex h-16 items-center justify-between border-b border-slate-200 bg-surface-light px-6 dark:border-slate-800 dark:bg-[#111722]">
-  <div class="flex items-center gap-4 lg:hidden">
-    <button class="text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-white">
+  <div class="flex items-center gap-4 md:hidden">
+    <button data-admin-menu-btn class="text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-white">
       <span class="material-symbols-outlined">menu</span>
     </button>
     <span class="font-bold text-slate-900 dark:text-white">Math Admin</span>
   </div>
-  <div class="hidden max-w-md flex-1 lg:flex">
+  <div class="hidden max-w-md flex-1 md:flex">
     <div class="relative w-full">
       <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400">search</span>
-      <input class="h-10 w-full rounded-lg border border-slate-200 bg-slate-50 pl-10 text-sm outline-none focus:border-primary focus:ring-1 focus:ring-primary dark:border-slate-700 dark:bg-[#232f48] dark:text-white dark:placeholder-slate-400" placeholder="Search lessons, students, or quizzes..." type="text"/>
+      <input data-admin-search class="h-10 w-full rounded-lg border border-slate-200 bg-slate-50 pl-10 text-sm outline-none focus:border-primary focus:ring-1 focus:ring-primary dark:border-slate-700 dark:bg-[#232f48] dark:text-white dark:placeholder-slate-400" placeholder="Search lessons, students, or quizzes..." type="text"/>
     </div>
   </div>
   <div class="flex items-center gap-4">
-    <button class="flex h-10 w-10 items-center justify-center rounded-lg text-slate-500 hover:bg-slate-100 dark:text-slate-400 dark:hover:bg-slate-800">
-      <span class="material-symbols-outlined">notifications</span>
-    </button>
-    <button class="flex h-10 w-10 items-center justify-center rounded-lg text-slate-500 hover:bg-slate-100 dark:text-slate-400 dark:hover:bg-slate-800" onclick="document.documentElement.classList.toggle('dark')">
+    
+    <button data-theme-toggle class="flex h-10 w-10 items-center justify-center rounded-lg text-slate-500 hover:bg-slate-100 dark:text-slate-400 dark:hover:bg-slate-800">
       <span class="material-symbols-outlined dark:hidden">dark_mode</span>
       <span class="material-symbols-outlined hidden dark:block">light_mode</span>
     </button>
@@ -166,11 +169,108 @@ function htmlToFragment(html) {
   return template.content.firstElementChild;
 }
 
+function ensureMobileSidebar() {
+  let overlay = document.getElementById("admin-mobile-overlay");
+  let sidebar = document.getElementById("admin-mobile-sidebar");
+
+  if (!overlay) {
+    overlay = document.createElement("div");
+    overlay.id = "admin-mobile-overlay";
+    overlay.className =
+      "fixed inset-0 z-[110] bg-black/40 opacity-0 pointer-events-none transition-opacity";
+    document.body.appendChild(overlay);
+  }
+
+  if (!sidebar) {
+    sidebar = document.createElement("aside");
+    sidebar.id = "admin-mobile-sidebar";
+    sidebar.className =
+      "fixed inset-y-0 left-0 z-[120] w-72 max-w-[85vw] translate-x-[-100%] bg-white dark:bg-[#111722] border-r border-slate-200 dark:border-slate-800 shadow-2xl transition-transform duration-300 flex flex-col";
+    sidebar.innerHTML = `
+      <div class="flex h-16 items-center justify-between gap-3 px-6 border-b border-slate-200 dark:border-slate-800">
+        <div class="flex items-center gap-3">
+          <div class="flex h-8 w-8 items-center justify-center rounded bg-primary text-white">
+            <span class="material-symbols-outlined">calculate</span>
+          </div>
+          <h1 class="text-lg font-bold tracking-tight text-slate-900 dark:text-white">Math Admin</h1>
+        </div>
+        <button data-admin-close class="text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-white">
+          <span class="material-symbols-outlined">close</span>
+        </button>
+      </div>
+      <div class="flex flex-1 flex-col justify-between overflow-y-auto px-4 py-6">
+        <nav class="flex flex-col gap-2">
+          <a class="group flex items-center gap-3 rounded-lg px-3 py-2 text-slate-600 hover:bg-slate-100 dark:text-slate-400 dark:hover:bg-slate-800 dark:hover:text-white transition-colors" href="/admin-dashboard.html">
+            <span class="material-symbols-outlined">dashboard</span>
+            <span class="text-sm font-medium">Dashboard</span>
+          </a>
+          <a class="group flex items-center gap-3 rounded-lg px-3 py-2 text-slate-600 hover:bg-slate-100 dark:text-slate-400 dark:hover:bg-slate-800 dark:hover:text-white transition-colors" href="/manage-lessons.html">
+            <span class="material-symbols-outlined">book_2</span>
+            <span class="text-sm font-medium">Manage Lessons</span>
+          </a>
+          <a class="group flex items-center gap-3 rounded-lg px-3 py-2 text-slate-600 hover:bg-slate-100 dark:text-slate-400 dark:hover:bg-slate-800 dark:hover:text-white transition-colors" href="/manage-quizzes.html">
+            <span class="material-symbols-outlined">quiz</span>
+            <span class="text-sm font-medium">Manage Quizzes</span>
+          </a>
+          <a class="group flex items-center gap-3 rounded-lg px-3 py-2 text-slate-600 hover:bg-slate-100 dark:text-slate-400 dark:hover:bg-slate-800 dark:hover:text-white transition-colors" href="/admin-trash.html">
+            <span class="material-symbols-outlined">delete</span>
+            <span class="text-sm font-medium">Trash</span>
+          </a>
+          <a class="group flex items-center gap-3 rounded-lg px-3 py-2 text-slate-600 hover:bg-slate-100 dark:text-slate-400 dark:hover:bg-slate-800 dark:hover:text-white transition-colors" href="/manage-users.html">
+            <span class="material-symbols-outlined">group</span>
+            <span class="text-sm font-medium">Users Management</span>
+          </a>
+          <a class="group flex items-center gap-3 rounded-lg px-3 py-2 text-slate-600 hover:bg-slate-100 dark:text-slate-400 dark:hover:bg-slate-800 dark:hover:text-white transition-colors" href="/admin-leaderboard.html">
+            <span class="material-symbols-outlined">leaderboard</span>
+            <span class="text-sm font-medium">Leaderboard</span>
+          </a>
+        </nav>
+        <nav class="flex flex-col gap-2 border-t border-slate-200 pt-6 dark:border-slate-800">
+          <a class="group flex items-center gap-3 rounded-lg px-3 py-2 text-slate-600 hover:bg-slate-100 dark:text-slate-400 dark:hover:bg-slate-800 dark:hover:text-white transition-colors" href="/">
+            <span class="material-symbols-outlined">logout</span>
+            <span class="text-sm font-medium">Home</span>
+          </a>
+        </nav>
+      </div>
+    `;
+    document.body.appendChild(sidebar);
+  }
+
+  updateSidebarActiveLink(sidebar);
+
+  const open = () => {
+    sidebar.classList.remove("translate-x-[-100%]");
+    sidebar.classList.add("translate-x-0");
+    overlay.classList.remove("opacity-0", "pointer-events-none");
+    overlay.classList.add("opacity-100");
+    document.body.classList.add("overflow-hidden");
+  };
+
+  const close = () => {
+    sidebar.classList.add("translate-x-[-100%]");
+    sidebar.classList.remove("translate-x-0");
+    overlay.classList.add("opacity-0", "pointer-events-none");
+    overlay.classList.remove("opacity-100");
+    document.body.classList.remove("overflow-hidden");
+  };
+
+  overlay.addEventListener("click", close);
+  sidebar.querySelectorAll("[data-admin-close], nav a").forEach((el) => {
+    el.addEventListener("click", close);
+  });
+
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") close();
+  });
+
+  return { open, close };
+}
+
 export function insertAdminLayout() {
   // replace aside
   const existingAside = document.querySelector("aside");
   const newAside = htmlToFragment(asideHtml);
-  
+
   // Highlight the active link in the sidebar
   updateSidebarActiveLink(newAside);
 
@@ -196,7 +296,7 @@ export function insertAdminLayout() {
 
   // wire sign-out buttons (optional) to clear cookie endpoint if available
   const signoutButtons = document.querySelectorAll(
-    '#admin-signout, #admin-signout-2, [id^="signout"]'
+    '#admin-signout, #admin-signout-2, [id^="signout"]',
   );
   signoutButtons.forEach((btn) => {
     btn.addEventListener("click", async (e) => {
@@ -213,8 +313,42 @@ export function insertAdminLayout() {
       window.location.href = "/";
     });
   });
+
+  // Wire up global search
+  const searchInput = newHeader.querySelector('input[type="text"]');
+  if (searchInput) {
+    searchInput.addEventListener("keydown", (e) => {
+      if (e.key === "Enter") {
+        e.preventDefault();
+        const query = searchInput.value.trim();
+        if (query) {
+          window.location.href = `/admin-dashboard.html?q=${encodeURIComponent(
+            query,
+          )}`;
+        }
+      }
+    });
+  }
+
+  // Mobile sidebar
+  const mobileSidebar = ensureMobileSidebar();
+  const menuBtn = newHeader.querySelector("[data-admin-menu-btn]");
+  if (menuBtn) {
+    menuBtn.addEventListener("click", () => mobileSidebar.open());
+  }
+
+  const themeBtn = newHeader.querySelector("[data-theme-toggle]");
+  if (themeBtn) {
+    themeBtn.addEventListener("click", () => {
+      toggleTheme();
+    });
+  }
+
   // prepare header with admin info
   prepareHeader();
+
+  // notify listeners (filters can rebind after header replacement)
+  window.dispatchEvent(new CustomEvent("admin-layout-ready"));
 }
 
 // Auto-run on module load
@@ -222,4 +356,6 @@ document.addEventListener("DOMContentLoaded", () => {
   insertAdminLayout();
 });
 
-export default { insertAdminLayout };
+// export { insertAdminLayout, prepareHeader, updateSidebarActiveLink };
+export default { insertAdminLayout, prepareHeader, updateSidebarActiveLink };
+

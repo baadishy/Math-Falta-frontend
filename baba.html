@@ -1,0 +1,336 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>بوستر اليوم العلمي - أطباء الأطفال بالمنيا</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        font-family: "Cairo", sans-serif;
+        background-color: #f0f4f8;
+        margin: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+      }
+
+      /* نسبة العرض 1080 إلى 1350 (4:5) المصممة للسوشيال ميديا */
+      .poster-canvas {
+        width: 100%;
+        max-width: 600px;
+        background: linear-gradient(135deg, #ffffff 0%, #e0f2fe 100%);
+        border: 12px solid #fff;
+        box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
+        position: relative;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        padding: 40px;
+      }
+
+      .header-accent {
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 100%;
+        height: 15px;
+        background: #0ea5e9;
+      }
+
+      .decorative-circle {
+        position: absolute;
+        bottom: -50px;
+        left: -50px;
+        width: 200px;
+        height: 200px;
+        background: rgba(14, 165, 233, 0.05);
+        border-radius: 50%;
+        z-index: 0;
+      }
+
+      .speaker-circle {
+        width: 170px;
+        height: 170px;
+        border-radius: 50%;
+        border: 6px solid #0ea5e9;
+        background: #fff;
+        overflow: hidden;
+        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        position: relative;
+      }
+
+      .speaker-image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center top;
+      }
+
+      .title-box {
+        background-color: #0ea5e9;
+        color: white;
+        padding: 15px 25px;
+        border-radius: 0 50px 50px 0;
+        margin-right: -40px;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        display: inline-block;
+      }
+
+      .footer-info {
+        border-top: 2px dashed #bae6fd;
+        padding-top: 15px;
+        margin-top: auto;
+      }
+
+      .badge {
+        background: #0369a1;
+        color: white;
+        padding: 2px 10px;
+        border-radius: 4px;
+        font-size: 0.7rem;
+        display: inline-block;
+        margin-bottom: 5px;
+      }
+      /* تنسيق القيادات الأفقي */
+      .leaders-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        grid-template-rows: auto auto;
+        gap: 10px;
+        text-align: center;
+        margin-bottom: 15px;
+      } 
+      .greeting {
+        grid-column: 1 / -1;
+        justify-self: center;
+      }
+
+      .leader-card {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        grid-row: 2;
+      }
+      
+      .leader-card img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+      }
+      .leader-card img:first-child {
+        object-position: top;
+      }
+      .marwa img {
+        object-fit: contain;
+      }
+
+      .leader-card p {
+        font-size: 18px;
+      }
+
+      .leader-circle {
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        border: 3px solid #0ea5e9;
+        background: #f1f5f9;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 8px;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+      }
+      .leader-card + p {
+        font-size: 18px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="poster-canvas">
+      <div class="header-accent"></div>
+      <div class="decorative-circle"></div>
+
+      <!-- الجزء العلوي: الرعاية -->
+      <!-- <div class="mb-6">
+            <p class="text-sky-700 text-sm font-bold mb-2">تحت رعاية قيادات الصحة بالمنيا</p>
+            <div class="grid grid-cols-1 gap-1 text-xs text-gray-700 border-r-4 border-sky-500 pr-3">
+                <p><span class="font-bold text-gray-900">د/ محمود عمر عبد الوهاب</span> – وكيل وزارة الصحة</p>
+                <p><span class="font-bold text-gray-900">د/ مروة محمد إسماعيل</span> – وكيل المديرية</p>
+                <p><span class="font-bold text-gray-900">د/ محمد عزت</span> – مدير الإدارة الصحية بالمنيا</p>
+            </div>
+        </div> -->
+
+      <div class="leaders-grid">
+        <p class="text-sky-700 font-bold mb-2 greeting">تحت رعاية قيادات الصحة بالمنيا</p>
+        <!-- القائد 1 -->
+        <div class="leader-card">
+          <div class="leader-circle">
+            <img src="./030c6fbc-f3a4-4e31-9740-d6e473b244a9.jpg" alt="">
+          </div>
+          <p class="font-black text-gray-800 text-[11px] leading-tight mb-1">
+            د/ محمود عمر عبد الوهاب
+          </p>
+          <p class="text-sky-600 text-[9px] font-bold">وكيل وزارة الصحة</p>
+        </div>
+
+        <!-- القائد 2 -->
+        <div class="leader-card marwa">
+          <div class="leader-circle">
+            <img src="./83518886-ada2-4ece-bca2-ae1ee4cec296.jpg" alt="">
+          </div>
+          <p class="font-black text-gray-800 text-[11px] leading-tight mb-1">
+            د/ مروة محمد إسماعيل
+          </p>
+          <p class="text-sky-600 text-[9px] font-bold">وكيل المديرية</p>
+        </div>
+
+        <!-- القائد 3 -->
+        <div class="leader-card">
+          <div class="leader-circle">
+            <img src="./49dbe4ef-dc60-47e6-b606-d658082a0c2f.jpg" alt="">
+          </div>
+          <p class="font-black text-gray-800 text-[11px] leading-tight mb-1">
+            د/ محمد عزت
+          </p>
+          <p class="text-sky-600 text-[9px] font-bold">مدير الإدارة الصحية</p>
+        </div>
+      </div>
+
+      <!-- العنوان الرئيسي -->
+      <div class="mb-6">
+        <div class="title-box">
+          <h1 class="text-2xl font-black">
+            اليوم العلمي لأطباء الأطفال بالمنيا
+          </h1>
+        </div>
+        <div class="mt-4">
+          <div class="badge">الموضوع العلمي</div>
+          <h2 class="text-xl font-bold text-sky-800">
+            إدارة النزلات المعوية والجفاف
+          </h2>
+          <p class="text-md text-sky-600 font-semibold italic">
+            Pediatric Diarrheal Disease & Dehydration Management
+          </p>
+        </div>
+      </div>
+
+      <!-- الترحيب والدعوة -->
+      <div class="bg-sky-50 p-4 rounded-lg mb-6 border-r-4 border-sky-400">
+        <p class="text-sky-900 font-bold mb-1">
+          الإدارة الصحية بالمنيا ترحب بكم
+        </p>
+        <p class="text-gray-600 text-sm">
+          دعوة عامة لجميع أطباء الأطفال للحضور والمشاركة العلمية
+        </p>
+      </div>
+
+      <!-- المتحدث (مع الصورة المحدثة) -->
+      <div class="flex items-center gap-6 mb-6">
+        <div class="flex-grow">
+          <p
+            class="text-sky-600 font-bold text-sm mb-1 italic underline decoration-sky-200"
+          >
+            المتحدث الرئيسي:
+          </p>
+          <h3 class="text-xl font-black text-gray-800 mb-1">
+            د/ مينا سمير فرج الله
+          </h3>
+          <div class="text-sm text-gray-600 space-y-1">
+            <p>مدير إدارة التدريب والمدارس</p>
+            <p>ممثل المجلس الصحي المصري للاعتماد المؤسسي لقطاع شمال الصعيد</p>
+            <p class="font-bold text-sky-700">استشاري الأطفال و حديثي الولادة</p>
+          </div>
+        </div>
+
+        <div class="flex-shrink-0">
+          <div class="speaker-circle">
+            <!-- تم إدراج الصورة المرفوعة هنا -->
+            <img
+              src="./WhatsApp Image 2026-02-06 at 6.51.46 PM.jpeg"
+              class="speaker-image"
+            />
+          </div>
+        </div>
+      </div>
+
+      <!-- الزمان والمكان -->
+      <div class="footer-info">
+        <div
+          class="grid grid-cols-2 gap-4 bg-white p-4 rounded-xl shadow-sm border border-sky-100"
+        >
+          <div class="flex items-start gap-2">
+            <div class="bg-sky-100 p-2 rounded-lg">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-5 w-5 text-sky-600"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+                />
+              </svg>
+            </div>
+            <div>
+              <p class="text-[10px] text-gray-500 font-bold">التاريخ والوقت</p>
+              <p class="text-xs font-bold text-gray-800">السبت 14 / 2 / 2026</p>
+              <p class="text-xs font-bold text-sky-600">10:00 صباحاً</p>
+            </div>
+          </div>
+
+          <div class="flex items-start gap-2 border-r border-gray-100 pr-4">
+            <div class="bg-sky-100 p-2 rounded-lg">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-5 w-5 text-sky-600"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
+                />
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
+                />
+              </svg>
+            </div>
+            <div>
+              <p class="text-[10px] text-gray-500 font-bold">المكان</p>
+              <p class="text-xs font-bold text-gray-800">المركز الطبي الشرقي</p>
+              <p class="text-xs text-gray-600 italic">محافظة المنيا</p>
+            </div>
+          </div>
+        </div>
+
+        <p
+          class="text-center text-[10px] text-gray-400 mt-4 tracking-widest uppercase font-bold"
+        >
+          Minia Health Administration • Department of Pediatrics
+        </p>
+      </div>
+    </div>
+      <script type="module" src="/js/theme.js"></script>
+  </body>
+</html>
+

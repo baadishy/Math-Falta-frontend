@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html class="dark" lang="en">
   <head>
     <meta charset="utf-8" />
@@ -55,10 +55,13 @@
         background: #475569;
       }
       .math-pattern {
-        background-image: radial-gradient(#135bec 0.5px, transparent 0.5px),
+        background-image:
+          radial-gradient(#135bec 0.5px, transparent 0.5px),
           radial-gradient(#135bec 0.5px, transparent 0.5px);
         background-size: 20px 20px;
-        background-position: 0 0, 10px 10px;
+        background-position:
+          0 0,
+          10px 10px;
         opacity: 0.05;
       }
     </style>
@@ -66,152 +69,153 @@
   <body
     class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-white font-display h-screen flex overflow-hidden"
   >
-    <aside
-      class="w-64 bg-surface-light dark:bg-sidebar-dark border-r border-slate-200 dark:border-slate-800 flex flex-col shrink-0 transition-all z-20"
-    >
-      <div
-        class="h-16 flex items-center gap-3 px-6 border-b border-slate-200 dark:border-slate-800"
+    <div class="flex h-full w-full overflow-hidden">
+      <aside
+        class="w-64 bg-surface-light dark:bg-sidebar-dark border-r border-slate-200 dark:border-slate-800 flex flex-col shrink-0 transition-all z-20"
       >
-        <span class="material-symbols-outlined text-[28px] text-primary"
-          >function</span
-        >
-        <h2
-          class="text-slate-900 dark:text-white text-lg font-bold tracking-tight"
-        >
-          MathAdmin
-        </h2>
-      </div>
-      <nav class="flex-1 overflow-y-auto py-6 px-3 flex flex-col gap-1">
-        <a
-          class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800/50 hover:text-primary dark:hover:text-white transition-colors group"
-          href="/admin-dashboard.html"
-        >
-          <span
-            class="material-symbols-outlined text-[22px] group-hover:text-primary transition-colors"
-            >dashboard</span
-          >
-          <span class="text-sm font-medium">Dashboard</span>
-        </a>
-        <a
-          class="flex items-center gap-3 px-3 py-2.5 rounded-lg bg-primary/10 text-primary dark:bg-primary/20 dark:text-white transition-colors"
-          href="/manage-lessons.html"
-        >
-          <span
-            class="material-symbols-outlined text-[22px] text-primary dark:text-blue-400"
-            >library_books</span
-          >
-          <span class="text-sm font-medium">Manage Lessons</span>
-        </a>
-        <a
-          class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800/50 hover:text-primary dark:hover:text-white transition-colors group"
-          href="/manage-quizzes.html"
-        >
-          <span
-            class="material-symbols-outlined text-[22px] group-hover:text-primary transition-colors"
-            >quiz</span
-          >
-          <span class="text-sm font-medium">Manage Quizzes</span>
-        </a>
-        <a
-          class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800/50 hover:text-primary dark:hover:text-white transition-colors group"
-          href="/manage-users.html"
-        >
-          <span
-            class="material-symbols-outlined text-[22px] group-hover:text-primary transition-colors"
-            >group</span
-          >
-          <span class="text-sm font-medium">Users Management</span>
-        </a>
-        <a
-          class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800/50 hover:text-primary dark:hover:text-white transition-colors group"
-          href="/admin-leaderboard.html"
-        >
-          <span
-            class="material-symbols-outlined text-[22px] group-hover:text-primary transition-colors"
-            >leaderboard</span
-          >
-          <span class="text-sm font-medium">Leaderboard</span>
-        </a>
-      </nav>
-      <div class="p-4 border-t border-slate-200 dark:border-slate-800">
         <div
-          class="flex items-center gap-3 px-2 py-2 rounded-lg bg-slate-50 dark:bg-slate-800/50 border border-slate-100 dark:border-slate-700/50"
+          class="h-16 flex items-center gap-3 px-6 border-b border-slate-200 dark:border-slate-800"
         >
-          <div class="w-2 h-2 rounded-full bg-green-500"></div>
-          <span class="text-xs font-medium text-slate-600 dark:text-slate-400"
-            >System Operational</span
+          <span class="material-symbols-outlined text-[28px] text-primary"
+            >function</span
           >
+          <h2
+            class="text-slate-900 dark:text-white text-lg font-bold tracking-tight"
+          >
+            MathAdmin
+          </h2>
         </div>
-      </div>
-    </aside>
-    <div
-      class="flex-1 flex flex-col min-w-0 bg-background-light dark:bg-background-dark relative"
-    >
-      <div class="absolute inset-0 z-0 math-pattern pointer-events-none"></div>
-      <header
-        class="h-16 flex items-center justify-between px-6 lg:px-8 border-b border-slate-200 dark:border-slate-800 bg-surface-light/80 dark:bg-[#111722]/80 backdrop-blur-sm z-10"
-      >
-        <div class="hidden md:flex flex-1 max-w-md">
-          <div class="relative w-full">
+        <nav class="flex-1 overflow-y-auto py-6 px-3 flex flex-col gap-1">
+          <a
+            class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800/50 hover:text-primary dark:hover:text-white transition-colors group"
+            href="/admin-dashboard.html"
+          >
             <span
-              class="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 dark:text-slate-500"
+              class="material-symbols-outlined text-[22px] group-hover:text-primary transition-colors"
+              >dashboard</span
             >
-              <span class="material-symbols-outlined text-[20px]">search</span>
-            </span>
-            <input
-              class="w-full bg-slate-100 dark:bg-slate-800/50 border-none rounded-lg py-2 pl-10 pr-4 text-sm text-slate-900 dark:text-white placeholder:text-slate-400 focus:ring-2 focus:ring-primary/50"
-              placeholder="Search for lessons, users, or topics..."
-              type="text"
-            />
+            <span class="text-sm font-medium">Dashboard</span>
+          </a>
+          <a
+            class="flex items-center gap-3 px-3 py-2.5 rounded-lg bg-primary/10 text-primary dark:bg-primary/20 dark:text-white transition-colors"
+            href="/manage-lessons.html"
+          >
+            <span
+              class="material-symbols-outlined text-[22px] text-primary dark:text-blue-400"
+              >library_books</span
+            >
+            <span class="text-sm font-medium">Manage Lessons</span>
+          </a>
+          <a
+            class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800/50 hover:text-primary dark:hover:text-white transition-colors group"
+            href="/manage-quizzes.html"
+          >
+            <span
+              class="material-symbols-outlined text-[22px] group-hover:text-primary transition-colors"
+              >quiz</span
+            >
+            <span class="text-sm font-medium">Manage Quizzes</span>
+          </a>
+          <a
+            class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800/50 hover:text-primary dark:hover:text-white transition-colors group"
+            href="/manage-users.html"
+          >
+            <span
+              class="material-symbols-outlined text-[22px] group-hover:text-primary transition-colors"
+              >group</span
+            >
+            <span class="text-sm font-medium">Users Management</span>
+          </a>
+          <a
+            class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800/50 hover:text-primary dark:hover:text-white transition-colors group"
+            href="/admin-leaderboard.html"
+          >
+            <span
+              class="material-symbols-outlined text-[22px] group-hover:text-primary transition-colors"
+              >leaderboard</span
+            >
+            <span class="text-sm font-medium">Leaderboard</span>
+          </a>
+        </nav>
+        <div class="p-4 border-t border-slate-200 dark:border-slate-800">
+          <div
+            class="flex items-center gap-3 px-2 py-2 rounded-lg bg-slate-50 dark:bg-slate-800/50 border border-slate-100 dark:border-slate-700/50"
+          >
+            <div class="w-2 h-2 rounded-full bg-green-500"></div>
+            <span class="text-xs font-medium text-slate-600 dark:text-slate-400"
+              >System Operational</span
+            >
           </div>
         </div>
-        <button class="md:hidden p-2 text-slate-600 dark:text-white">
-          <span class="material-symbols-outlined">menu</span>
-        </button>
-        <div class="flex items-center gap-4 ml-auto">
-          <button
-            class="flex items-center justify-center rounded-lg h-9 w-9 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-500 dark:text-slate-400 transition-colors"
-          >
-            <span class="material-symbols-outlined text-[20px]"
-              >light_mode</span
-            >
-          </button>
-          <button
-            class="flex items-center justify-center rounded-lg h-9 w-9 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-500 dark:text-slate-400 transition-colors relative"
-          >
-            <span class="material-symbols-outlined text-[20px]"
-              >notifications</span
-            >
-            <span
-              class="absolute top-2 right-2.5 w-2 h-2 bg-red-500 rounded-full border-2 border-white dark:border-[#111722]"
-            ></span>
-          </button>
-          <div class="h-8 w-px bg-slate-200 dark:bg-slate-700 mx-2"></div>
-          <button
-            class="flex items-center gap-3 hover:bg-slate-50 dark:hover:bg-slate-800/50 rounded-full pl-1 pr-3 py-1 transition-colors border border-transparent hover:border-slate-200 dark:hover:border-slate-700"
-          >
-            <div
-              class="bg-center bg-no-repeat bg-cover rounded-full size-8 border border-slate-200 dark:border-slate-700 shadow-sm"
-              style="
-                background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDb5RUo_0GsFFqVX_ermJe-MjZS5E_hJ36xTzi830pIerkSR1_OFUsklCmmY_YNoV7pIzjneYjNEEptT5lIKtA6aVyYUsjKUPb4GB_hdF3RQb_y5-FmK9cqRjzZZ0KBlVO1xVlhxFbBrfKEwC6o45XmaWGgZZKyq874AxSjMswHutMt6ubHOo7dmGL6QXw7Hbg4Xi8dVVdHaqdHtzDBuuj96I4msprIyycnVo83-KL_0BUQbZh_PrZ1lNUkzwPuVMkRcrJsZSv5qBU');
-              "
-            ></div>
-            <div class="hidden lg:flex flex-col items-start text-xs">
-              <span class="font-semibold text-slate-900 dark:text-white"
-                >Admin User</span
+      </aside>
+      <main class="flex flex-1 flex-col overflow-hidden">
+        <header
+          class="h-16 flex items-center justify-between px-6 lg:px-8 border-b border-slate-200 dark:border-slate-800 bg-surface-light/80 dark:bg-[#111722]/80 backdrop-blur-sm z-10"
+        >
+          <div class="hidden md:flex flex-1 max-w-md">
+            <div class="relative w-full">
+              <span
+                class="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 dark:text-slate-500"
               >
-              <span class="text-slate-500 dark:text-slate-400"
-                >Administrator</span
-              >
+                <span class="material-symbols-outlined text-[20px]"
+                  >search</span
+                >
+              </span>
+              <input
+                class="w-full bg-slate-100 dark:bg-slate-800/50 border-none rounded-lg py-2 pl-10 pr-4 text-sm text-slate-900 dark:text-white placeholder:text-slate-400 focus:ring-2 focus:ring-primary/50"
+                placeholder="Search for lessons, users, or topics..."
+                type="text"
+              />
             </div>
-            <span class="material-symbols-outlined text-[16px] text-slate-400"
-              >expand_more</span
-            >
+          </div>
+          <button class="md:hidden p-2 text-slate-600 dark:text-white">
+            <span class="material-symbols-outlined">menu</span>
           </button>
-        </div>
-      </header>
-      <main class="flex-1 overflow-y-auto p-4 md:p-8 relative z-0">
-        <div class="max-w-4xl mx-auto flex flex-col gap-6">
+          <div class="flex items-center gap-4 ml-auto">
+            <button
+              class="flex items-center justify-center rounded-lg h-9 w-9 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-500 dark:text-slate-400 transition-colors"
+            >
+              <span class="material-symbols-outlined text-[20px]"
+                >light_mode</span
+              >
+            </button>
+            <button
+              class="flex items-center justify-center rounded-lg h-9 w-9 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-500 dark:text-slate-400 transition-colors relative"
+            >
+              <span class="material-symbols-outlined text-[20px]"
+                >notifications</span
+              >
+              <span
+                class="absolute top-2 right-2.5 w-2 h-2 bg-red-500 rounded-full border-2 border-white dark:border-[#111722]"
+              ></span>
+            </button>
+            <div class="h-8 w-px bg-slate-200 dark:bg-slate-700 mx-2"></div>
+            <button
+              class="flex items-center gap-3 hover:bg-slate-50 dark:hover:bg-slate-800/50 rounded-full pl-1 pr-3 py-1 transition-colors border border-transparent hover:border-slate-200 dark:hover:border-slate-700"
+            >
+              <div
+                class="bg-center bg-no-repeat bg-cover rounded-full size-8 border border-slate-200 dark:border-slate-700 shadow-sm"
+                style="
+                  background-image: url(&quot;https://lh3.googleusercontent.com/aida-public/AB6AXuDb5RUo_0GsFFqVX_ermJe-MjZS5E_hJ36xTzi830pIerkSR1_OFUsklCmmY_YNoV7pIzjneYjNEEptT5lIKtA6aVyYUsjKUPb4GB_hdF3RQb_y5-FmK9cqRjzZZ0KBlVO1xVlhxFbBrfKEwC6o45XmaWGgZZKyq874AxSjMswHutMt6ubHOo7dmGL6QXw7Hbg4Xi8dVVdHaqdHtzDBuuj96I4msprIyycnVo83-KL_0BUQbZh_PrZ1lNUkzwPuVMkRcrJsZSv5qBU&quot;);
+                "
+              ></div>
+              <div class="hidden lg:flex flex-col items-start text-xs">
+                <span class="font-semibold text-slate-900 dark:text-white"
+                  >Admin User</span
+                >
+                <span class="text-slate-500 dark:text-slate-400"
+                  >Administrator</span
+                >
+              </div>
+              <span class="material-symbols-outlined text-[16px] text-slate-400"
+                >expand_more</span
+              >
+            </button>
+          </div>
+        </header>
+        <div class="flex-1 overflow-y-auto p-4 md:p-8">
+          <div class="max-w-4xl mx-auto flex flex-col gap-6"></div>
+
           <div class="flex flex-wrap gap-2 text-sm">
             <a
               class="text-slate-500 dark:text-[#92a4c9] hover:text-primary transition-colors flex items-center gap-1"
@@ -245,7 +249,7 @@
               </p>
             </div>
             <button
-              class="flex items-center gap-2 text-red-500 hover:text-red-600 dark:hover:text-red-400 text-sm font-medium px-4 py-2.5 rounded-lg hover:bg-red-50 dark:hover:bg-red-900/20 transition-colors border border-transparent hover:border-red-100 dark:hover:border-red-900/30"
+              class="flex items-center gap-2 text-red-500 hover:text-red-600 dark:hover:text-red-400 text-sm font-medium px-4 py-2.5 rounded-lg hover:bg-red-50 dark:hover:bg-red-900/20 transition-colors border border-transparent hover:border-red-100 dark:hover:border-red-900/30 dl-btn"
             >
               <span class="material-symbols-outlined text-[20px]">delete</span>
               Delete Lesson
@@ -254,7 +258,7 @@
           <div
             class="bg-surface-light dark:bg-surface-dark rounded-xl shadow-sm border border-slate-200 dark:border-slate-800 flex flex-col"
           >
-            <div class="p-6 md:p-8 flex flex-col gap-8">
+            <form class="p-6 md:p-8 flex flex-col gap-8">
               <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <label class="flex flex-col gap-2 group">
                   <span
@@ -264,8 +268,9 @@
                     <span class="text-red-500">*</span>
                   </span>
                   <input
+                    type="text"
                     class="form-input w-full rounded-lg border border-slate-300 dark:border-[#324467] bg-slate-50 dark:bg-[#192233] text-slate-900 dark:text-white focus:ring-primary focus:border-primary placeholder:text-slate-400 h-11 px-4 text-sm transition-colors"
-                    value="Introduction to Calculus"
+                    placeholder="Introduction to Calculus"
                   />
                 </label>
                 <label class="flex flex-col gap-2">
@@ -276,14 +281,43 @@
                     <span class="text-red-500">*</span>
                   </span>
                   <div class="relative">
-                    <select
+                    <!-- <select
                       class="form-select w-full rounded-lg border border-slate-300 dark:border-[#324467] bg-slate-50 dark:bg-[#192233] text-slate-900 dark:text-white focus:ring-primary focus:border-primary h-11 px-4 text-sm appearance-none pr-10 transition-colors cursor-pointer"
                     >
                       <option selected="" value="calc1">Calculus I</option>
                       <option value="calc2">Calculus II</option>
                       <option value="alg">Algebra</option>
                       <option value="geo">Geometry</option>
+                    </select> -->
+                    <input
+                      type="text"
+                      class="form-input w-full rounded-lg border border-slate-300 dark:border-[#324467] bg-slate-50 dark:bg-[#192233] text-slate-900 dark:text-white focus:ring-primary focus:border-primary h-11 px-4 text-sm appearance-none pr-10 transition-colors"
+                      placeholder="Calculus I"
+                    />
+                  </div>
+                </label>
+              </div>
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <label class="flex flex-col gap-2">
+                  <span
+                    class="text-slate-900 dark:text-white text-sm font-medium"
+                    >Target Grade <span class="text-red-500">*</span></span
+                  >
+                  <div class="relative">
+                    <select
+                      class="form-select w-full rounded-lg border border-slate-300 dark:border-[#324467] bg-slate-50 dark:bg-[#192233] text-slate-900 dark:text-white focus:ring-primary focus:border-primary h-11 px-4 text-sm appearance-none pr-10 transition-colors cursor-pointer"
+                    >
+                      <option disabled value="">Select Grade Level</option>
+                      <option value="5">Grade 5</option>
+                      <option value="6">Grade 6</option>
+                      <option value="7">Grade 7</option>
+                      <option value="8">Grade 8</option>
+                      <option value="9">Grade 9</option>
                     </select>
+                    <!-- <span
+                      class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none"
+                      >arrow_drop_down</span
+                    > -->
                   </div>
                 </label>
               </div>
@@ -302,23 +336,24 @@
                     </span>
                     <input
                       class="form-input w-full rounded-lg border border-slate-300 dark:border-[#324467] bg-slate-50 dark:bg-[#192233] text-slate-900 dark:text-white focus:ring-primary focus:border-primary placeholder:text-slate-400 h-11 pl-10 pr-4 text-sm transition-colors"
-                      value="https://www.youtube.com/watch?v=HXp13d1"
+                      type="url"
+                      placeholder="https://www.youtube.com/watch?v=HXp13d1"
                     />
                   </div>
-                  <button
+                  <!-- <button
                     class="shrink-0 h-11 px-6 rounded-lg bg-slate-100 dark:bg-[#232f48] text-slate-700 dark:text-white font-medium text-sm hover:bg-slate-200 dark:hover:bg-[#324467] transition-colors border border-slate-200 dark:border-[#324467]"
                   >
                     Preview
-                  </button>
+                  </button> -->
                 </div>
-                <div
+                <!-- <div
                   class="mt-4 w-full md:max-w-[320px] aspect-video rounded-xl overflow-hidden relative group bg-black shadow-lg ring-1 ring-slate-900/5 dark:ring-white/10"
                 >
                   <div
                     class="w-full h-full bg-cover bg-center opacity-90 group-hover:opacity-75 transition-opacity duration-300"
                     data-alt="Video thumbnail showing a graph of a function with math equations"
                     style="
-                      background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBV4rnC5JE6CRR3twmsIcxDsElA_PwCjNSgcowGVNzjZ0fQFJsU8FyZ3G84pzNRyQiCFy2DkuICjrL4xc1DdzukRTFtUhnUrOR05SWdYTtlbPrl-0L50SgFsV0yNhtISuGS-p5FQhEWGwhem1kHNJG_wmdpyfTSyeZbqinbUUeHRP0tzxy58QuOoQNp8Bih9HGkvTvPPF24udfoGFNNBmtuFe26vkxaBNcIJqVO9JOp1C12zzZiwEjT874XUvvgrxDFVBAj8IrgyG4');
+                      background-image: url(&quot;https://lh3.googleusercontent.com/aida-public/AB6AXuBV4rnC5JE6CRR3twmsIcxDsElA_PwCjNSgcowGVNzjZ0fQFJsU8FyZ3G84pzNRyQiCFy2DkuICjrL4xc1DdzukRTFtUhnUrOR05SWdYTtlbPrl-0L50SgFsV0yNhtISuGS-p5FQhEWGwhem1kHNJG_wmdpyfTSyeZbqinbUUeHRP0tzxy58QuOoQNp8Bih9HGkvTvPPF24udfoGFNNBmtuFe26vkxaBNcIJqVO9JOp1C12zzZiwEjT874XUvvgrxDFVBAj8IrgyG4&quot;);
                     "
                   ></div>
                   <div
@@ -338,136 +373,51 @@
                   >
                     12:45
                   </div>
-                </div>
+                </div> -->
               </div>
-              <hr class="border-slate-200 dark:border-slate-800" />
-              <div class="flex flex-col gap-4">
-                <div class="flex justify-between items-center">
+              <div class="flex flex-col gap-6">
+                <div
+                  class="flex items-center justify-between pb-2 border-b border-slate-100 dark:border-slate-700/50"
+                >
+                  <div class="flex items-center gap-2">
+                    <span class="material-symbols-outlined text-primary"
+                      >folder_open</span
+                    >
+                    <h3
+                      class="text-lg font-bold text-slate-900 dark:text-white"
+                    >
+                      Course Documents
+                    </h3>
+                  </div>
                   <span
-                    class="text-slate-900 dark:text-white text-sm font-medium"
-                    >Attached Materials</span
+                    class="text-xs font-medium text-slate-500 dark:text-slate-400 bg-slate-100 dark:bg-slate-800 px-2 py-1 rounded"
+                    id="doc-count"
+                    >0 Attached</span
                   >
+                </div>
+                <div class="flex flex-col gap-4">
+                  <!-- Existing documents will be rendered here by JavaScript -->
+                  <div class="flex flex-col gap-3" id="document-list"></div>
                   <button
-                    class="text-primary hover:text-blue-500 text-sm font-medium flex items-center gap-1 transition-colors px-2 py-1 hover:bg-blue-50 dark:hover:bg-blue-900/20 rounded"
+                    id="add-another-doc"
+                    class="flex items-center justify-center gap-2 w-full py-3 rounded-lg border-2 border-dashed border-slate-300 dark:border-slate-700 text-slate-500 dark:text-slate-400 hover:border-primary hover:text-primary hover:bg-primary/5 transition-all group"
+                    type="button"
                   >
-                    <span class="material-symbols-outlined text-[18px]"
+                    <span
+                      class="material-symbols-outlined group-hover:scale-110 transition-transform"
                       >add_circle</span
                     >
-                    Add Document
+                    <span class="font-bold text-sm">Add Another Document</span>
                   </button>
                 </div>
-                <div class="flex flex-col gap-3">
-                  <div
-                    class="flex flex-col sm:flex-row gap-3 items-start sm:items-center p-3 rounded-lg border border-slate-200 dark:border-[#324467] bg-slate-50 dark:bg-[#192233]/50 transition-all hover:border-primary/40 hover:shadow-sm"
-                  >
-                    <div
-                      class="p-2.5 rounded-lg bg-red-100 dark:bg-red-500/10 text-red-600 dark:text-red-400 shrink-0"
-                    >
-                      <span class="material-symbols-outlined text-[24px]"
-                        >picture_as_pdf</span
-                      >
-                    </div>
-                    <div class="flex-1 flex flex-col gap-1 w-full min-w-0">
-                      <label
-                        class="text-[11px] text-slate-500 dark:text-slate-400 uppercase tracking-wider font-semibold"
-                        >Document Label</label
-                      >
-                      <input
-                        class="bg-transparent border-none p-0 text-sm font-medium text-slate-900 dark:text-white focus:ring-0 placeholder:text-slate-400 w-full"
-                        placeholder="Enter label"
-                        value="Lecture Notes - Week 1"
-                      />
-                    </div>
-                    <div
-                      class="flex items-center gap-2 w-full sm:w-auto mt-2 sm:mt-0"
-                    >
-                      <div
-                        class="flex-1 sm:flex-none px-3 py-1.5 rounded bg-slate-200 dark:bg-[#232f48] text-xs text-slate-600 dark:text-slate-300 truncate max-w-[150px] border border-transparent dark:border-slate-700"
-                      >
-                        intro_calc_notes.pdf
-                      </div>
-                      <div class="flex gap-1">
-                        <button
-                          class="p-1.5 rounded-lg hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-400 hover:text-primary transition-colors"
-                          title="Replace file"
-                        >
-                          <span class="material-symbols-outlined text-[20px]"
-                            >file_upload</span
-                          >
-                        </button>
-                        <button
-                          class="p-1.5 rounded-lg hover:bg-red-50 dark:hover:bg-red-900/20 text-slate-400 hover:text-red-500 transition-colors"
-                          title="Remove"
-                        >
-                          <span class="material-symbols-outlined text-[20px]"
-                            >close</span
-                          >
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                  <div
-                    class="flex flex-col sm:flex-row gap-3 items-start sm:items-center p-3 rounded-lg border border-slate-200 dark:border-[#324467] bg-slate-50 dark:bg-[#192233]/50 transition-all hover:border-primary/40 hover:shadow-sm"
-                  >
-                    <div
-                      class="p-2.5 rounded-lg bg-blue-100 dark:bg-blue-500/10 text-blue-600 dark:text-blue-400 shrink-0"
-                    >
-                      <span class="material-symbols-outlined text-[24px]"
-                        >description</span
-                      >
-                    </div>
-                    <div class="flex-1 flex flex-col gap-1 w-full min-w-0">
-                      <label
-                        class="text-[11px] text-slate-500 dark:text-slate-400 uppercase tracking-wider font-semibold"
-                        >Document Label</label
-                      >
-                      <input
-                        class="bg-transparent border-none p-0 text-sm font-medium text-slate-900 dark:text-white focus:ring-0 placeholder:text-slate-400 w-full"
-                        placeholder="Enter label"
-                        value="Homework Set #1"
-                      />
-                    </div>
-                    <div
-                      class="flex items-center gap-2 w-full sm:w-auto mt-2 sm:mt-0"
-                    >
-                      <div
-                        class="flex-1 sm:flex-none px-3 py-1.5 rounded bg-slate-200 dark:bg-[#232f48] text-xs text-slate-600 dark:text-slate-300 truncate max-w-[150px] border border-transparent dark:border-slate-700"
-                      >
-                        hw_set_01.docx
-                      </div>
-                      <div class="flex gap-1">
-                        <button
-                          class="p-1.5 rounded-lg hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-400 hover:text-primary transition-colors"
-                          title="Replace file"
-                        >
-                          <span class="material-symbols-outlined text-[20px]"
-                            >file_upload</span
-                          >
-                        </button>
-                        <button
-                          class="p-1.5 rounded-lg hover:bg-red-50 dark:hover:bg-red-900/20 text-slate-400 hover:text-red-500 transition-colors"
-                          title="Remove"
-                        >
-                          <span class="material-symbols-outlined text-[20px]"
-                            >close</span
-                          >
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
               </div>
-            </div>
+            </form>
             <div
               class="flex items-center justify-end gap-3 p-6 border-t border-slate-200 dark:border-slate-800 bg-slate-50/50 dark:bg-[#151b28]/50 rounded-b-xl"
             >
               <button
-                class="px-6 py-2.5 rounded-lg border border-slate-300 dark:border-[#324467] text-slate-700 dark:text-white font-medium text-sm hover:bg-white dark:hover:bg-[#232f48] transition-colors focus:ring-2 focus:ring-slate-400"
-              >
-                Cancel
-              </button>
-              <button
-                class="px-6 py-2.5 rounded-lg bg-primary text-white font-medium text-sm hover:bg-blue-600 transition-colors shadow-lg shadow-blue-500/20 focus:ring-2 focus:ring-offset-2 focus:ring-primary dark:focus:ring-offset-[#1e293b]"
+                type="submit"
+                class="px-6 py-2.5 rounded-lg bg-primary text-white font-medium text-sm hover:bg-blue-600 transition-colors shadow-lg shadow-blue-500/20 focus:ring-2 focus:ring-offset-2 focus:ring-primary dark:focus:ring-offset-[#1e293b] submit-btn-edit"
               >
                 Save Changes
               </button>
@@ -481,8 +431,15 @@
         </div>
       </main>
     </div>
+    <div
+      class="flex-1 flex flex-col min-w-0 bg-background-light dark:bg-background-dark relative"
+    >
+      <div class="absolute inset-0 z-0 math-pattern pointer-events-none"></div>
+    </div>
 
     <script type="module" src="/js/add-edit-lesson.js"></script>
-    <script type="module" src="js/admin-layout.js"></script>
+    <script type="module" src="/js/admin-layout.js"></script>
+      <script type="module" src="/js/theme.js"></script>
   </body>
 </html>
+

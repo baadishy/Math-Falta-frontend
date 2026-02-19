@@ -1,4 +1,5 @@
 import { postJSON } from "./app.js";
+import { showToast } from "./ui.js";
 
 // Sign In
 const signInForm = document.getElementById("signInForm");
@@ -18,7 +19,7 @@ if (signInForm) {
       }
       window.location.href = "/user-dashboard.html";
     } catch (err) {
-      alert(err.payload?.msg || err.message || "Sign in failed");
+      showToast(err.payload?.msg || err.message || "Sign in failed", "error");
     }
   });
 }
@@ -35,7 +36,7 @@ if (signUpForm) {
     const gradeEl = signUpForm.querySelector('input[name="grade"]:checked');
     const grade = gradeEl ? gradeEl.value : null;
 
-    if (!grade) return alert("Please pick a grade");
+    if (!grade) return showToast("Please pick a grade", "warning");
 
     try {
       await postJSON("/auth/sign-up", {
@@ -47,7 +48,37 @@ if (signUpForm) {
       });
       window.location.href = "/user-dashboard.html";
     } catch (err) {
-      alert(err.payload?.msg || err.message || "Sign up failed");
+      showToast(err.payload?.msg || err.message || "Sign up failed", "error");
     }
   });
 }
+
+// 👁 Toggle password visibility (Sign In)
+const signInPasswordInput = document.getElementById("signin-password");
+const signUpPasswordInput = document.getElementById("signup-password");
+
+const signIntoggleBtn =
+  signInPasswordInput?.parentElement.querySelector("button");
+const signUpToggleBtn =
+  signUpPasswordInput?.parentElement.querySelector("button");
+
+const signInToggleIcon = signIntoggleBtn?.querySelector("span");
+const signUpToggleIcon = signUpToggleBtn?.querySelector("span");
+
+if (signInPasswordInput && signIntoggleBtn && signInToggleIcon) {
+  signIntoggleBtn.addEventListener("click", () => {
+    const isHidden = signInPasswordInput.type === "password";
+
+    signInPasswordInput.type = isHidden ? "text" : "password";
+    signInToggleIcon.textContent = isHidden ? "visibility_off" : "visibility";
+  });
+} else if (signUpPasswordInput && signUpToggleBtn && signUpToggleIcon) {
+  signUpToggleBtn.addEventListener("click", () => {
+    const isHidden = signUpPasswordInput.type === "password";
+
+    signUpPasswordInput.type = isHidden ? "text" : "password";
+    signUpToggleIcon.textContent = isHidden ? "visibility_off" : "visibility";
+  });
+}
+
+// 👁 Toggle password visibility (Sign Up )

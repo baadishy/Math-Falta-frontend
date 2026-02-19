@@ -1,6 +1,159 @@
 import { getJSON } from "./app.js";
 
 async function initAdminDashboard() {
+  const urlParams = new URLSearchParams(window.location.search);
+  const searchQuery = urlParams.get("q");
+
+  if (searchQuery) {
+    document.querySelector(
+      'input[placeholder="Search lessons, students, or quizzes..."]',
+    ).value = searchQuery;
+    // hide the default dashboard content
+    const mainContainer = document.querySelector(".mx-auto.max-w-6xl.space-y-8");
+    if (mainContainer) {
+      Array.from(mainContainer.children).forEach((child) => {
+        if (child.id !== "search-results-container") {
+          child.style.display = "none";
+        }
+      });
+    }
+
+    performSearch(searchQuery);
+  } else {
+    loadDefaultDashboard();
+  }
+}
+
+async function performSearch(query) {
+  const searchResultsContainer = document.getElementById(
+    "search-results-container",
+  );
+  searchResultsContainer.innerHTML = `<div>Searching...</div>`;
+
+  try {
+    const [lessonsRes, quizzesRes, usersRes] = await Promise.all([
+      getJSON("/admin/lessons"),
+      getJSON("/admin/quizzes"),
+      getJSON("/admin/users"),
+    ]);
+
+    const lowerCaseQuery = query.toLowerCase();
+
+    const filteredLessons = (lessonsRes.data || []).filter(
+      (l) =>
+        l.title.toLowerCase().includes(lowerCaseQuery) ||
+        (l.topic && l.topic.toLowerCase().includes(lowerCaseQuery)),
+    );
+
+    const filteredQuizzes = (quizzesRes.data || []).filter((q) =>
+      q.title.toLowerCase().includes(lowerCaseQuery),
+    );
+
+    const filteredUsers = (usersRes.data || []).filter(
+      (u) =>
+        (u.name && u.name.toLowerCase().includes(lowerCaseQuery)) ||
+        (u.email && u.email.toLowerCase().includes(lowerCaseQuery)),
+    );
+
+    renderSearchResults(
+      filteredLessons,
+      filteredQuizzes,
+      filteredUsers,
+      searchResultsContainer,
+    );
+  } catch (err) {
+    console.error("Search failed", err);
+    searchResultsContainer.innerHTML = `<div class="text-red-500">Search failed. Please try again.</div>`;
+  }
+}
+
+function renderSearchResults(lessons, quizzes, users, container) {
+  container.innerHTML = "";
+
+  if (lessons.length === 0 && quizzes.length === 0 && users.length === 0) {
+    container.innerHTML = `
+      <div class="text-center py-10">
+        <h2 class="text-xl font-semibold">No results found</h2>
+        <p class="text-slate-500">Try a different search term.</p>
+      </div>
+    `;
+    return;
+  }
+
+  container.innerHTML += `<h2 class="text-2xl font-bold mb-4">Search Results</h2>`;
+
+  if (lessons.length > 0) {
+    container.innerHTML += renderLessons(lessons);
+  }
+  if (quizzes.length > 0) {
+    container.innerHTML += renderQuizzes(quizzes);
+  }
+  if (users.length > 0) {
+    container.innerHTML += renderUsers(users);
+  }
+}
+
+function renderLessons(lessons) {
+  return `
+    <div class="mb-8">
+      <h3 class="text-xl font-semibold mb-4">Lessons (${lessons.length})</h3>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        ${lessons
+          .map(
+            (l) => `
+          <div class="bg-surface-light dark:bg-surface-dark p-4 rounded-lg shadow-sm border border-border-light dark:border-border-dark cursor-pointer hover:shadow-md" onclick="window.location.href='/edit-lesson.html?id=${l._id}'">
+            <p class="font-bold">${l.title}</p>
+            <p class="text-sm text-slate-500">${l.topic || ""}</p>
+          </div>
+        `,
+          )
+          .join("")}
+      </div>
+    </div>
+  `;
+}
+
+function renderQuizzes(quizzes) {
+  return `
+    <div class="mb-8">
+      <h3 class="text-xl font-semibold mb-4">Quizzes (${quizzes.length})</h3>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        ${quizzes
+          .map(
+            (q) => `
+          <div class="bg-surface-light dark:bg-surface-dark p-4 rounded-lg shadow-sm border border-border-light dark:border-border-dark cursor-pointer hover:shadow-md" onclick="window.location.href='/edit-quiz.html?id=${q._id}'">
+            <p class="font-bold">${q.title}</p>
+            <p class="text-sm text-slate-500">Grade: ${q.grade || ""}</p>
+          </div>
+        `,
+          )
+          .join("")}
+      </div>
+    </div>
+  `;
+}
+
+function renderUsers(users) {
+  return `
+    <div class="mb-8">
+      <h3 class="text-xl font-semibold mb-4">Users (${users.length})</h3>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        ${users
+          .map(
+            (u) => `
+          <div class="bg-surface-light dark:bg-surface-dark p-4 rounded-lg shadow-sm border border-border-light dark:border-border-dark cursor-pointer hover:shadow-md" onclick="window.location.href='/manage-user.html?id=${u._id}'">
+            <p class="font-bold">${u.name}</p>
+            <p class="text-sm text-slate-500">${u.email || ""}</p>
+          </div>
+        `,
+          )
+          .join("")}
+      </div>
+    </div>
+  `;
+}
+
+async function loadDefaultDashboard() {
   try {
     const dashboardData = await getJSON("/admin/dashboard");
 
@@ -23,7 +176,7 @@ async function initAdminDashboard() {
     // Populate the Leaderboard list
     const leaderboardUsers = dashboardData.data.leaderboard || [];
     const leaderboardContainer = document.getElementById(
-      "admin-leaderboard-list"
+      "admin-leaderboard-list",
     );
 
     if (leaderboardContainer) {
@@ -78,12 +231,16 @@ async function initAdminDashboard() {
         });
 
         leaderboardContainer.appendChild(row);
-        document.getElementById("admin-view-full-leaderboard")?.addEventListener("click", () => {
-          window.location.href = "/admin-leaderboard.html";
-        });
-        document.getElementById("view-all-lessons")?.addEventListener("click", () => {
-          window.location.href = "/manage-lessons.html";
-        });
+        document
+          .getElementById("admin-view-full-leaderboard")
+          ?.addEventListener("click", () => {
+            window.location.href = "/admin-leaderboard.html";
+          });
+        document
+          .getElementById("view-all-lessons")
+          ?.addEventListener("click", () => {
+            window.location.href = "/manage-lessons.html";
+          });
       });
 
       // update count
@@ -106,14 +263,10 @@ async function initAdminDashboard() {
         quizzes.forEach((quiz) => {
           // quiz status (simple logic)
           let statusLabel = quiz.isDeleted ? "Deleted" : "Active";
-          let statusClasses = statusLabel === "Deleted"
-            ? "bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-400" : "bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400";
-
-          // if (quiz.results?.attempts > 0) {
-          //   statusLabel = "Active";
-          //   statusClasses =
-          //     "bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400";
-          // }
+          let statusClasses =
+            statusLabel === "Deleted"
+              ? "bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-400"
+              : "bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400";
 
           const card = document.createElement("div");
           card.className =
@@ -129,12 +282,6 @@ async function initAdminDashboard() {
               ${quiz.title}
             </h4>
           </div>
-          <button
-            class="text-slate-400 hover:text-slate-600 dark:hover:text-slate-200"
-            data-menu="${quiz._id}"
-          >
-            <span class="material-symbols-outlined">more_vert</span>
-          </button>
         </div>
 
         <div class="flex justify-between text-xs text-slate-500 dark:text-slate-400">
@@ -187,7 +334,7 @@ async function initAdminDashboard() {
         .sort(
           (a, b) =>
             new Date(b.updatedAt || b.createdAt) -
-            new Date(a.updatedAt || a.createdAt)
+            new Date(a.updatedAt || a.createdAt),
         )
         .slice(0, 5);
       if (!top.length) {
@@ -208,7 +355,7 @@ async function initAdminDashboard() {
                   l.title
                 }</p>
                 <p class="text-sm text-slate-500 dark:text-[#92a4c9]">Updated ${new Date(
-                  l.updatedAt || l.createdAt
+                  l.updatedAt || l.createdAt,
                 ).toLocaleString()}</p>
               </div>
             </div>

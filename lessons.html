@@ -67,6 +67,7 @@
         </svg>
       </div>
       <header data-inject-header></header>
+      <script src="https://www.youtube.com/iframe_api"></script>
       <script type="module" src="js/header.js"></script>
       <script type="module" src="js/lessons.js"></script>
       <noscript><style>header{display:block}</style></noscript>
@@ -91,12 +92,10 @@
                 >Filters:</span
               >
               <select
+                id="topic-filter"
                 class="form-select bg-white dark:bg-[#192233] border-slate-200 dark:border-[#232f48] text-slate-700 dark:text-slate-200 rounded-lg text-sm py-2 px-7 shadow-sm focus:border-primary focus:ring-primary"
               >
-                <option>All Topics</option>
-                <option>Algebra</option>
-                <option>Geometry</option>
-                <option>Calculus</option>
+                <option value="">All Topics</option>
               </select>
             </div>
           </div>
@@ -107,5 +106,7 @@
         </div>
       </main>
     </div>
+      <script type="module" src="/js/theme.js"></script>
   </body>
 </html>
+

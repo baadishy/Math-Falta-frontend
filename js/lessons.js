@@ -1,4 +1,6 @@
 import { getJSON } from "./app.js";
+const lessonProgress = new Map(); // key: lesson._id, value: progress %
+let allLessons = [];
 
 function timeAgo(dateStr) {
   const when = new Date(dateStr || Date.now());
@@ -12,24 +14,45 @@ function timeAgo(dateStr) {
   return `just now`;
 }
 
-async function loadLessons() {
+function populateTopicFilter(topics) {
+  const select = document.getElementById("topic-filter");
+  if (!select) return;
+
+  const existing = new Set(
+    Array.from(select.querySelectorAll("option")).map((opt) => opt.value),
+  );
+  topics.forEach((topic) => {
+    if (!topic || existing.has(topic)) return;
+    const option = document.createElement("option");
+    option.value = topic;
+    option.textContent = topic;
+    select.appendChild(option);
+  });
+}
+
+function applyFilters() {
+  const select = document.getElementById("topic-filter");
+  const topic = select?.value || "";
+
+  const filtered = topic
+    ? allLessons.filter((lesson) => lesson.topic === topic)
+    : allLessons.slice();
+
+  renderLessons(filtered);
+}
+
+function renderLessons(lessons) {
   const container = document.getElementById("lessons-list");
   if (!container) return;
 
   // show skeleton while loading
-  container.innerHTML = `<div class="grid gap-6"><div class="p-6 bg-white dark:bg-[#192233] rounded-2xl border border-slate-200 dark:border-[#232f48] animate-pulse h-64"></div><div class="p-6 bg-white dark:bg-[#192233] rounded-2xl border border-slate-200 dark:border-[#232f48] animate-pulse h-64"></div></div>`;
+  if (!lessons || lessons.length === 0) {
+    container.innerHTML = `<div class="text-center p-8 text-slate-500 dark:text-slate-400">No lessons found</div>`;
+    return;
+  }
 
-  try {
-    const res = await getJSON("/lessons/");
-    const lessons = res.data || [];
-
-    if (!lessons.length) {
-      container.innerHTML = `<div class="text-center p-8 text-slate-500 dark:text-slate-400">No lessons found</div>`;
-      return;
-    }
-
-    container.innerHTML = "";
-    lessons.forEach((lesson) => {
+  container.innerHTML = "";
+  lessons.forEach((lesson) => {
       const article = document.createElement("article");
       article.className =
         "bg-white dark:bg-[#192233] rounded-2xl border border-slate-200 dark:border-[#232f48] shadow-sm overflow-hidden";
@@ -44,7 +67,7 @@ async function loadLessons() {
           }</span>
           <span class="text-xs text-slate-400 dark:text-slate-500 font-bold">•</span>
           <span class="text-xs text-slate-500 dark:text-slate-400 font-medium">Updated ${timeAgo(
-            lesson.updatedAt
+            lesson.updatedAt,
           )}</span>
         </div>
         <h2 class="text-2xl font-bold text-slate-900 dark:text-white mb-2">${
@@ -57,17 +80,78 @@ async function loadLessons() {
 
       // video as iframe
       const videoWrap = document.createElement("div");
-      videoWrap.className = "w-full";
+      videoWrap.className = "w-full relative"; // relative positioning for overlay
+
       const iframe = document.createElement("iframe");
-      iframe.src = lesson.videoUrl;
+      iframe.src =
+        lesson.videoUrl + "?enablejsapi=1&modestbranding=1&rel=0&controls=1";
+      const iframeId = `yt-player-${lesson._id}`;
+      iframe.id = iframeId;
       iframe.className =
         "w-full aspect-video rounded-md border border-slate-200 dark:border-[#232f48]";
       iframe.setAttribute("allowfullscreen", "true");
       iframe.setAttribute("allow", "autoplay; fullscreen; picture-in-picture");
-      // iframe.setAttribute("referrerpolicy", "no-referrer");
       iframe.setAttribute("loading", "lazy");
       iframe.title = lesson.title || "Lesson video";
       videoWrap.appendChild(iframe);
+
+      const waitForYT = setInterval(() => {
+        if (window.YT && YT.Player) {
+          clearInterval(waitForYT);
+
+          const player = new YT.Player(iframeId, {
+            events: {
+              onReady: (event) => {
+                // ▶️ RESUME FROM LAST PROGRESS
+                if (lesson.lastTime && lesson.lastTime > 0) {
+                  event.target.seekTo(lesson.lastTime, true);
+                } else if (lesson.progress && lesson.progress > 0) {
+                  const duration = event.target.getDuration();
+                  const seekTo = (lesson.progress / 100) * duration;
+                  event.target.seekTo(seekTo, true);
+                }
+              },
+
+              onStateChange: (event) => {
+                const duration = event.target.getDuration();
+                let progressInterval;
+
+                const updateProgress = () => {
+                  const currentTime = event.target.getCurrentTime();
+                  lessonProgress.set(lesson._id, {
+                    progress: Math.round((currentTime / duration) * 100),
+                    lastTime: Math.floor(currentTime),
+                  });
+                  console.log(
+                    `Progress for lesson ${lesson._id}: ${lessonProgress.get(lesson._id).progress}% at ${lessonProgress.get(lesson._id).lastTime}s`,
+                  );
+                };
+
+                if (event.data === YT.PlayerState.PLAYING) {
+                  // ▶️ First-time watch logging
+                  if (!watchedLessons.has(lesson._id)) {
+                    watchedLessons.add(lesson._id);
+                    fetch(`/api/lessons/${lesson._id}/watch`, {
+                      method: "POST",
+                      headers: { "Content-Type": "application/json" },
+                    }).catch((err) =>
+                      console.error("Failed to save watch", err),
+                    );
+                  }
+
+                  // ▶️ Start interval to update progress every second
+                  progressInterval = setInterval(updateProgress, 1000);
+                } else {
+                  // ▶️ Clear interval when paused, ended, or buffering
+                  if (progressInterval) clearInterval(progressInterval);
+                  // Also update progress one last time
+                  updateProgress();
+                }
+              },
+            },
+          });
+        }
+      }, 100);
 
       // materials
       const mats = document.createElement("div");
@@ -118,7 +202,40 @@ async function loadLessons() {
       article.appendChild(mats);
 
       container.appendChild(article);
-    });
+  });
+}
+
+const watchedLessons = new Set();
+
+window.onYouTubeIframeAPIReady = function () {
+  console.log("YouTube API Ready");
+};
+async function loadLessons() {
+  const container = document.getElementById("lessons-list");
+  if (!container) return;
+
+  // show skeleton while loading
+  container.innerHTML = `<div class="grid gap-6"><div class="p-6 bg-white dark:bg-[#192233] rounded-2xl border border-slate-200 dark:border-[#232f48] animate-pulse h-64"></div><div class="p-6 bg-white dark:bg-[#192233] rounded-2xl border border-slate-200 dark:border-[#232f48] animate-pulse h-64"></div></div>`;
+
+  try {
+    const res = await getJSON("/lessons/");
+    allLessons = res.data || [];
+
+    const topics = Array.from(
+      new Set(
+        allLessons
+          .map((lesson) => lesson.topic)
+          .filter((topic) => typeof topic === "string" && topic.trim() !== ""),
+      ),
+    ).sort((a, b) => a.localeCompare(b));
+    populateTopicFilter(topics);
+
+    applyFilters();
+
+    const select = document.getElementById("topic-filter");
+    if (select) {
+      select.addEventListener("change", applyFilters);
+    }
   } catch (err) {
     console.error("Failed to load lessons", err);
     if (err.status === 401 || err.status === 403) {
@@ -130,3 +247,31 @@ async function loadLessons() {
 }
 
 document.addEventListener("DOMContentLoaded", loadLessons);
+window.addEventListener("beforeunload", async (e) => {
+  if (lessonProgress.size === 0) return;
+
+  const payload = [];
+  lessonProgress.forEach((data, lessonId) => {
+    payload.push({
+      lessonId,
+      progress: data.progress,
+      lastTime: data.lastTime,
+      lastOpened: new Date().toISOString(),
+    });
+  });
+
+  console.log("Sending progress on unload:", payload);
+
+  // Send data to backend
+  try {
+    // navigator.sendBeacon ensures the request completes before leaving page
+    const url = "/api/lessons/progress";
+    const blob = new Blob([JSON.stringify(payload)], {
+      type: "application/json",
+    });
+    navigator.sendBeacon(url, blob);
+    console.log("Progress sent:", payload);
+  } catch (err) {
+    console.error("Failed to send progress on unload", err);
+  }
+});

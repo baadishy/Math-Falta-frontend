@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Math-Falta — Report Viewer</title>
+    <style>
+      :root {
+        --brand: #135bec;
+      }
+      body {
+        font-family: Inter, Arial, Helvetica, sans-serif;
+        margin: 0;
+        background: #f6f6f8;
+        color: #0f172a;
+      }
+      .top {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 18px 28px;
+        background: #fff;
+        border-bottom: 1px solid #eef2ff;
+        box-shadow: 0 6px 18px rgba(16, 24, 40, 0.03);
+      }
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+      }
+      .brand img {
+        height: 52px;
+      }
+      .brand .title {
+        font-weight: 800;
+        color: var(--brand);
+        letter-spacing: -0.2px;
+      }
+      .controls {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+      }
+      .btn {
+        background: var(--brand);
+        color: #fff;
+        padding: 8px 14px;
+        border-radius: 10px;
+        text-decoration: none;
+        border: none;
+        cursor: pointer;
+        font-weight: 600;
+      }
+      .btn.secondary {
+        background: #6b7280;
+      }
+      .viewer-wrap {
+        max-width: 1120px;
+        margin: 22px auto;
+        padding: 18px;
+      }
+      .viewer-box {
+        background: #fff;
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 8px 24px rgba(2, 6, 23, 0.06);
+        border: 1px solid #eef2ff;
+      }
+      .viewer {
+        height: calc(100vh - 180px);
+        width: 100%;
+        border: 0;
+        display: block;
+      }
+      .meta {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 12px 16px;
+        border-bottom: 1px solid #f1f5f9;
+      }
+      .meta .name {
+        font-weight: 700;
+        color: #0f172a;
+      }
+      .hint {
+        font-size: 13px;
+        color: #64748b;
+      }
+      @media (max-width: 640px) {
+        .top {
+          padding: 12px;
+        }
+        .brand img {
+          height: 40px;
+        }
+        .viewer {
+          height: calc(100vh - 150px);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="top">
+      <div class="brand">
+        <img
+          src="https://lh3.googleusercontent.com/aida-public/AB6AXuDEnHeX6lQASREHo1CvcD7QajIRgG-bxK1_GrGnL3ZFhDJQYxQ_lrDe7CnigLxfH3imLfdpb3DCk-V3FmnDBeNvZ9uFXwsCRvZokrYJoR7dphuKXlanzVBLBGzqciJUJW79daXHfJG_pizZ8g_O5QLHYhHE7Ci50qsI0E5j3uxiMqzqCj4YsscAk1GE1vZREbMnvt6F646N6wuLriYo-bk1wn36wZTNBgKIQ2c0o0TJIBKmpqmCZvbnbG-MlbRK9_pKV22ZDXNgj1s"
+          alt="Logo"
+        />
+        <div>
+          <div class="title">Math Falta</div>
+          <div style="font-size: 12px; color: #64748b">Report Viewer</div>
+        </div>
+      </div>
+      <div class="controls">
+        <a href="index.html" class="btn secondary">Home</a>
+        <a id="downloadLink" class="btn" download rel="noopener noreferrer"
+          >Download</a
+        >
+      </div>
+    </div>
+
+    <div class="viewer-wrap">
+      <div class="viewer-box">
+        <div class="meta">
+          <div>
+            <div id="file-name" class="name">Report</div>
+            <div id="file-hint" class="hint">
+              Preview the report below. Use Download to save.
+            </div>
+          </div>
+          <div
+            id="file-actions"
+            style="display: flex; gap: 8px; align-items: center"
+          ></div>
+        </div>
+        <iframe
+          id="viewer"
+          class="viewer"
+          src="about:blank"
+          title="Report viewer"
+        ></iframe>
+      </div>
+    </div>
+
+    <script src="js/view-report.js"></script>
+  </body>
+</html>

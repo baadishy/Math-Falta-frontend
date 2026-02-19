@@ -103,13 +103,6 @@
           </h2>
         </div>
         <div class="flex flex-1 justify-end items-center gap-6">
-          <div class="hidden md:flex items-center gap-8">
-            <a
-              class="text-slate-600 dark:text-slate-300 hover:text-primary dark:hover:text-white transition-colors text-sm font-medium leading-normal"
-              href="./index.html"
-              >Home</a
-            >
-          </div>
           <button
             aria-label="Toggle theme"
             class="flex items-center justify-center size-9 rounded-lg text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors"
@@ -122,12 +115,13 @@
               >light_mode</span
             >
           </button>
-          <div class="md:hidden">
-            <span
-              class="material-symbols-outlined cursor-pointer text-slate-900 dark:text-white"
-              >menu</span
-            >
-          </div>
+          <a
+            class="flex items-center justify-center size-9 rounded-lg text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors"
+            href="./index.html"
+            aria-label="Home"
+          >
+            <span class="material-symbols-outlined text-xl">home</span>
+          </a>
         </div>
       </header>
       <main class="relative z-10 flex flex-1 items-center justify-center p-4">

@@ -85,19 +85,11 @@ async function loadLeaderboard() {
       .sort((a, b) => (b.totalScore || 0) - (a.totalScore || 0));
     renderTable(allUsers);
     
-    const applyButton = document.getElementById("apply-filters");
-    applyButton.addEventListener("click", applyFilters);
-
     const searchInput = document.getElementById("search-input");
     const gradeSelect = document.getElementById("grade-select");
 
-    [searchInput, gradeSelect].forEach(element => {
-        element.addEventListener("keydown", (event) => {
-            if (event.key === "Enter") {
-                applyFilters();
-            }
-        });
-    });
+    searchInput.addEventListener('input', applyFilters);
+    gradeSelect.addEventListener('change', applyFilters);
 
   } catch (err) {
     console.error(err);
@@ -105,4 +97,38 @@ async function loadLeaderboard() {
   }
 }
 
-document.addEventListener("DOMContentLoaded", loadLeaderboard);
+document.addEventListener("DOMContentLoaded", () => {
+  loadLeaderboard();
+
+  const exportMenuButton = document.getElementById("export-menu-button");
+  const exportMenu = document.getElementById("export-menu");
+
+  exportMenuButton.addEventListener("click", () => {
+    exportMenu.classList.toggle("hidden");
+  });
+
+  document.addEventListener("click", (e) => {
+    if (!exportMenuButton.contains(e.target)) {
+      exportMenu.classList.add("hidden");
+    }
+  });
+
+  const exportButtons = document.querySelectorAll("[data-export-format]");
+  exportButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+      const format = button.dataset.exportFormat;
+      const searchInput = document.getElementById("search-input");
+      const gradeSelect = document.getElementById("grade-select");
+      const searchTerm = searchInput.value;
+      const grade = gradeSelect.value;
+      let url = `api/admin/users/export?format=${format}`;
+      if (searchTerm) {
+        url += `&search=${searchTerm}`;
+      }
+      if (grade) {
+        url += `&grade=${grade}`;
+      }
+      window.location = url;
+    });
+  });
+});

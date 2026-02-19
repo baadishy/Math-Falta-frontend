@@ -38,7 +38,7 @@ async function initDashboard() {
     const nameEls = document
       .querySelectorAll(".profile-name")
       .forEach(
-        (el) => (el.textContent = data.name || data.username || "Student")
+        (el) => (el.textContent = data.name || data.username || "Student"),
       );
     const emailEls = document.querySelectorAll(".profile-email");
     emailEls.forEach((el) => (el.textContent = data.email || ""));
@@ -60,8 +60,7 @@ async function initDashboard() {
         if (user._id === data._id) {
           tr.className =
             "group bg-primary/10 hover:bg-primary/20 dark:bg-primary-dark/10 dark:hover:bg-primary-dark/20 transition-colors";
-            console.log("done")
-
+          console.log("done");
         } else {
           tr.className =
             "group hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors";
@@ -76,8 +75,8 @@ async function initDashboard() {
             .slice(0, 2)
             .join("")
             .toUpperCase()}</div><span class="font-bold text-slate-900 dark:text-white">${
-          user.name || "Student"
-        }</span></div></td>
+            user.name || "Student"
+          }</span></div></td>
           <td class="px-6 py-4 text-sm font-medium text-slate-600 dark:text-slate-400 hidden sm:table-cell">${
             user.grade
           }th Grade</td>
@@ -123,6 +122,27 @@ async function initDashboard() {
       }
 
       if (lastLesson && lastLesson._id) {
+        // ----- Progress line -----
+        const progressContainer = document.querySelector(
+          ".last-lesson-progress-container",
+        );
+        if (progressContainer) {
+          const progressFill =
+            progressContainer.querySelector(".progress-fill");
+          const progressText =
+            progressContainer.querySelector(".progress-text");
+
+          const progress = lastLesson.progress ?? 0; // get progress from backend
+          progressFill.style.width = "0%"; // start from 0
+
+          // animate to actual progress
+          setTimeout(() => {
+            progressFill.style.width = progress + "%";
+            progressText.textContent = `Progress: ${progress}%`;
+          }, 300); // small delay to trigger CSS transition
+        }
+
+        // ----- Lesson details -----
         if (lastTitleEl)
           lastTitleEl.textContent = lastLesson.title || "Untitled Lesson";
         if (lastDescEl)
@@ -186,7 +206,7 @@ async function initDashboard() {
           const meta = document.createElement("p");
           meta.className = "text-xs text-slate-500 dark:text-slate-400 mt-1";
           // simple timeAgo
-          const when = new Date(act.createdAt || act.updatedAt || Date.now());
+          const when = new Date(act.updatedAt || act.createdAt || Date.now());
           const diff = Date.now() - when.getTime();
           const hrs = Math.floor(diff / (1000 * 60 * 60));
           const days = Math.floor(hrs / 24);
@@ -195,7 +215,9 @@ async function initDashboard() {
               ? `${days} day${days > 1 ? "s" : ""} ago`
               : `${Math.max(1, hrs)} hour${hrs > 1 ? "s" : ""} ago`;
           meta.textContent =
-            (act.score ? `Scored ${act.score}% • ` : "") + timeText;
+            (act.score !== undefined && act.score !== null && act.activityType === "quiz"
+              ? `Scored ${act.score}% • `
+              : "") + timeText;
           content.appendChild(title);
           content.appendChild(meta);
           wrap.appendChild(dot);

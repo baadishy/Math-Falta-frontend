@@ -203,17 +203,34 @@ function renderSidebar(quizzes, activeId) {
     el.onclick = async () => {
       setParam("answersId", quiz._id);
       await loadQuiz(quiz._id);
-      renderSidebar(quizzes, quiz._id);
+      // Re-render sidebar to update active state, preserving search
+      applyFilters();
     };
 
     panel.appendChild(el);
   });
 }
 
+function applyFilters() {
+    const searchInput = document.getElementById("quiz-search");
+    const searchTerm = searchInput.value.toLowerCase();
+    const activeId = getParam("answersId");
+
+    const filteredQuizzes = allQuizzes.filter(q => 
+        q.title.toLowerCase().includes(searchTerm)
+    );
+    
+    renderSidebar(filteredQuizzes, activeId);
+}
+
+
 /* =======================
    Init
 ======================= */
 async function init() {
+  const searchInput = document.getElementById("quiz-search");
+  searchInput.addEventListener('input', applyFilters);
+
   const res = await getJSON("/quizzes/answers");
   allQuizzes = res.data || [];
   if (!allQuizzes.length) return;
@@ -221,7 +238,7 @@ async function init() {
   const activeId = getParam("answersId") || allQuizzes[0]._id;
   setParam("answersId", activeId);
 
-  renderSidebar(allQuizzes, activeId);
+  applyFilters(); // Initial render of sidebar
   await loadQuiz(activeId);
 }
 
