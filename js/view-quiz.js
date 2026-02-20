@@ -84,6 +84,12 @@ function updateChips(quiz) {
   const questionsChip = document.getElementById("questions-count");
   if (questionsChip)
     questionsChip.textContent = `${(quiz.questions || []).length} Questions`;
+
+  const timeText = document.getElementById("time-limit-text");
+  if (timeText) {
+    const tl = Number(quiz.timeLimit) || 0;
+    timeText.textContent = tl > 0 ? `${tl} min` : "No limit";
+  }
 }
 
 // Process user results
@@ -103,6 +109,7 @@ function processResults(results) {
         quizScore: percentage,
         rawScore: rawScore,
         createdAt: result.createdAt,
+        timeTaken: result.timeTaken ?? null,
       };
     })
     .sort((a, b) => b.quizScore - a.quizScore);
@@ -265,6 +272,14 @@ function displayResults() {
     const date = result.createdAt
       ? new Date(result.createdAt).toLocaleString()
       : "-";
+    const timeTakenLabel = result.timeTaken
+      ? (() => {
+          const s = Number(result.timeTaken) || 0;
+          const mm = Math.floor(s / 60);
+          const ss = s % 60;
+          return `${mm}m ${ss}s`;
+        })()
+      : "-";
 
     // First column: avatar + name & email
     const initials = (studentName || "")
@@ -315,6 +330,7 @@ function displayResults() {
     <span class="text-[11px] opacity-80">(${quizScore}%)</span>
   </span>
 </td>
+  <td class="px-4 py-3 text-sm text-center">${escapeHtml(timeTakenLabel)}</td>
 `;
     tbody.appendChild(row);
   });

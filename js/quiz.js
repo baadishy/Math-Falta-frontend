@@ -120,40 +120,81 @@ async function initQuiz() {
       container.appendChild(renderQuestion(q, idx));
     });
 
-    if (submitBtn) {
-      submitBtn.removeAttribute("disabled");
-      submitBtn.addEventListener("click", async () => {
-        const questions = quiz.questions.map((q, idx) => {
-          const sel = document.querySelector(
-            `input[name="quiz-option-${idx}"]:checked`
-          );
-          return { questionId: q._id, userAnswer: sel ? sel.value : "" };
-        });
+    // Timer: if quiz.timeLimit > 0 start countdown (minutes)
+    const timerEl = document.getElementById("quiz-timer");
+    let countdownInterval = null;
+    function formatTime(s) {
+      const mm = Math.floor(s / 60)
+        .toString()
+        .padStart(2, "0");
+      const ss = Math.floor(s % 60)
+        .toString()
+        .padStart(2, "0");
+      return `${mm}:${ss}`;
+    }
 
-        try {
-          const postRes = await postJSON("/quizzes/answers", {
-            quizId: id,
-            questions,
-          });
-          const created = postRes.data;
-          if (created && created._id) {
-            window.location.href = `/quiz-result.html?answersId=${created._id}`;
-          } else {
-            showToast("Submitted", "success");
-          }
-        } catch (err) {
+    async function submitAnswers(auto = false) {
+      if (submitBtn) submitBtn.setAttribute("disabled", "disabled");
+      const questions = quiz.questions.map((q, idx) => {
+        const sel = document.querySelector(
+          `input[name="quiz-option-${idx}"]:checked`,
+        );
+        return { questionId: q._id, userAnswer: sel ? sel.value : "" };
+      });
+
+      const elapsed = Math.round((Date.now() - startTime) / 1000);
+
+      try {
+        const postRes = await postJSON("/quizzes/answers", {
+          quizId: id,
+          questions,
+          timeTaken: elapsed,
+        });
+        const created = postRes.data;
+        if (created && created._id) {
+          window.location.href = `/quiz-result.html?answersId=${created._id}`;
+        } else {
+          showToast("Submitted", "success");
+        }
+      } catch (err) {
+        if (!auto)
           showToast(
             err.payload?.msg || err.message || "Submission failed",
             "error",
           );
+      }
+    }
+
+    // start timer baseline for timeTaken
+    const startTime = Date.now();
+
+    if (submitBtn) {
+      submitBtn.removeAttribute("disabled");
+      submitBtn.addEventListener("click", async () => submitAnswers(false));
+    }
+
+    if (quiz.timeLimit && Number(quiz.timeLimit) > 0 && timerEl) {
+      let remaining = Number(quiz.timeLimit) * 60;
+      timerEl.textContent = `Time left: ${formatTime(remaining)}`;
+      countdownInterval = setInterval(() => {
+        remaining -= 1;
+        if (remaining <= 0) {
+          clearInterval(countdownInterval);
+          timerEl.textContent = "Time's up";
+          submitAnswers(true);
+        } else {
+          timerEl.textContent = `Time left: ${formatTime(remaining)}`;
         }
-      });
+      }, 1000);
     }
   } catch (err) {
     console.error(err);
     if (err.status === 401) window.location.href = "/sign-in.html";
     else {
-      showToast(err.payload?.msg || err.message || "Could not load quiz", "error");
+      showToast(
+        err.payload?.msg || err.message || "Could not load quiz",
+        "error",
+      );
     }
   }
 }

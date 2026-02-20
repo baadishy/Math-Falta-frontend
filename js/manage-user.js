@@ -219,6 +219,11 @@ function renderQuizzes(quizzes) {
           grade.status,
         )}">${escapeHtml(grade.status)}</span>
       </td>
+      <td class="px-6 py-4">${escapeHtml(
+        quiz.timeTaken
+          ? `${Math.floor(quiz.timeTaken / 60)}m ${quiz.timeTaken % 60}s`
+          : "-",
+      )}</td>
       <td class="px-6 py-4 text-right">
         <span class="font-bold text-slate-900 dark:text-white">${escapeHtml(
           percentLabel,
@@ -422,13 +427,29 @@ function renderQuizDetail(quiz) {
 
   setText("quiz-detail-title", quiz.title || "Quiz");
   setText("quiz-detail-grade", percent === null ? "N/A" : `${percent}% Grade`);
-  setText(
-    "quiz-detail-date",
-    `Date Taken: ${formatDate(quiz.createdAt)} - Time spent: --`,
-  );
+  setText("quiz-detail-date", `Date Taken: ${formatDate(quiz.createdAt)}`);
   setText("quiz-detail-correct", `${correct}/${total || "-"}`);
   setText("quiz-detail-incorrect", `${incorrect}/${total || "-"}`);
+  // Time spent (seconds) -> display and avg time per question
+  const timeSecs = Number(quiz.timeTaken) || 0;
+  const timeLabel =
+    timeSecs > 0 ? `${Math.floor(timeSecs / 60)}m ${timeSecs % 60}s` : "-";
   setText("quiz-detail-avg-time", "--");
+  // update date line to include time spent
+  const dateEl = document.getElementById("quiz-detail-date");
+  if (dateEl) {
+    dateEl.textContent = `Date Taken: ${formatDate(quiz.createdAt)} • Time spent: ${timeLabel}`;
+  }
+
+  // avg time per question
+  if (timeSecs > 0 && total > 0) {
+    const avg = Math.round(timeSecs / total);
+    const mm = Math.floor(avg / 60);
+    const ss = avg % 60;
+    setText("quiz-detail-avg-time", `${mm}m ${ss}s`);
+  } else {
+    setText("quiz-detail-avg-time", "-");
+  }
 
   const questions = Array.isArray(quiz.questions) ? quiz.questions : [];
   const blocks = questions.map(createQuestionHtml).join("");

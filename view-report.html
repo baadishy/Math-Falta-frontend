@@ -29,7 +29,9 @@
         gap: 14px;
       }
       .brand img {
-        height: 52px;
+        height: 56px;
+        border-radius: 8px;
+        box-shadow: 0 6px 18px rgba(19, 91, 236, 0.12);
       }
       .brand .title {
         font-weight: 800;
@@ -38,26 +40,37 @@
       }
       .controls {
         display: flex;
-        gap: 10px;
+        gap: 12px;
         align-items: center;
       }
       .btn {
         background: var(--brand);
         color: #fff;
-        padding: 8px 14px;
-        border-radius: 10px;
+        padding: 10px 16px;
+        border-radius: 12px;
         text-decoration: none;
         border: none;
         cursor: pointer;
-        font-weight: 600;
+        font-weight: 700;
+        box-shadow: 0 6px 18px rgba(19, 91, 236, 0.18);
+        display: inline-flex;
+        gap: 8px;
+        align-items: center;
       }
       .btn.secondary {
-        background: #6b7280;
+        background: #111827;
+        color: #fff;
+        box-shadow: 0 6px 18px rgba(17, 24, 39, 0.08);
       }
       .viewer-wrap {
         max-width: 1120px;
         margin: 22px auto;
         padding: 18px;
+      }
+      .head-row {
+        display: flex;
+        gap: 18px;
+        align-items: center;
       }
       .viewer-box {
         background: #fff;
@@ -65,6 +78,13 @@
         overflow: hidden;
         box-shadow: 0 8px 24px rgba(2, 6, 23, 0.06);
         border: 1px solid #eef2ff;
+      }
+      .donut-holder {
+        width: 120px;
+        height: 120px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
       }
       .viewer {
         height: calc(100vh - 180px);
@@ -102,20 +122,24 @@
   </head>
   <body>
     <div class="top">
-      <div class="brand">
+      <div class="brand head-row">
         <img
-          src="https://lh3.googleusercontent.com/aida-public/AB6AXuDEnHeX6lQASREHo1CvcD7QajIRgG-bxK1_GrGnL3ZFhDJQYxQ_lrDe7CnigLxfH3imLfdpb3DCk-V3FmnDBeNvZ9uFXwsCRvZokrYJoR7dphuKXlanzVBLBGzqciJUJW79daXHfJG_pizZ8g_O5QLHYhHE7Ci50qsI0E5j3uxiMqzqCj4YsscAk1GE1vZREbMnvt6F646N6wuLriYo-bk1wn36wZTNBgKIQ2c0o0TJIBKmpqmCZvbnbG-MlbRK9_pKV22ZDXNgj1s"
+          src="/logo.jpg"
           alt="Logo"
+          onerror="this.src = '/assets/logo.jpg'"
         />
         <div>
           <div class="title">Math Falta</div>
           <div style="font-size: 12px; color: #64748b">Report Viewer</div>
         </div>
+        <div class="donut-holder" id="donut-holder" title="Performance">
+          <!-- Donut chart inserted here -->
+        </div>
       </div>
       <div class="controls">
-        <a href="index.html" class="btn secondary">Home</a>
+        <a href="/" class="btn secondary"><span>🏠</span> Home</a>
         <a id="downloadLink" class="btn" download rel="noopener noreferrer"
-          >Download</a
+          >⬇ Download</a
         >
       </div>
     </div>

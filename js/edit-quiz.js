@@ -152,7 +152,8 @@ function setNewQuestionTypeUI(type) {
     if (imageWrapper) imageWrapper.classList.add("hidden");
     if (imageInput) imageInput.value = "";
     clearNewImagePreview();
-    if (optionsHelp) optionsHelp.textContent = "Options are editable (Text Question)";
+    if (optionsHelp)
+      optionsHelp.textContent = "Options are editable (Text Question)";
     optionInputs.forEach((el) => el.classList.remove("hidden"));
     fixedMap.forEach((el) => el && el.classList.add("hidden"));
   }
@@ -187,15 +188,21 @@ async function loadQuiz() {
         .join("");
     }
 
+    const timeLimitInput = document.getElementById("quiz-time-limit");
+    if (timeLimitInput) timeLimitInput.value = q.timeLimit ?? 0;
+
     ORIGINAL_QUIZ = {
       title: q.title || "",
       grade: q.grade || "",
+      timeLimit: q.timeLimit ?? 0,
     };
     ORIGINAL_QUESTIONS.clear();
     (q.questions || []).forEach((qq) => {
       ORIGINAL_QUESTIONS.set(qq._id, {
         question: qq.question || "",
-        options: Array.isArray(qq.options) ? qq.options.slice(0, 4) : ["", "", "", ""],
+        options: Array.isArray(qq.options)
+          ? qq.options.slice(0, 4)
+          : ["", "", "", ""],
         answer: indexToLetter(answerToIndex(qq.answer)),
         isImage: Boolean(qq.image?.url),
       });
@@ -207,7 +214,10 @@ async function loadQuiz() {
     hideLoading();
     console.error(err);
     if (err.status === 401) location.href = "/sign-in.html";
-    showToast(err.message || err.payload?.message || "Failed to load quiz", "error");
+    showToast(
+      err.message || err.payload?.message || "Failed to load quiz",
+      "error",
+    );
   }
 }
 
@@ -424,7 +434,10 @@ function renderExistingQuestions(questions, quizId) {
         } catch (err) {
           hideLoading();
           console.error(err);
-          showToast(err.message || err.payload?.message || "Update failed", "error");
+          showToast(
+            err.message || err.payload?.message || "Update failed",
+            "error",
+          );
         }
       }),
     );
@@ -547,7 +560,9 @@ async function addQuestion() {
       const tick = b.querySelector(".material-symbols-outlined");
       if (tick) tick.remove();
     });
-    const firstBtn = document.querySelector(".new-answer-option[data-answer='A']");
+    const firstBtn = document.querySelector(
+      ".new-answer-option[data-answer='A']",
+    );
     if (firstBtn) {
       firstBtn.classList.add("border-primary", "ring-2", "ring-primary/30");
       const label = firstBtn.querySelector("span");
@@ -579,9 +594,10 @@ async function saveMeta() {
   const quizId = getParam("id");
   const title = document.getElementById("quiz-title")?.value;
   const grade = document.getElementById("quiz-grade")?.value;
+  const timeLimit = document.getElementById("quiz-time-limit")?.value;
   try {
     showLoading("Saving quiz...");
-    await putJSON(`/admin/quizzes/${quizId}`, { title, grade });
+    await putJSON(`/admin/quizzes/${quizId}`, { title, grade, timeLimit });
     hideLoading();
     showToast("Saved", "success");
     loadQuiz();
@@ -597,17 +613,23 @@ async function saveMetaAutosave() {
   if (!quizId) return;
   const title = document.getElementById("quiz-title")?.value;
   const grade = document.getElementById("quiz-grade")?.value;
+  const timeLimit = document.getElementById("quiz-time-limit")?.value;
   if (
     ORIGINAL_QUIZ &&
     (title || "") === (ORIGINAL_QUIZ.title || "") &&
-    (grade || "") === (ORIGINAL_QUIZ.grade || "")
+    (grade || "") === (ORIGINAL_QUIZ.grade || "") &&
+    (timeLimit || "") === String(ORIGINAL_QUIZ.timeLimit || "")
   ) {
     return;
   }
   try {
     bumpSaving();
-    await putJSON(`/admin/quizzes/${quizId}`, { title, grade });
-    ORIGINAL_QUIZ = { title: title || "", grade: grade || "" };
+    await putJSON(`/admin/quizzes/${quizId}`, { title, grade, timeLimit });
+    ORIGINAL_QUIZ = {
+      title: title || "",
+      grade: grade || "",
+      timeLimit: timeLimit || 0,
+    };
   } catch (err) {
     console.error(err);
   } finally {
@@ -768,8 +790,11 @@ function flushPendingSaves() {
   if (!quizId) return;
   const title = document.getElementById("quiz-title")?.value;
   const grade = document.getElementById("quiz-grade")?.value;
-  if (title || grade) {
-    putJSON(`/admin/quizzes/${quizId}`, { title, grade }).catch(() => {});
+  const timeLimit = document.getElementById("quiz-time-limit")?.value;
+  if (title || grade || timeLimit) {
+    putJSON(`/admin/quizzes/${quizId}`, { title, grade, timeLimit }).catch(
+      () => {},
+    );
   }
   const questionDivs = document.querySelectorAll("#existing-questions > div");
   questionDivs.forEach((div) => {
@@ -828,32 +853,35 @@ function wire() {
       const type = e.target.value;
       setNewQuestionTypeUI(type);
     });
-  document.getElementById("new-image-trigger")?.addEventListener("click", () => {
-    document.getElementById("new-image")?.click();
-  });
+  document
+    .getElementById("new-image-trigger")
+    ?.addEventListener("click", () => {
+      document.getElementById("new-image")?.click();
+    });
   document.getElementById("new-image-empty")?.addEventListener("click", () => {
     document.getElementById("new-image")?.click();
   });
-  document
-    .getElementById("new-image")
-    ?.addEventListener("change", (e) => {
-      const file = e.target.files?.[0];
-      const preview = document.getElementById("new-image-preview");
-      const empty = document.getElementById("new-image-empty");
-      if (!preview || !empty) return;
-      if (!file) {
-        clearNewImagePreview();
-        return;
-      }
-      const url = URL.createObjectURL(file);
-      preview.src = url;
-      preview.classList.remove("hidden");
-      empty.classList.add("hidden");
-    });
+  document.getElementById("new-image")?.addEventListener("change", (e) => {
+    const file = e.target.files?.[0];
+    const preview = document.getElementById("new-image-preview");
+    const empty = document.getElementById("new-image-empty");
+    if (!preview || !empty) return;
+    if (!file) {
+      clearNewImagePreview();
+      return;
+    }
+    const url = URL.createObjectURL(file);
+    preview.src = url;
+    preview.classList.remove("hidden");
+    empty.classList.add("hidden");
+  });
   document.getElementById("quiz-title")?.addEventListener("blur", () => {
     saveMetaAutosave();
   });
   document.getElementById("quiz-grade")?.addEventListener("blur", () => {
+    saveMetaAutosave();
+  });
+  document.getElementById("quiz-time-limit")?.addEventListener("blur", () => {
     saveMetaAutosave();
   });
   document

@@ -94,6 +94,7 @@ function saveDraft() {
   const draftData = {
     title: titleInput?.value || "",
     grade: gradeSelect?.value || "",
+    timeLimit: document.getElementById("quiz-time-limit")?.value || "0",
     questions,
     savedAt: new Date().toLocaleString(),
   };
@@ -119,6 +120,8 @@ function loadDraft() {
 
     if (titleInput) titleInput.value = data.title || "";
     if (gradeSelect) gradeSelect.value = data.grade || "";
+    const timeLimitInput = document.getElementById("quiz-time-limit");
+    if (timeLimitInput) timeLimitInput.value = data.timeLimit ?? "0";
 
     const questionsContainer = document.querySelector(".flex.flex-col.gap-6");
     const defaultQuestion =
@@ -337,19 +340,21 @@ function createQuestionBlock(data = null, questionNumber = null) {
   `;
 
   // ===================== Event listeners (radio buttons) =====================
-  const radioButtons = block.querySelectorAll('input[type="radio"][name^="correct_q"]');
-  radioButtons.forEach(radio => {
-    radio.addEventListener('change', () => {
+  const radioButtons = block.querySelectorAll(
+    'input[type="radio"][name^="correct_q"]',
+  );
+  radioButtons.forEach((radio) => {
+    radio.addEventListener("change", () => {
       // Hide all symbols within this question block
-      block.querySelectorAll('.js-correct-symbol').forEach(symbol => {
-        symbol.classList.add('hidden');
+      block.querySelectorAll(".js-correct-symbol").forEach((symbol) => {
+        symbol.classList.add("hidden");
       });
       // Show symbol for the checked radio
       if (radio.checked) {
         // Find the symbol within the radio's parent container
-        const symbol = radio.parentElement.querySelector('.js-correct-symbol');
+        const symbol = radio.parentElement.querySelector(".js-correct-symbol");
         if (symbol) {
-          symbol.classList.remove('hidden');
+          symbol.classList.remove("hidden");
         }
       }
     });
@@ -537,6 +542,8 @@ async function publishQuiz() {
   const fd = new FormData();
   fd.append("title", title);
   fd.append("grade", grade);
+  const timeLimit = document.getElementById("quiz-time-limit")?.value || 0;
+  fd.append("timeLimit", timeLimit);
   fd.append("questions", JSON.stringify(questions));
 
   document.querySelectorAll(".question-block").forEach((block, idx) => {

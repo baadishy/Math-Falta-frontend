@@ -69,6 +69,16 @@ function renderSummary(data) {
       Solved at: ${formatDate(data.createdAt)}
     </p>
   `;
+  // timeTaken in seconds
+  if (data.timeTaken !== undefined && data.timeTaken !== null) {
+    const mm = Math.floor(data.timeTaken / 60);
+    const ss = data.timeTaken % 60;
+    const timeStr = `${mm}m ${ss}s`;
+    const el = document.createElement("p");
+    el.className = "text-slate-400 dark:text-slate-500 text-xs";
+    el.textContent = `Time taken: ${timeStr}`;
+    summary.appendChild(el);
+  }
 }
 
 /* =======================
@@ -212,24 +222,23 @@ function renderSidebar(quizzes, activeId) {
 }
 
 function applyFilters() {
-    const searchInput = document.getElementById("quiz-search");
-    const searchTerm = searchInput.value.toLowerCase();
-    const activeId = getParam("answersId");
+  const searchInput = document.getElementById("quiz-search");
+  const searchTerm = searchInput.value.toLowerCase();
+  const activeId = getParam("answersId");
 
-    const filteredQuizzes = allQuizzes.filter(q => 
-        q.title.toLowerCase().includes(searchTerm)
-    );
-    
-    renderSidebar(filteredQuizzes, activeId);
+  const filteredQuizzes = allQuizzes.filter((q) =>
+    q.title.toLowerCase().includes(searchTerm),
+  );
+
+  renderSidebar(filteredQuizzes, activeId);
 }
-
 
 /* =======================
    Init
 ======================= */
 async function init() {
   const searchInput = document.getElementById("quiz-search");
-  searchInput.addEventListener('input', applyFilters);
+  searchInput.addEventListener("input", applyFilters);
 
   const res = await getJSON("/quizzes/answers");
   allQuizzes = res.data || [];

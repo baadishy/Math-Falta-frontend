@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html class="dark" lang="en">
   <head>
     <meta charset="utf-8" />
@@ -104,9 +104,15 @@
             >
               Loading...
             </h1>
-            <p id="quiz-description" class="text-slate-500 dark:text-[#92a4c9]">
-              Fetching quiz...
-            </p>
+            <div class="flex items-center justify-between">
+              <p
+                id="quiz-description"
+                class="text-slate-500 dark:text-[#92a4c9]"
+              >
+                Fetching quiz...
+              </p>
+              <div id="quiz-timer" class="text-sm font-bold text-primary"></div>
+            </div>
           </div>
 
           <!-- ✅ QUESTIONS WILL BE RENDERED HERE -->

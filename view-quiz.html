@@ -147,6 +147,17 @@
                   >
                   <span class="text-sm font-medium">20 Questions</span>
                 </div>
+                <div
+                  class="flex items-center gap-2 px-3 py-1.5 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700"
+                  id="time-limit-chip"
+                >
+                  <span class="material-symbols-outlined text-[18px]"
+                    >timer</span
+                  >
+                  <span class="text-sm font-medium" id="time-limit-text"
+                    >No limit</span
+                  >
+                </div>
               </div>
             </div>
             <div class="flex gap-3 mt-1" id="quiz-actions">
@@ -266,6 +277,7 @@
                       <th class="py-2 text-left pl-4">Attempt Date</th>
                       <th class="py-2 text-center">Total Score</th>
                       <th class="py-2 text-center">Quiz Score</th>
+                      <th class="py-2 text-center">Time</th>
                     </tr>
                   </thead>
                   <tbody id="quiz-results"></tbody>
@@ -286,7 +298,6 @@
     </div>
     <script src="js/admin-layout.js" type="module"></script>
     <script src="js/view-quiz.js" type="module"></script>
-      <script type="module" src="/js/theme.js"></script>
+    <script type="module" src="/js/theme.js"></script>
   </body>
 </html>
-
