@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html class="dark" lang="en">
   <head>
     <meta charset="utf-8" />
@@ -43,10 +43,18 @@
     </script>
     <style>
       .material-symbols-outlined {
-        font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24;
+        font-variation-settings:
+          "FILL" 0,
+          "wght" 400,
+          "GRAD" 0,
+          "opsz" 24;
       }
       .icon-fill {
-        font-variation-settings: "FILL" 1, "wght" 400, "GRAD" 0, "opsz" 24;
+        font-variation-settings:
+          "FILL" 1,
+          "wght" 400,
+          "GRAD" 0,
+          "opsz" 24;
       }
       ::-webkit-scrollbar {
         width: 8px;
@@ -206,7 +214,7 @@
                   class="h-10 w-10 overflow-hidden rounded-full bg-slate-200 dark:bg-slate-700 bg-center bg-cover"
                   data-alt="Admin user profile picture showing a placeholder avatar"
                   style="
-                    background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAlXYaEVeHoTogkCqsZ_nXsz6ywYFxdgP7aZWCHthY3w5fZs9HHaSNaXuxeHWYJbEIVRE7bmsOQIYKAwmNG-E_3_wfuouNkfHptc_5ydKAP2EntLhYyABTcNcw6Nt84BGkJ_-yIgX_LJxdObkax6cvtV5CsLnM4JqNNMomVSQ1qXEwP-nWQLG8m70fwZqy5Ew4qYE30yiDpA7TENm84Rpa2wz-ydRiXLuP1wLpriQgE8giZyEyhO-Q5QjyHtQpRkEfQlDfiZ5_06nc');
+                    background-image: url(&quot;https://lh3.googleusercontent.com/aida-public/AB6AXuAlXYaEVeHoTogkCqsZ_nXsz6ywYFxdgP7aZWCHthY3w5fZs9HHaSNaXuxeHWYJbEIVRE7bmsOQIYKAwmNG-E_3_wfuouNkfHptc_5ydKAP2EntLhYyABTcNcw6Nt84BGkJ_-yIgX_LJxdObkax6cvtV5CsLnM4JqNNMomVSQ1qXEwP-nWQLG8m70fwZqy5Ew4qYE30yiDpA7TENm84Rpa2wz-ydRiXLuP1wLpriQgE8giZyEyhO-Q5QjyHtQpRkEfQlDfiZ5_06nc&quot;);
                   "
                 ></div>
               </button>
@@ -283,7 +291,6 @@
                     class="text-3xl font-bold text-slate-900 dark:text-white"
                     >1,204</span
                   >
-                  
                 </div>
                 <p class="text-xs text-slate-400 mt-1">Currently active</p>
               </div>
@@ -307,7 +314,6 @@
                     class="text-3xl font-bold text-slate-900 dark:text-white"
                     >8</span
                   >
-                  
                 </div>
                 <p class="text-xs text-slate-400 mt-1">Currently live</p>
               </div>
@@ -331,7 +337,6 @@
                     class="text-3xl font-bold text-slate-900 dark:text-white"
                     >420</span
                   >
-                  
                 </div>
                 <p class="text-xs text-slate-400 mt-1">Currently live</p>
               </div>
@@ -348,7 +353,8 @@
                       Manage Lessons
                     </h3>
                     <button
-                      class="flex items-center gap-2 rounded-lg bg-primary px-3 py-1.5 text-sm font-medium text-white hover:bg-blue-600 transition-colors" id="add-new-lesson"
+                      class="flex items-center gap-2 rounded-lg bg-primary px-3 py-1.5 text-sm font-medium text-white hover:bg-blue-600 transition-colors"
+                      id="add-new-lesson"
                     >
                       <span class="material-symbols-outlined text-[18px]"
                         >add</span
@@ -449,7 +455,8 @@
                     class="border-t border-slate-200 p-3 text-center dark:border-slate-700"
                   >
                     <button
-                      class="text-sm font-medium text-primary hover:underline" id="view-all-lessons"
+                      class="text-sm font-medium text-primary hover:underline"
+                      id="view-all-lessons"
                     >
                       View all lessons
                     </button>
@@ -465,7 +472,8 @@
                       Student Leaderboard
                     </h3>
                     <button
-                      class="text-sm text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-white" id="admin-view-full-leaderboard"
+                      class="text-sm text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-white"
+                      id="admin-view-full-leaderboard"
                     >
                       View Full List
                     </button>
@@ -616,7 +624,6 @@
     </div>
     <script type="module" src="js/admin-layout.js"></script>
     <script type="module" src="js/admin-dashboard.js"></script>
-      <script type="module" src="/js/theme.js"></script>
+    <script type="module" src="/js/theme.js"></script>
   </body>
 </html>
-
