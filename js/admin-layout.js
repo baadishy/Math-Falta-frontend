@@ -1,4 +1,4 @@
-import { getJSON } from "./app.js";
+import { getJSON, API_BASE } from "./app.js";
 import { toggleTheme } from "./theme.js";
 
 async function prepareHeader() {
@@ -302,7 +302,7 @@ export function insertAdminLayout() {
     btn.addEventListener("click", async (e) => {
       e.preventDefault();
       try {
-        await fetch("/api/auth/sign-out", {
+        await fetch(`${API_BASE}/auth/sign-out`, {
           method: "GET",
           credentials: "include",
         });
@@ -358,4 +358,3 @@ document.addEventListener("DOMContentLoaded", () => {
 
 // export { insertAdminLayout, prepareHeader, updateSidebarActiveLink };
 export default { insertAdminLayout, prepareHeader, updateSidebarActiveLink };
-

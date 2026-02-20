@@ -1,4 +1,7 @@
-const API_BASE = "/api";
+const API_BASE =
+  (window.APP_CONFIG && window.APP_CONFIG.API_BASE) ||
+  window.__API_BASE__ ||
+  "/api";
 
 async function apiFetch(path, options = {}) {
   const url = `${API_BASE}${path}`;
@@ -45,4 +48,4 @@ async function deleteJSON(path) {
   return apiFetch(path, { method: "DELETE" });
 }
 
-export { apiFetch, postJSON, getJSON, putJSON, deleteJSON };
+export { API_BASE, apiFetch, postJSON, getJSON, putJSON, deleteJSON };

@@ -1,4 +1,5 @@
 import { toggleTheme, applySavedTheme } from "./theme.js";
+import { API_BASE } from "./app.js";
 
 // Build standard header HTML for student pages
 function makeHeader() {
@@ -173,7 +174,7 @@ function insertHeader() {
       e.preventDefault();
       try {
         // Server expects GET for sign-out
-        await fetch("/api/auth/sign-out", { credentials: "include" });
+        await fetch(`${API_BASE}/auth/sign-out`, { credentials: "include" });
       } catch (err) {
         // ignore errors
       }
@@ -221,7 +222,9 @@ function insertHeader() {
 
     try {
       // while fetching, the placeholders are visible (animated)
-      const res = await fetch("/api/users/header", { credentials: "include" });
+      const res = await fetch(`${API_BASE}/users/header`, {
+        credentials: "include",
+      });
 
       // If unauthorized, redirect to sign-in on protected pages; otherwise show Sign In link
       if (res.status === 401 || res.status === 403) {
@@ -253,7 +256,7 @@ function insertHeader() {
 
       // We have a user — populate the UI and reveal real values
       const nameEls = headerRoot.querySelectorAll(
-        ".profile-name-real, .profile-display-name.real"
+        ".profile-name-real, .profile-display-name.real",
       );
       nameEls.forEach((el) => {
         el.textContent = user.name || user.username || "Student";
@@ -263,17 +266,17 @@ function insertHeader() {
       document
         .querySelectorAll(".profile-name")
         .forEach(
-          (el) => (el.textContent = user.name || user.username || "Student")
+          (el) => (el.textContent = user.name || user.username || "Student"),
         );
       document
         .querySelectorAll(".profile-display-name")
         .forEach(
-          (el) => (el.textContent = user.name || user.username || "Student")
+          (el) => (el.textContent = user.name || user.username || "Student"),
         );
 
       // hide placeholders
       const namePlaceholders = headerRoot.querySelectorAll(
-        ".profile-name-placeholder, .profile-display-placeholder"
+        ".profile-name-placeholder, .profile-display-placeholder",
       );
       namePlaceholders.forEach((el) => el.classList.add("hidden"));
 
@@ -305,7 +308,7 @@ function insertHeader() {
 
       const initialsReal = headerRoot.querySelector(".profile-initials.real");
       const initialsPlaceholder = headerRoot.querySelector(
-        ".profile-initials-placeholder"
+        ".profile-initials-placeholder",
       );
       if (initialsReal) {
         const initials = (user.name || user.username || "")
@@ -353,7 +356,7 @@ function highlightActiveNav() {
       "text-slate-600",
       "dark:text-slate-300",
       "hover:text-primary",
-      "dark:hover:text-primary"
+      "dark:hover:text-primary",
     );
   });
 
@@ -377,7 +380,11 @@ function highlightActiveNav() {
   );
   if (activeMobile) {
     activeMobile.classList.remove("text-slate-700", "dark:text-slate-200");
-    activeMobile.classList.add("text-primary", "bg-primary/10", "font-semibold");
+    activeMobile.classList.add(
+      "text-primary",
+      "bg-primary/10",
+      "font-semibold",
+    );
   }
 }
 

@@ -1,4 +1,4 @@
-import { getJSON } from "./app.js";
+import { getJSON, API_BASE } from "./app.js";
 const lessonProgress = new Map(); // key: lesson._id, value: progress %
 let allLessons = [];
 
@@ -53,14 +53,14 @@ function renderLessons(lessons) {
 
   container.innerHTML = "";
   lessons.forEach((lesson) => {
-      const article = document.createElement("article");
-      article.className =
-        "bg-white dark:bg-[#192233] rounded-2xl border border-slate-200 dark:border-[#232f48] shadow-sm overflow-hidden";
+    const article = document.createElement("article");
+    article.className =
+      "bg-white dark:bg-[#192233] rounded-2xl border border-slate-200 dark:border-[#232f48] shadow-sm overflow-hidden";
 
-      const header = document.createElement("div");
-      header.className =
-        "p-6 md:p-8 border-b border-slate-100 dark:border-[#232f48]";
-      header.innerHTML = `
+    const header = document.createElement("div");
+    header.className =
+      "p-6 md:p-8 border-b border-slate-100 dark:border-[#232f48]";
+    header.innerHTML = `
         <div class="flex items-center gap-3 mb-3">
           <span class="px-2.5 py-1 rounded-md bg-indigo-100 dark:bg-indigo-900/30 text-indigo-600 dark:text-indigo-300 text-xs font-bold uppercase tracking-wider">${
             lesson.topic
@@ -78,103 +78,106 @@ function renderLessons(lessons) {
         }</p>
       `;
 
-      // video as iframe
-      const videoWrap = document.createElement("div");
-      videoWrap.className = "w-full relative"; // relative positioning for overlay
+    // video as iframe
+    const videoWrap = document.createElement("div");
+    videoWrap.className = "w-full relative"; // relative positioning for overlay
 
-      const iframe = document.createElement("iframe");
-      iframe.src =
-        lesson.videoUrl + "?enablejsapi=1&modestbranding=1&rel=0&controls=1";
-      const iframeId = `yt-player-${lesson._id}`;
-      iframe.id = iframeId;
-      iframe.className =
-        "w-full aspect-video rounded-md border border-slate-200 dark:border-[#232f48]";
-      iframe.setAttribute("allowfullscreen", "true");
-      iframe.setAttribute("allow", "autoplay; fullscreen; picture-in-picture");
-      iframe.setAttribute("loading", "lazy");
-      iframe.title = lesson.title || "Lesson video";
-      videoWrap.appendChild(iframe);
+    const iframe = document.createElement("iframe");
+    iframe.src =
+      lesson.videoUrl + "?enablejsapi=1&modestbranding=1&rel=0&controls=1";
+    const iframeId = `yt-player-${lesson._id}`;
+    iframe.id = iframeId;
+    iframe.className =
+      "w-full aspect-video rounded-md border border-slate-200 dark:border-[#232f48]";
+    iframe.setAttribute("allowfullscreen", "true");
+    iframe.setAttribute("allow", "autoplay; fullscreen; picture-in-picture");
+    iframe.setAttribute("loading", "lazy");
+    iframe.title = lesson.title || "Lesson video";
+    videoWrap.appendChild(iframe);
 
-      const waitForYT = setInterval(() => {
-        if (window.YT && YT.Player) {
-          clearInterval(waitForYT);
+    const waitForYT = setInterval(() => {
+      if (window.YT && YT.Player) {
+        clearInterval(waitForYT);
 
-          const player = new YT.Player(iframeId, {
-            events: {
-              onReady: (event) => {
-                // ▶️ RESUME FROM LAST PROGRESS
-                if (lesson.lastTime && lesson.lastTime > 0) {
-                  event.target.seekTo(lesson.lastTime, true);
-                } else if (lesson.progress && lesson.progress > 0) {
-                  const duration = event.target.getDuration();
-                  const seekTo = (lesson.progress / 100) * duration;
-                  event.target.seekTo(seekTo, true);
-                }
-              },
-
-              onStateChange: (event) => {
+        const player = new YT.Player(iframeId, {
+          events: {
+            onReady: (event) => {
+              // ▶️ RESUME FROM LAST PROGRESS
+              if (lesson.lastTime && lesson.lastTime > 0) {
+                event.target.seekTo(lesson.lastTime, true);
+              } else if (lesson.progress && lesson.progress > 0) {
                 const duration = event.target.getDuration();
-                let progressInterval;
+                const seekTo = (lesson.progress / 100) * duration;
+                event.target.seekTo(seekTo, true);
+              }
+            },
 
-                const updateProgress = () => {
-                  const currentTime = event.target.getCurrentTime();
-                  lessonProgress.set(lesson._id, {
-                    progress: Math.round((currentTime / duration) * 100),
-                    lastTime: Math.floor(currentTime),
-                  });
-                  console.log(
-                    `Progress for lesson ${lesson._id}: ${lessonProgress.get(lesson._id).progress}% at ${lessonProgress.get(lesson._id).lastTime}s`,
-                  );
-                };
+            onStateChange: async (event) => {
+              const duration = event.target.getDuration();
+              let progressInterval;
 
-                if (event.data === YT.PlayerState.PLAYING) {
-                  // ▶️ First-time watch logging
-                  if (!watchedLessons.has(lesson._id)) {
-                    watchedLessons.add(lesson._id);
-                    fetch(`/api/lessons/${lesson._id}/watch`, {
+              const updateProgress = () => {
+                const currentTime = event.target.getCurrentTime();
+                lessonProgress.set(lesson._id, {
+                  progress: Math.round((currentTime / duration) * 100),
+                  lastTime: Math.floor(currentTime),
+                });
+                console.log(
+                  `Progress for lesson ${lesson._id}: ${lessonProgress.get(lesson._id).progress}% at ${lessonProgress.get(lesson._id).lastTime}s`,
+                );
+              };
+
+              if (event.data === YT.PlayerState.PLAYING) {
+                // ▶️ First-time watch logging
+                if (!watchedLessons.has(lesson._id)) {
+                  watchedLessons.add(lesson._id);
+                  try {
+                    await fetch(`${API_BASE}/lessons/${lesson._id}/watch`, {
                       method: "POST",
                       headers: { "Content-Type": "application/json" },
-                    }).catch((err) =>
-                      console.error("Failed to save watch", err),
-                    );
+                      credentials: "include",
+                    });
+                  } catch (err) {
+                    console.error("Failed to save watch", err);
                   }
-
-                  // ▶️ Start interval to update progress every second
-                  progressInterval = setInterval(updateProgress, 1000);
-                } else {
-                  // ▶️ Clear interval when paused, ended, or buffering
-                  if (progressInterval) clearInterval(progressInterval);
-                  // Also update progress one last time
-                  updateProgress();
                 }
-              },
-            },
-          });
-        }
-      }, 100);
 
-      // materials
-      const mats = document.createElement("div");
-      mats.className =
-        "p-6 md:p-8 bg-slate-50/50 dark:bg-black/20 border-t border-slate-100 dark:border-[#232f48]";
-      const matsInner = document.createElement("div");
-      matsInner.innerHTML = `
+                // ▶️ Start interval to update progress every second
+                progressInterval = setInterval(updateProgress, 1000);
+              } else {
+                // ▶️ Clear interval when paused, ended, or buffering
+                if (progressInterval) clearInterval(progressInterval);
+                // Also update progress one last time
+                updateProgress();
+              }
+            },
+          },
+        });
+      }
+    }, 100);
+
+    // materials
+    const mats = document.createElement("div");
+    mats.className =
+      "p-6 md:p-8 bg-slate-50/50 dark:bg-black/20 border-t border-slate-100 dark:border-[#232f48]";
+    const matsInner = document.createElement("div");
+    matsInner.innerHTML = `
         <h3 class="text-sm font-bold text-slate-900 dark:text-white uppercase tracking-wider mb-4 flex items-center gap-2">
           <span class="material-symbols-outlined text-lg">folder_open</span> Lesson Materials
         </h3>
       `;
 
-      const grid = document.createElement("div");
-      grid.className = "grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4";
-      if (lesson.docs && lesson.docs.length) {
-        lesson.docs.forEach((d) => {
-          const a = document.createElement("a");
-          a.className =
-            "flex items-center gap-3 p-3 rounded-xl border border-slate-200 dark:border-[#232f48] bg-white dark:bg-[#192233] hover:border-primary dark:hover:border-primary/50 hover:shadow-md transition-all group/file";
-          a.href = d.url;
-          a.setAttribute("download", `${d.originalName || "document"}`);
-          a.rel = "noopener noreferrer";
-          a.innerHTML = `
+    const grid = document.createElement("div");
+    grid.className = "grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4";
+    if (lesson.docs && lesson.docs.length) {
+      lesson.docs.forEach((d) => {
+        const a = document.createElement("a");
+        a.className =
+          "flex items-center gap-3 p-3 rounded-xl border border-slate-200 dark:border-[#232f48] bg-white dark:bg-[#192233] hover:border-primary dark:hover:border-primary/50 hover:shadow-md transition-all group/file";
+        a.href = d.url;
+        a.setAttribute("download", `${d.originalName || "document"}`);
+        a.rel = "noopener noreferrer";
+        a.innerHTML = `
             <div class="size-10 rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 flex items-center justify-center flex-shrink-0">
               <span class="material-symbols-outlined">description</span>
             </div>
@@ -188,20 +191,20 @@ function renderLessons(lessons) {
             </div>
             <span class="material-symbols-outlined text-slate-400">download</span>
           `;
-          grid.appendChild(a);
-        });
-      } else {
-        grid.innerHTML = `<div class="text-slate-500 dark:text-slate-400 p-4">No lesson materials</div>`;
-      }
+        grid.appendChild(a);
+      });
+    } else {
+      grid.innerHTML = `<div class="text-slate-500 dark:text-slate-400 p-4">No lesson materials</div>`;
+    }
 
-      matsInner.appendChild(grid);
-      mats.appendChild(matsInner);
+    matsInner.appendChild(grid);
+    mats.appendChild(matsInner);
 
-      article.appendChild(header);
-      article.appendChild(videoWrap);
-      article.appendChild(mats);
+    article.appendChild(header);
+    article.appendChild(videoWrap);
+    article.appendChild(mats);
 
-      container.appendChild(article);
+    container.appendChild(article);
   });
 }
 
@@ -262,14 +265,15 @@ window.addEventListener("beforeunload", async (e) => {
 
   console.log("Sending progress on unload:", payload);
 
-  // Send data to backend
+  // Send data to backend. Use fetch with keepalive so cookies are included cross-origin.
   try {
-    // navigator.sendBeacon ensures the request completes before leaving page
-    const url = "/api/lessons/progress";
-    const blob = new Blob([JSON.stringify(payload)], {
-      type: "application/json",
+    await fetch(`${API_BASE}/lessons/progress`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload),
+      credentials: "include",
+      keepalive: true,
     });
-    navigator.sendBeacon(url, blob);
     console.log("Progress sent:", payload);
   } catch (err) {
     console.error("Failed to send progress on unload", err);
