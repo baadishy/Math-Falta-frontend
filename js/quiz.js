@@ -152,7 +152,7 @@ async function initQuiz() {
         });
         const created = postRes.data;
         if (created && created._id) {
-          window.location.href = `/quiz-result.html?answersId=${created._id}`;
+          window.location.href = `quiz-result.html?answersId=${created._id}`;
         } else {
           showToast("Submitted", "success");
         }
@@ -189,7 +189,7 @@ async function initQuiz() {
     }
   } catch (err) {
     console.error(err);
-    if (err.status === 401) window.location.href = "/sign-in.html";
+    if (err.status === 401) window.location.href = "sign-in.html";
     else {
       showToast(
         err.payload?.msg || err.message || "Could not load quiz",

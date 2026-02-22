@@ -2,7 +2,7 @@
 <html class="dark" lang="en">
   <head>
     <meta charset="utf-8" />
-    <script src="/app-config.js"></script>
+    <script src="app-config.js"></script>
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
     <title>Manage Quizzes - Math Admin</title>
     <link href="https://fonts.googleapis.com" rel="preconnect" />
@@ -61,7 +61,7 @@
 
         <nav class="flex-1 overflow-y-auto px-4 py-6 space-y-2">
           <a
-            href="/admin-dashboard.html"
+            href="admin-dashboard.html"
             class="flex items-center gap-3 rounded-lg px-3 py-2 text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800"
           >
             <span class="material-symbols-outlined">dashboard</span>
@@ -69,7 +69,7 @@
           </a>
 
           <a
-            href="/manage-lessons.html"
+            href="manage-lessons.html"
             class="flex items-center gap-3 rounded-lg bg-primary/10 px-3 py-2 text-primary dark:bg-[#232f48]"
           >
             <span class="material-symbols-outlined">book_2</span>
@@ -159,7 +159,7 @@
                 </div>
                 <a
                   class="flex w-full items-center gap-2 rounded-lg px-3 py-2 text-sm text-slate-600 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-slate-800"
-                  href="/manage-users.html"
+                  href="manage-users.html"
                 >
                   <span class="material-symbols-outlined text-[20px]"
                     >person</span
@@ -180,7 +180,7 @@
             </div>
           </div>
         </header>
-        <div class="px-4 py-8 sm:px-6 lg:px-8">
+        <div class="flex-1 px-4 py-8 sm:px-6 lg:px-8 overflow-y-auto">
           <div class="mx-auto flex w-full max-w-[1200px] flex-col gap-6">
             <div class="flex flex-wrap items-end justify-between gap-4">
               <div class="flex min-w-[280px] flex-col gap-2">
@@ -212,20 +212,20 @@
                     class="bg-slate-50 text-slate-500 dark:bg-[#111722] dark:text-slate-400 border-b border-slate-200 dark:border-slate-700"
                   >
                     <tr>
-                      <th class="sticky top-0 z-50 px-6 py-4 font-semibold">
+                      <th class="sticky top-0 z-40 px-6 py-4 font-semibold">
                         Quiz Title
                       </th>
-                      <th class="sticky top-0 z-50 px-6 py-4 font-semibold">
+                      <th class="sticky top-0 z-40 px-6 py-4 font-semibold">
                         Grade Level
                       </th>
-                      <th class="sticky top-0 z-50 px-6 py-4 font-semibold">
+                      <th class="sticky top-0 z-40 px-6 py-4 font-semibold">
                         Status
                       </th>
-                      <th class="sticky top-0 z-50 px-6 py-4 font-semibold">
+                      <th class="sticky top-0 z-40 px-6 py-4 font-semibold">
                         Last Updated
                       </th>
                       <th
-                        class="sticky top-0 z-50 px-6 py-4 font-semibold text-right"
+                        class="sticky top-0 z-40 px-6 py-4 font-semibold text-right"
                       >
                         Actions
                       </th>
@@ -244,8 +244,8 @@
       </main>
     </div>
 
-    <script type="module" src="/js/admin-quizzes.js"></script>
-    <script type="module" src="js/admin-layout.js"></script>
-    <script type="module" src="/js/theme.js"></script>
+    <script type="module" src="./js/admin-quizzes.js"></script>
+    <script type="module" src="./js/admin-layout.js"></script>
+    <script type="module" src="./js/theme.js"></script>
   </body>
 </html>

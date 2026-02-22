@@ -562,7 +562,7 @@ async function publishQuiz() {
     ]);
 
     window.modalCallback = (action) => {
-      if (action === "success") window.location.href = "/manage-quizzes.html";
+      if (action === "success") window.location.href = "manage-quizzes.html";
     };
   } catch (err) {
     hideLoading();

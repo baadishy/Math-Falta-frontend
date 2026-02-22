@@ -24,8 +24,10 @@ function renderCounts() {
   const lessonsCountEl = document.getElementById("deleted-lessons-count");
   const quizzesCountEl = document.getElementById("deleted-quizzes-count");
 
-  if (lessonsCountEl) lessonsCountEl.textContent = String(deletedLessons.length);
-  if (quizzesCountEl) quizzesCountEl.textContent = String(deletedQuizzes.length);
+  if (lessonsCountEl)
+    lessonsCountEl.textContent = String(deletedLessons.length);
+  if (quizzesCountEl)
+    quizzesCountEl.textContent = String(deletedQuizzes.length);
 }
 
 function renderTable() {
@@ -76,7 +78,12 @@ function renderTable() {
   wireActions();
 }
 
-function createConfirmationPrompt({ title, message, confirmLabel, confirmClass }) {
+function createConfirmationPrompt({
+  title,
+  message,
+  confirmLabel,
+  confirmClass,
+}) {
   return new Promise((resolve) => {
     const modal = document.createElement("div");
     modal.className =
@@ -196,7 +203,7 @@ async function loadTrashData() {
   } catch (err) {
     console.error("Failed to load trash data", err);
     if (err.status === 401) {
-      window.location.href = "/sign-in.html";
+      window.location.href = "sign-in.html";
       return;
     }
 

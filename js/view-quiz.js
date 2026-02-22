@@ -402,7 +402,7 @@ function addDeleteButton() {
       await putJSON(`/admin/quizzes/${quizId}/delete`, {});
       hideLoading();
       showToast("Quiz deleted", "success");
-      window.location.href = "/manage-quizzes.html";
+      window.location.href = "manage-quizzes.html";
     } catch (err) {
       hideLoading();
       console.error("Delete failed:", err);

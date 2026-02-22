@@ -617,7 +617,7 @@ async function loadUser() {
   if (!userId) {
     showToast("Missing user id in URL. Returning to users list.", "error");
     setTimeout(() => {
-      window.location.href = "/manage-users.html";
+      window.location.href = "manage-users.html";
     }, 800);
     return;
   }
@@ -643,7 +643,7 @@ async function loadUser() {
   } catch (err) {
     console.error("Failed to load user", err);
     if (err.status === 401 || err.status === 403) {
-      window.location.href = "/sign-in.html";
+      window.location.href = "sign-in.html";
       return;
     }
     showToast("Unable to load user details.", "error");

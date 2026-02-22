@@ -17,7 +17,7 @@ function renderTable(users) {
     tr.className =
       "group hover:bg-slate-50 dark:hover:bg-[#1a2333] transition-colors cursor-pointer";
     tr.innerHTML = `
-      <td class="px-6 py-4 text-center">${sortedAllUsers.findIndex(user => user._id === u._id) + 1}</td>
+      <td class="px-6 py-4 text-center">${sortedAllUsers.findIndex((user) => user._id === u._id) + 1}</td>
       <td class="px-6 py-4">
         <div class="flex items-center gap-4">
           <div class="size-10 rounded-full bg-cover bg-center border border-slate-200 dark:border-border-dark text-xs font-bold flex items-center justify-center">${(
@@ -44,10 +44,10 @@ function renderTable(users) {
       <td class="px-6 py-4 text-center"><span class="text-primary font-bold text-lg tabular-nums">${
         u.totalScore || 0
       }</span><span class="text-xs text-slate-400 ml-1">pts</span></td>
-      <td class="px-6 py-4 text-center">${(u.quizzesTaken || 0)}</td>
+      <td class="px-6 py-4 text-center">${u.quizzesTaken || 0}</td>
     `;
-    tr.addEventListener('click', () => {
-        window.location.href = `/manage-user.html?id=${u._id}`;
+    tr.addEventListener("click", () => {
+      window.location.href = `manage-user.html?id=${u._id}`;
     });
     tbody.appendChild(tr);
   });
@@ -55,25 +55,25 @@ function renderTable(users) {
 }
 
 function applyFilters() {
-    const searchInput = document.getElementById("search-input");
-    const gradeSelect = document.getElementById("grade-select");
+  const searchInput = document.getElementById("search-input");
+  const gradeSelect = document.getElementById("grade-select");
 
-    const searchTerm = searchInput.value.toLowerCase();
-    const grade = gradeSelect.value;
+  const searchTerm = searchInput.value.toLowerCase();
+  const grade = gradeSelect.value;
 
-    let filteredUsers = allUsers;
+  let filteredUsers = allUsers;
 
-    if (searchTerm) {
-        filteredUsers = filteredUsers.filter(user =>
-            user.name.toLowerCase().includes(searchTerm)
-        );
-    }
+  if (searchTerm) {
+    filteredUsers = filteredUsers.filter((user) =>
+      user.name.toLowerCase().includes(searchTerm),
+    );
+  }
 
-    if (grade) {
-        filteredUsers = filteredUsers.filter(user => user.grade === grade);
-    }
+  if (grade) {
+    filteredUsers = filteredUsers.filter((user) => user.grade === grade);
+  }
 
-    renderTable(filteredUsers);
+  renderTable(filteredUsers);
 }
 
 async function loadLeaderboard() {
@@ -84,16 +84,15 @@ async function loadLeaderboard() {
       .slice()
       .sort((a, b) => (b.totalScore || 0) - (a.totalScore || 0));
     renderTable(allUsers);
-    
+
     const searchInput = document.getElementById("search-input");
     const gradeSelect = document.getElementById("grade-select");
 
-    searchInput.addEventListener('input', applyFilters);
-    gradeSelect.addEventListener('change', applyFilters);
-
+    searchInput.addEventListener("input", applyFilters);
+    gradeSelect.addEventListener("change", applyFilters);
   } catch (err) {
     console.error(err);
-    if (err.status === 401) window.location.href = "/sign-in.html";
+    if (err.status === 401) window.location.href = "sign-in.html";
   }
 }
 

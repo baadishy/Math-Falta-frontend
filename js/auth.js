@@ -14,10 +14,10 @@ if (signInForm) {
       if (!res.success) throw new Error("Sign in failed");
       if (res.isAdmin) {
         localStorage.setItem("isAdmin", true);
-        window.location.href = "/admin-dashboard.html";
+        window.location.href = "admin-dashboard.html";
         return;
       }
-      window.location.href = "/user-dashboard.html";
+      window.location.href = "user-dashboard.html";
     } catch (err) {
       showToast(err.payload?.msg || err.message || "Sign in failed", "error");
     }
@@ -46,7 +46,7 @@ if (signUpForm) {
         parentNumber,
         grade,
       });
-      window.location.href = "/user-dashboard.html";
+      window.location.href = "user-dashboard.html";
     } catch (err) {
       showToast(err.payload?.msg || err.message || "Sign up failed", "error");
     }

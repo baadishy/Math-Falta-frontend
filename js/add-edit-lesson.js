@@ -95,8 +95,8 @@ function renderDocs(list, lessonId) {
 
     // delete
     el.querySelector(".delete-doc").addEventListener("click", async (e) => {
-      e.preventDefault()
-      e.stopPropagation()
+      e.preventDefault();
+      e.stopPropagation();
       const confirmed = await createConfirmationPrompt("Remove this document?");
       if (!confirmed) return;
 
@@ -278,7 +278,7 @@ async function loadLesson(lessonId) {
   } catch (err) {
     console.error(err);
     showToast("Failed to load lesson data", "error");
-    window.location.href = "/manage-lessons.html";
+    window.location.href = "manage-lessons.html";
   }
 }
 
@@ -315,7 +315,7 @@ async function createLesson(form) {
       setTimeout(() => {
         hideLoading();
         sessionStorage.removeItem(LESSON_DRAFT_KEY);
-        location.href = "/manage-lessons.html";
+        location.href = "manage-lessons.html";
       }, 1500);
     }
   } catch (err) {
@@ -764,8 +764,8 @@ function wire() {
     });
   });
 
-  document.querySelector('.dl-btn').addEventListener('click', async () => {
-    const lessonId = getParam('id');
+  document.querySelector(".dl-btn").addEventListener("click", async () => {
+    const lessonId = getParam("id");
     if (!lessonId) return;
 
     try {
@@ -773,7 +773,7 @@ function wire() {
         "Delete this lesson? It can be restored later.",
       );
       if (!confirmed) return;
-      showLoading('Deleting lesson...');
+      showLoading("Deleting lesson...");
       await putJSON(`/admin/lessons/${lessonId}/delete`);
       hideLoading();
       showToast("Lesson deleted successfully", "success");
@@ -782,7 +782,7 @@ function wire() {
       hideLoading();
       showToast("Failed to delete lesson", "error");
     }
-  })
+  });
 }
 
 function showToast(message, type = "success", duration = 3000) {

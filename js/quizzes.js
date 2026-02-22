@@ -27,7 +27,7 @@ function renderQuizzes(quizzes) {
       </div>
       <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-2 group-hover:text-primary transition-colors">${q.title}</h3>
       <p class="text-sm text-slate-500 dark:text-slate-400 mb-6 line-clamp-2">Practice your ${q.title} skills.</p>
-      <a class="flex items-center justify-center w-full py-2.5 bg-slate-50 dark:bg-[#111722] hover:bg-primary dark:hover:bg-primary text-slate-700 dark:text-slate-300 hover:text-white dark:hover:text-white border border-slate-200 dark:border-[#232f48] hover:border-primary dark:hover:border-primary rounded-lg font-medium transition-all gap-2 group/btn" href="/quiz.html?id=${q._id}">
+      <a class="flex items-center justify-center w-full py-2.5 bg-slate-50 dark:bg-[#111722] hover:bg-primary dark:hover:bg-primary text-slate-700 dark:text-slate-300 hover:text-white dark:hover:text-white border border-slate-200 dark:border-[#232f48] hover:border-primary dark:hover:border-primary rounded-lg font-medium transition-all gap-2 group/btn" href="quiz.html?id=${q._id}">
         Start Quiz
         <span class="material-symbols-outlined text-lg group-hover/btn:translate-x-1 transition-transform">arrow_forward</span>
       </a>
@@ -37,11 +37,13 @@ function renderQuizzes(quizzes) {
 }
 
 function applyFilters() {
-  const searchInput = document.querySelector('input[placeholder="Search topics..."]');
+  const searchInput = document.querySelector(
+    'input[placeholder="Search topics..."]',
+  );
   const searchTerm = searchInput.value.toLowerCase();
 
-  const filteredQuizzes = allQuizzes.filter(quiz =>
-    quiz.title.toLowerCase().includes(searchTerm)
+  const filteredQuizzes = allQuizzes.filter((quiz) =>
+    quiz.title.toLowerCase().includes(searchTerm),
   );
 
   renderQuizzes(filteredQuizzes);
@@ -51,8 +53,10 @@ async function initQuizzes() {
   const grid = document.getElementById("quizzes-grid");
   if (!grid) return;
 
-  const searchInput = document.querySelector('input[placeholder="Search topics..."]');
-  searchInput.addEventListener('input', applyFilters);
+  const searchInput = document.querySelector(
+    'input[placeholder="Search topics..."]',
+  );
+  searchInput.addEventListener("input", applyFilters);
 
   // show skeleton cards while fetching
   grid.innerHTML = "";
@@ -78,10 +82,9 @@ async function initQuizzes() {
     const res = await getJSON("/quizzes/titles");
     allQuizzes = res.data || [];
     applyFilters(); // Initial render
-
   } catch (err) {
     console.error("Failed to load quizzes", err);
-    if (err.status === 401) window.location.href = "/sign-in.html";
+    if (err.status === 401) window.location.href = "sign-in.html";
     // remove skeletons on error
     grid.innerHTML = "";
     const errDiv = document.createElement("div");

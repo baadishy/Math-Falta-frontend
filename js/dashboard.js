@@ -156,10 +156,10 @@ async function initDashboard() {
         if (lastImg)
           lastImg.src = `https://picsum.photos/seed/${lastLesson._id}/800/800`;
         if (continueBtn) {
-          continueBtn.href = `/lessons.html?id=${lastLesson._id}`;
+          continueBtn.href = `./lessons.html?id=${lastLesson._id}`;
           continueBtn.addEventListener("click", (e) => {
             e.preventDefault();
-            window.location.href = `/lessons.html?id=${lastLesson._id}`;
+            window.location.href = `./lessons.html?id=${lastLesson._id}`;
           });
         }
       } else {
@@ -171,7 +171,7 @@ async function initDashboard() {
         if (lastMetaEl) lastMetaEl.textContent = "";
         if (lastImg)
           lastImg.src = `https://picsum.photos/seed/default-lesson/800/800`;
-        if (continueBtn) continueBtn.href = "/lessons.html";
+        if (continueBtn) continueBtn.href = "./lessons.html";
       }
     } catch (errInner) {
       console.error("Failed to render last lesson", errInner);
@@ -239,7 +239,7 @@ async function initDashboard() {
           const a = document.createElement("a");
           a.className =
             "flex flex-col items-center justify-center gap-3 p-4 rounded-xl bg-white dark:bg-[#192233] border border-slate-200 dark:border-[#232f48] hover:border-primary/50 dark:hover:border-primary/50 hover:shadow-md transition-all group";
-          a.href = `/quiz.html?id=${q._id}`;
+          a.href = `./quiz.html?id=${q._id}`;
           a.innerHTML = `
             <div class="size-12 rounded-full bg-indigo-100 dark:bg-indigo-900/30 text-indigo-600 dark:text-indigo-300 flex items-center justify-center group-hover:scale-110 transition-transform">
               <span class="material-symbols-outlined">quiz</span>
@@ -253,7 +253,7 @@ async function initDashboard() {
   } catch (err) {
     // If not authorized, redirect to sign-in
     if (err.status === 401 || err.status === 403) {
-      window.location.href = "/sign-in.html";
+      window.location.href = "./sign-in.html";
       console.log("not authorized");
     }
     console.error(err);
@@ -270,7 +270,7 @@ document.addEventListener("DOMContentLoaded", () => {
     signout.addEventListener("click", async (e) => {
       e.preventDefault();
       await getJSON("/auth/sign-out");
-      window.location.href = "/";
+      window.location.href = "../index.html";
     });
   }
 });

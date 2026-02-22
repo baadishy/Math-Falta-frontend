@@ -84,33 +84,33 @@ const asideHtml = `
   </div>
   <div class="flex flex-1 flex-col justify-between overflow-y-auto px-4 py-6">
     <nav class="flex flex-col gap-2">
-      <a class="group flex items-center gap-3 rounded-lg px-3 py-2 text-slate-600 hover:bg-slate-100 dark:text-slate-400 dark:hover:bg-slate-800 dark:hover:text-white transition-colors" href="/admin-dashboard.html">
+      <a class="group flex items-center gap-3 rounded-lg px-3 py-2 text-slate-600 hover:bg-slate-100 dark:text-slate-400 dark:hover:bg-slate-800 dark:hover:text-white transition-colors" href="admin-dashboard.html">
         <span class="material-symbols-outlined">dashboard</span>
         <span class="text-sm font-medium">Dashboard</span>
       </a>
-      <a class="group flex items-center gap-3 rounded-lg px-3 py-2 text-slate-600 hover:bg-slate-100 dark:text-slate-400 dark:hover:bg-slate-800 dark:hover:text-white transition-colors" href="/manage-lessons.html">
+      <a class="group flex items-center gap-3 rounded-lg px-3 py-2 text-slate-600 hover:bg-slate-100 dark:text-slate-400 dark:hover:bg-slate-800 dark:hover:text-white transition-colors" href="manage-lessons.html">
         <span class="material-symbols-outlined">book_2</span>
         <span class="text-sm font-medium">Manage Lessons</span>
       </a>
-      <a class="group flex items-center gap-3 rounded-lg px-3 py-2 text-slate-600 hover:bg-slate-100 dark:text-slate-400 dark:hover:bg-slate-800 dark:hover:text-white transition-colors" href="/manage-quizzes.html">
+      <a class="group flex items-center gap-3 rounded-lg px-3 py-2 text-slate-600 hover:bg-slate-100 dark:text-slate-400 dark:hover:bg-slate-800 dark:hover:text-white transition-colors" href="manage-quizzes.html">
         <span class="material-symbols-outlined">quiz</span>
         <span class="text-sm font-medium">Manage Quizzes</span>
       </a>
-      <a class="group flex items-center gap-3 rounded-lg px-3 py-2 text-slate-600 hover:bg-slate-100 dark:text-slate-400 dark:hover:bg-slate-800 dark:hover:text-white transition-colors" href="/admin-trash.html">
+      <a class="group flex items-center gap-3 rounded-lg px-3 py-2 text-slate-600 hover:bg-slate-100 dark:text-slate-400 dark:hover:bg-slate-800 dark:hover:text-white transition-colors" href="admin-trash.html">
         <span class="material-symbols-outlined">delete</span>
         <span class="text-sm font-medium">Trash</span>
       </a>
-      <a class="group flex items-center gap-3 rounded-lg px-3 py-2 text-slate-600 hover:bg-slate-100 dark:text-slate-400 dark:hover:bg-slate-800 dark:hover:text-white transition-colors" href="/manage-users.html">
+      <a class="group flex items-center gap-3 rounded-lg px-3 py-2 text-slate-600 hover:bg-slate-100 dark:text-slate-400 dark:hover:bg-slate-800 dark:hover:text-white transition-colors" href="manage-users.html">
         <span class="material-symbols-outlined">group</span>
         <span class="text-sm font-medium">Users Management</span>
       </a>
-      <a class="group flex items-center gap-3 rounded-lg px-3 py-2 text-slate-600 hover:bg-slate-100 dark:text-slate-400 dark:hover:bg-slate-800 dark:hover:text-white transition-colors" href="/admin-leaderboard.html">
+      <a class="group flex items-center gap-3 rounded-lg px-3 py-2 text-slate-600 hover:bg-slate-100 dark:text-slate-400 dark:hover:bg-slate-800 dark:hover:text-white transition-colors" href="admin-leaderboard.html">
         <span class="material-symbols-outlined">leaderboard</span>
         <span class="text-sm font-medium">Leaderboard</span>
       </a>
     </nav>
     <nav class="flex flex-col gap-2 border-t border-slate-200 pt-6 dark:border-slate-800">
-      <a class="group flex items-center gap-3 rounded-lg px-3 py-2 text-slate-600 hover:bg-slate-100 dark:text-slate-400 dark:hover:bg-slate-800 dark:hover:text-white transition-colors" href="/">
+      <a class="group flex items-center gap-3 rounded-lg px-3 py-2 text-slate-600 hover:bg-slate-100 dark:text-slate-400 dark:hover:bg-slate-800 dark:hover:text-white transition-colors" href="index.html">
         <span class="material-symbols-outlined">logout</span>
         <span class="text-sm font-medium">Home</span>
       </a>
@@ -200,33 +200,33 @@ function ensureMobileSidebar() {
       </div>
       <div class="flex flex-1 flex-col justify-between overflow-y-auto px-4 py-6">
         <nav class="flex flex-col gap-2">
-          <a class="group flex items-center gap-3 rounded-lg px-3 py-2 text-slate-600 hover:bg-slate-100 dark:text-slate-400 dark:hover:bg-slate-800 dark:hover:text-white transition-colors" href="/admin-dashboard.html">
+          <a class="group flex items-center gap-3 rounded-lg px-3 py-2 text-slate-600 hover:bg-slate-100 dark:text-slate-400 dark:hover:bg-slate-800 dark:hover:text-white transition-colors" href="admin-dashboard.html">
             <span class="material-symbols-outlined">dashboard</span>
             <span class="text-sm font-medium">Dashboard</span>
           </a>
-          <a class="group flex items-center gap-3 rounded-lg px-3 py-2 text-slate-600 hover:bg-slate-100 dark:text-slate-400 dark:hover:bg-slate-800 dark:hover:text-white transition-colors" href="/manage-lessons.html">
+          <a class="group flex items-center gap-3 rounded-lg px-3 py-2 text-slate-600 hover:bg-slate-100 dark:text-slate-400 dark:hover:bg-slate-800 dark:hover:text-white transition-colors" href="manage-lessons.html">
             <span class="material-symbols-outlined">book_2</span>
             <span class="text-sm font-medium">Manage Lessons</span>
           </a>
-          <a class="group flex items-center gap-3 rounded-lg px-3 py-2 text-slate-600 hover:bg-slate-100 dark:text-slate-400 dark:hover:bg-slate-800 dark:hover:text-white transition-colors" href="/manage-quizzes.html">
+          <a class="group flex items-center gap-3 rounded-lg px-3 py-2 text-slate-600 hover:bg-slate-100 dark:text-slate-400 dark:hover:bg-slate-800 dark:hover:text-white transition-colors" href="manage-quizzes.html">
             <span class="material-symbols-outlined">quiz</span>
             <span class="text-sm font-medium">Manage Quizzes</span>
           </a>
-          <a class="group flex items-center gap-3 rounded-lg px-3 py-2 text-slate-600 hover:bg-slate-100 dark:text-slate-400 dark:hover:bg-slate-800 dark:hover:text-white transition-colors" href="/admin-trash.html">
+          <a class="group flex items-center gap-3 rounded-lg px-3 py-2 text-slate-600 hover:bg-slate-100 dark:text-slate-400 dark:hover:bg-slate-800 dark:hover:text-white transition-colors" href="admin-trash.html">
             <span class="material-symbols-outlined">delete</span>
             <span class="text-sm font-medium">Trash</span>
           </a>
-          <a class="group flex items-center gap-3 rounded-lg px-3 py-2 text-slate-600 hover:bg-slate-100 dark:text-slate-400 dark:hover:bg-slate-800 dark:hover:text-white transition-colors" href="/manage-users.html">
+          <a class="group flex items-center gap-3 rounded-lg px-3 py-2 text-slate-600 hover:bg-slate-100 dark:text-slate-400 dark:hover:bg-slate-800 dark:hover:text-white transition-colors" href="manage-users.html">
             <span class="material-symbols-outlined">group</span>
             <span class="text-sm font-medium">Users Management</span>
           </a>
-          <a class="group flex items-center gap-3 rounded-lg px-3 py-2 text-slate-600 hover:bg-slate-100 dark:text-slate-400 dark:hover:bg-slate-800 dark:hover:text-white transition-colors" href="/admin-leaderboard.html">
+          <a class="group flex items-center gap-3 rounded-lg px-3 py-2 text-slate-600 hover:bg-slate-100 dark:text-slate-400 dark:hover:bg-slate-800 dark:hover:text-white transition-colors" href="admin-leaderboard.html">
             <span class="material-symbols-outlined">leaderboard</span>
             <span class="text-sm font-medium">Leaderboard</span>
           </a>
         </nav>
         <nav class="flex flex-col gap-2 border-t border-slate-200 pt-6 dark:border-slate-800">
-          <a class="group flex items-center gap-3 rounded-lg px-3 py-2 text-slate-600 hover:bg-slate-100 dark:text-slate-400 dark:hover:bg-slate-800 dark:hover:text-white transition-colors" href="/">
+          <a class="group flex items-center gap-3 rounded-lg px-3 py-2 text-slate-600 hover:bg-slate-100 dark:text-slate-400 dark:hover:bg-slate-800 dark:hover:text-white transition-colors" href="index.html">
             <span class="material-symbols-outlined">logout</span>
             <span class="text-sm font-medium">Home</span>
           </a>
@@ -310,7 +310,7 @@ export function insertAdminLayout() {
       } catch (err) {
         // ignore
       }
-      window.location.href = "/";
+      window.location.href = "index.html";
     });
   });
 
@@ -322,7 +322,7 @@ export function insertAdminLayout() {
         e.preventDefault();
         const query = searchInput.value.trim();
         if (query) {
-          window.location.href = `/admin-dashboard.html?q=${encodeURIComponent(
+          window.location.href = `admin-dashboard.html?q=${encodeURIComponent(
             query,
           )}`;
         }

@@ -13,22 +13,22 @@ function makeHeader() {
         <h2 class="text-slate-900 dark:text-white text-lg font-bold leading-tight tracking-[-0.015em] hidden sm:block">Math-Falta</h2>
       </div>
       <nav class="hidden min-[500px]:flex items-center gap-2">
-        <a data-nav="dashboard" href="/user-dashboard.html"
+        <a data-nav="dashboard" href="user-dashboard.html"
           class="nav-link text-sm font-medium flex items-center gap-2 px-3 py-2 rounded-lg transition-colors">
           <span class="material-symbols-outlined !text-xl">dashboard</span>
           <span class="hidden md:inline">Dashboard</span>
         </a>
-        <a data-nav="lessons" href="/lessons.html"
+        <a data-nav="lessons" href="lessons.html"
           class="nav-link text-sm font-medium flex items-center gap-2 px-3 py-2 rounded-lg transition-colors">
           <span class="material-symbols-outlined !text-xl">school</span>
           <span class="hidden md:inline">My Lessons</span>
         </a>
-        <a data-nav="practice" href="/quizzes.html"
+        <a data-nav="practice" href="quizzes.html"
           class="nav-link text-sm font-medium flex items-center gap-2 px-3 py-2 rounded-lg transition-colors">
           <span class="material-symbols-outlined !text-xl">edit_note</span>
           <span class="hidden md:inline">Practice</span>
         </a>
-        <a data-nav="results" href="/quiz-result.html"
+        <a data-nav="results" href="quiz-result.html"
           class="nav-link text-sm font-medium flex items-center gap-2 px-3 py-2 rounded-lg transition-colors">
           <span class="material-symbols-outlined !text-xl">bar_chart</span>
           <span class="hidden md:inline">Results</span>
@@ -80,16 +80,12 @@ function makeHeader() {
               </div>
             </div>
             <div class="p-2">
-              <a class="flex items-center gap-3 px-3 py-2.5 text-sm font-medium text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 hover:text-primary dark:hover:text-primary rounded-lg transition-colors" href="/index.html">
+              <a class="flex items-center gap-3 px-3 py-2.5 text-sm font-medium text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 hover:text-primary dark:hover:text-primary rounded-lg transition-colors" href="index.html">
                 <span class="material-symbols-outlined text-xl">home</span>
                 Home
               </a>
-              <a class="flex items-center gap-3 px-3 py-2.5 text-sm font-medium text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 hover:text-primary dark:hover:text-primary rounded-lg transition-colors" href="/user-dashboard.html">
-                <span class="material-symbols-outlined text-xl">settings</span>
-                Settings
-              </a>
               <div class="h-px bg-slate-100 dark:bg-[#232f48] my-1"></div>
-              <a id="signin-btn" class="flex items-center gap-3 px-3 py-2.5 text-sm font-medium text-primary dark:text-primary hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg transition-colors hidden" href="/sign-in.html">
+              <a id="signin-btn" class="flex items-center gap-3 px-3 py-2.5 text-sm font-medium text-primary dark:text-primary hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg transition-colors hidden" href="sign-in.html">
                 <span class="material-symbols-outlined text-xl">login</span>
                 Sign In
               </a>
@@ -104,19 +100,19 @@ function makeHeader() {
     </div>
     <div class="min-[500px]:hidden border-t border-slate-200 dark:border-[#232f48] pt-2 pb-1">
       <div class="flex items-center gap-2 overflow-x-auto pb-2">
-        <a data-nav="dashboard" class="mobile-nav-link flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-medium text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 hover:text-primary" href="/user-dashboard.html">
+          <a data-nav="dashboard" class="mobile-nav-link flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-medium text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 hover:text-primary" href="user-dashboard.html">
           <span class="material-symbols-outlined !text-lg">dashboard</span>
           Dashboard
         </a>
-        <a data-nav="lessons" class="mobile-nav-link flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-medium text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 hover:text-primary" href="/lessons.html">
+        <a data-nav="lessons" class="mobile-nav-link flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-medium text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 hover:text-primary" href="lessons.html">
           <span class="material-symbols-outlined !text-lg">school</span>
           Lessons
         </a>
-        <a data-nav="practice" class="mobile-nav-link flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-medium text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 hover:text-primary" href="/quizzes.html">
+        <a data-nav="practice" class="mobile-nav-link flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-medium text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 hover:text-primary" href="quizzes.html">
           <span class="material-symbols-outlined !text-lg">edit_note</span>
           Practice
         </a>
-        <a data-nav="results" class="mobile-nav-link flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-medium text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 hover:text-primary" href="/quiz-result.html">
+        <a data-nav="results" class="mobile-nav-link flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-medium text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 hover:text-primary" href="quiz-result.html">
           <span class="material-symbols-outlined !text-lg">bar_chart</span>
           Results
         </a>
@@ -179,7 +175,7 @@ function insertHeader() {
         // ignore errors
       }
       // After sign out, go to sign-in page
-      window.location.href = "/sign-in.html";
+      window.location.href = "sign-in.html";
     });
   }
 
@@ -188,7 +184,7 @@ function insertHeader() {
   if (signinBtn) {
     signinBtn.addEventListener("click", (e) => {
       e.preventDefault();
-      window.location.href = "/sign-in.html";
+      window.location.href = "sign-in.html";
     });
   }
 
@@ -229,7 +225,7 @@ function insertHeader() {
       // If unauthorized, redirect to sign-in on protected pages; otherwise show Sign In link
       if (res.status === 401 || res.status === 403) {
         if (!publicPaths.includes(curPath)) {
-          window.location.href = "/sign-in.html";
+          window.location.href = "sign-in.html";
           return;
         }
         showSignedOutUI();
@@ -247,7 +243,7 @@ function insertHeader() {
       if (!user) {
         // No user in payload — treat as signed out
         if (!publicPaths.includes(curPath)) {
-          window.location.href = "/sign-in.html";
+          window.location.href = "sign-in.html";
           return;
         }
         showSignedOutUI();
@@ -327,7 +323,7 @@ function insertHeader() {
     } catch (e) {
       // Network error — show sign in UI for public pages and redirect on protected pages
       if (!publicPaths.includes(curPath)) {
-        window.location.href = "/sign-in.html";
+        window.location.href = "sign-in.html";
         return;
       }
       if (signInBtn) signInBtn.classList.remove("hidden");

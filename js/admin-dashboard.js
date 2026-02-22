@@ -9,7 +9,9 @@ async function initAdminDashboard() {
       'input[placeholder="Search lessons, students, or quizzes..."]',
     ).value = searchQuery;
     // hide the default dashboard content
-    const mainContainer = document.querySelector(".mx-auto.max-w-6xl.space-y-8");
+    const mainContainer = document.querySelector(
+      ".mx-auto.max-w-6xl.space-y-8",
+    );
     if (mainContainer) {
       Array.from(mainContainer.children).forEach((child) => {
         if (child.id !== "search-results-container") {
@@ -101,7 +103,7 @@ function renderLessons(lessons) {
         ${lessons
           .map(
             (l) => `
-          <div class="bg-surface-light dark:bg-surface-dark p-4 rounded-lg shadow-sm border border-border-light dark:border-border-dark cursor-pointer hover:shadow-md" onclick="window.location.href='/edit-lesson.html?id=${l._id}'">
+          <div class="bg-surface-light dark:bg-surface-dark p-4 rounded-lg shadow-sm border border-border-light dark:border-border-dark cursor-pointer hover:shadow-md" onclick="window.location.href='edit-lesson.html?id=${l._id}'">
             <p class="font-bold">${l.title}</p>
             <p class="text-sm text-slate-500">${l.topic || ""}</p>
           </div>
@@ -121,7 +123,7 @@ function renderQuizzes(quizzes) {
         ${quizzes
           .map(
             (q) => `
-          <div class="bg-surface-light dark:bg-surface-dark p-4 rounded-lg shadow-sm border border-border-light dark:border-border-dark cursor-pointer hover:shadow-md" onclick="window.location.href='/edit-quiz.html?id=${q._id}'">
+          <div class="bg-surface-light dark:bg-surface-dark p-4 rounded-lg shadow-sm border border-border-light dark:border-border-dark cursor-pointer hover:shadow-md" onclick="window.location.href='edit-quiz.html?id=${q._id}'">
             <p class="font-bold">${q.title}</p>
             <p class="text-sm text-slate-500">Grade: ${q.grade || ""}</p>
           </div>
@@ -141,7 +143,7 @@ function renderUsers(users) {
         ${users
           .map(
             (u) => `
-          <div class="bg-surface-light dark:bg-surface-dark p-4 rounded-lg shadow-sm border border-border-light dark:border-border-dark cursor-pointer hover:shadow-md" onclick="window.location.href='/manage-user.html?id=${u._id}'">
+          <div class="bg-surface-light dark:bg-surface-dark p-4 rounded-lg shadow-sm border border-border-light dark:border-border-dark cursor-pointer hover:shadow-md" onclick="window.location.href='manage-user.html?id=${u._id}'">
             <p class="font-bold">${u.name}</p>
             <p class="text-sm text-slate-500">${u.email || ""}</p>
           </div>
@@ -227,19 +229,19 @@ async function loadDefaultDashboard() {
   }</span><span class="text-xs text-slate-400 ml-1">pts</span></td>
 `;
         row.addEventListener("click", () => {
-          window.location.href = `/manage-user.html?id=${user._id}`;
+          window.location.href = `manage-user.html?id=${user._id}`;
         });
 
         leaderboardContainer.appendChild(row);
         document
           .getElementById("admin-view-full-leaderboard")
           ?.addEventListener("click", () => {
-            window.location.href = "/admin-leaderboard.html";
+            window.location.href = "admin-leaderboard.html";
           });
         document
           .getElementById("view-all-lessons")
           ?.addEventListener("click", () => {
-            window.location.href = "/manage-lessons.html";
+            window.location.href = "manage-lessons.html";
           });
       });
 
@@ -311,13 +313,13 @@ async function loadDefaultDashboard() {
 
           // actions
           card.querySelector("[data-edit]")?.addEventListener("click", () => {
-            window.location.href = `/edit-quiz.html?id=${quiz._id}`;
+            window.location.href = `./edit-quiz.html?id=${quiz._id}`;
           });
 
           card
             .querySelector("[data-results]")
             ?.addEventListener("click", () => {
-              window.location.href = `/view-quiz.html?id=${quiz._id}`;
+              window.location.href = `./view-quiz.html?id=${quiz._id}`;
             });
 
           quizControlList.appendChild(card);
@@ -367,17 +369,17 @@ async function loadDefaultDashboard() {
           `;
           listContainer.appendChild(item);
           item.querySelector("button")?.addEventListener("click", () => {
-            window.location.href = `/edit-lesson.html?id=${l._id}`;
+            window.location.href = `edit-lesson.html?id=${l._id}`;
           });
         });
       }
     }
     document.getElementById("add-new-lesson")?.addEventListener("click", () => {
-      window.location.href = "/add-new-lesson.html";
+      window.location.href = "add-new-lesson.html";
     });
   } catch (err) {
     console.error("Failed to load admin dashboard data", err);
-    if (err.status === 401) window.location.href = "/sign-in.html";
+    if (err.status === 401) window.location.href = "sign-in.html";
   }
 }
 

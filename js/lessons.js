@@ -122,9 +122,9 @@ function renderLessons(lessons) {
                   progress: Math.round((currentTime / duration) * 100),
                   lastTime: Math.floor(currentTime),
                 });
-                console.log(
-                  `Progress for lesson ${lesson._id}: ${lessonProgress.get(lesson._id).progress}% at ${lessonProgress.get(lesson._id).lastTime}s`,
-                );
+                // console.log(
+                //   `Progress for lesson ${lesson._id}: ${lessonProgress.get(lesson._id).progress}% at ${lessonProgress.get(lesson._id).lastTime}s`,
+                // );
               };
 
               if (event.data === YT.PlayerState.PLAYING) {
@@ -242,7 +242,7 @@ async function loadLessons() {
   } catch (err) {
     console.error("Failed to load lessons", err);
     if (err.status === 401 || err.status === 403) {
-      window.location.href = "/sign-in.html";
+      window.location.href = "sign-in.html";
       return;
     }
     container.innerHTML = `<div class="text-center p-8 text-slate-500 dark:text-slate-400">Could not load lessons.</div>`;

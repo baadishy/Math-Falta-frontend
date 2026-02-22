@@ -12,7 +12,7 @@ async function loadLessons() {
     applyFilters();
   } catch (err) {
     console.error("Failed to load lessons", err);
-    if (err.status === 401) window.location.href = "/sign-in.html";
+    if (err.status === 401) window.location.href = "sign-in.html";
   }
 }
 
@@ -96,7 +96,7 @@ function renderLessons(lessons) {
     btn.addEventListener("click", (e) => {
       const id = e.currentTarget.dataset.id;
       if (!id) return;
-      window.location.href = `/edit-lesson.html?id=${id}`;
+      window.location.href = `edit-lesson.html?id=${id}`;
     }),
   );
 
@@ -228,7 +228,7 @@ function wireAddLesson() {
   if (btn && btn.textContent.includes("+ Add Lesson")) {
     btn.addEventListener(
       "click",
-      () => (window.location.href = "/add-new-lesson.html"),
+      () => (window.location.href = "add-new-lesson.html"),
     );
   }
 }

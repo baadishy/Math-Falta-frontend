@@ -63,10 +63,10 @@ function renderTable(users) {
         </div>
       </td>
     </tr>
-  `
+  `,
     )
     .join("");
-    
+
   document.getElementById("users-count").textContent = users.length;
 
   // A single event listener on the new table body to handle all actions
@@ -82,7 +82,7 @@ function renderTable(users) {
       // Handle delete action
       e.stopPropagation(); // Prevent row click from firing
       const confirmed = await createConfirmationPrompt(
-        "Are you sure you want to delete this user? It can be restored later."
+        "Are you sure you want to delete this user? It can be restored later.",
       );
       if (!confirmed) return;
       try {
@@ -101,74 +101,75 @@ function renderTable(users) {
       }
     } else {
       // Handle row click or edit button click as navigation
-      window.location.href = `/manage-user.html?id=${id}`;
+      window.location.href = `manage-user.html?id=${id}`;
     }
   });
 }
 
 function applyFilters() {
-    const searchInput = document.getElementById("search-input");
-    const gradeSelect = document.getElementById("grade-select");
-    const sortSelect = document.getElementById("sort-select");
+  const searchInput = document.getElementById("search-input");
+  const gradeSelect = document.getElementById("grade-select");
+  const sortSelect = document.getElementById("sort-select");
 
-    const searchTerm = searchInput.value.toLowerCase();
-    const grade = gradeSelect.value;
-    const sort = sortSelect.value;
+  const searchTerm = searchInput.value.toLowerCase();
+  const grade = gradeSelect.value;
+  const sort = sortSelect.value;
 
-    let filteredUsers = allUsers;
+  let filteredUsers = allUsers;
 
-    // Filter by search term (name or email)
-    if (searchTerm) {
-        filteredUsers = filteredUsers.filter(user =>
-            (user.name && user.name.toLowerCase().includes(searchTerm)) ||
-            (user.email && user.email.toLowerCase().includes(searchTerm))
-        );
-    }
+  // Filter by search term (name or email)
+  if (searchTerm) {
+    filteredUsers = filteredUsers.filter(
+      (user) =>
+        (user.name && user.name.toLowerCase().includes(searchTerm)) ||
+        (user.email && user.email.toLowerCase().includes(searchTerm)),
+    );
+  }
 
-    // Filter by grade
-    if (grade) {
-        filteredUsers = filteredUsers.filter(user => user.grade === grade);
-    }
+  // Filter by grade
+  if (grade) {
+    filteredUsers = filteredUsers.filter((user) => user.grade === grade);
+  }
 
-    // Sort the filtered users
-    switch (sort) {
-        case 'newest':
-            filteredUsers.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
-            break;
-        case 'score_desc':
-            filteredUsers.sort((a, b) => (b.totalScore || 0) - (a.totalScore || 0));
-            break;
-        case 'score_asc':
-            filteredUsers.sort((a, b) => (a.totalScore || 0) - (b.totalScore || 0));
-            break;
-        case 'name_asc':
-            filteredUsers.sort((a, b) => a.name.localeCompare(b.name));
-            break;
-    }
+  // Sort the filtered users
+  switch (sort) {
+    case "newest":
+      filteredUsers.sort(
+        (a, b) => new Date(b.createdAt) - new Date(a.createdAt),
+      );
+      break;
+    case "score_desc":
+      filteredUsers.sort((a, b) => (b.totalScore || 0) - (a.totalScore || 0));
+      break;
+    case "score_asc":
+      filteredUsers.sort((a, b) => (a.totalScore || 0) - (b.totalScore || 0));
+      break;
+    case "name_asc":
+      filteredUsers.sort((a, b) => a.name.localeCompare(b.name));
+      break;
+  }
 
-    renderTable(filteredUsers);
+  renderTable(filteredUsers);
 }
-
 
 async function loadAdminUsers() {
   try {
     const res = await getJSON("/admin/users");
     allUsers = res.data || [];
-    
+
     applyFilters(); // Initial render
 
     const searchInput = document.getElementById("search-input");
     const gradeSelect = document.getElementById("grade-select");
     const sortSelect = document.getElementById("sort-select");
-    
-    searchInput.addEventListener('input', applyFilters);
-    gradeSelect.addEventListener('change', applyFilters);
-    sortSelect.addEventListener('change', applyFilters);
 
+    searchInput.addEventListener("input", applyFilters);
+    gradeSelect.addEventListener("change", applyFilters);
+    sortSelect.addEventListener("change", applyFilters);
   } catch (err) {
     console.error("Failed to load admin users", err);
     if (err.status === 401 || err.status === 403) {
-      window.location.href = "/sign-in.html";
+      window.location.href = "sign-in.html";
     }
   }
 }

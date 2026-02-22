@@ -42,17 +42,18 @@ function renderQuizzes(quizzes) {
     btn.addEventListener("click", (e) => {
       const id = e.currentTarget.dataset.id;
       if (!id) return;
-      window.location.href = `/edit-quiz.html?id=${id}`;
+      window.location.href = `edit-quiz.html?id=${id}`;
     }),
   );
 
-  tbody.querySelectorAll('tr').forEach((row, i) => {
-    row.onclick = (e) => { 
-      if (e.target.closest(".edit-btn") || e.target.closest(".delete-btn")) return;
+  tbody.querySelectorAll("tr").forEach((row, i) => {
+    row.onclick = (e) => {
+      if (e.target.closest(".edit-btn") || e.target.closest(".delete-btn"))
+        return;
       const id = row.querySelector(".edit-btn").dataset.id;
       if (!id) return;
-      window.location.href = `/view-quiz.html?id=${id}`;
-    }
+      window.location.href = `view-quiz.html?id=${id}`;
+    };
   });
 
   tbody.querySelectorAll(".delete-btn").forEach((btn) =>
@@ -153,7 +154,7 @@ async function loadQuizzes() {
     renderQuizzes(allQuizzes);
   } catch (err) {
     console.error("Failed to load admin quizzes", err);
-    if (err.status === 401) window.location.href = "/sign-in..html";
+    if (err.status === 401) window.location.href = "sign-in.html";
     const tbody = document.querySelector("tbody");
     if (tbody) {
       tbody.innerHTML = `<tr><td colspan="5" class="text-center p-6 text-slate-500">Could not load quizzes.</td></tr>`;
@@ -199,7 +200,7 @@ function wireAdd() {
   const addBtn = document.getElementById("add-new-quiz-btn");
   if (!addBtn) return;
   addBtn.addEventListener("click", () => {
-    window.location.href = "/add-new-quiz.html";
+    window.location.href = "add-new-quiz.html";
   });
 }
 
