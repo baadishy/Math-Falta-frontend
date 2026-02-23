@@ -1,4 +1,4 @@
-import { getJSON, API_BASE } from "./app.js";
+﻿import { getJSON, API_BASE } from "./app.js";
 const lessonProgress = new Map(); // key: lesson._id, value: progress %
 let allLessons = [];
 
@@ -65,7 +65,7 @@ function renderLessons(lessons) {
           <span class="px-2.5 py-1 rounded-md bg-indigo-100 dark:bg-indigo-900/30 text-indigo-600 dark:text-indigo-300 text-xs font-bold uppercase tracking-wider">${
             lesson.topic
           }</span>
-          <span class="text-xs text-slate-400 dark:text-slate-500 font-bold">•</span>
+          <span class="text-xs text-slate-400 dark:text-slate-500 font-bold">â€¢</span>
           <span class="text-xs text-slate-500 dark:text-slate-400 font-medium">Updated ${timeAgo(
             lesson.updatedAt,
           )}</span>
@@ -102,7 +102,7 @@ function renderLessons(lessons) {
         const player = new YT.Player(iframeId, {
           events: {
             onReady: (event) => {
-              // ▶️ RESUME FROM LAST PROGRESS
+              // â–¶ï¸ RESUME FROM LAST PROGRESS
               if (lesson.lastTime && lesson.lastTime > 0) {
                 event.target.seekTo(lesson.lastTime, true);
               } else if (lesson.progress && lesson.progress > 0) {
@@ -128,7 +128,7 @@ function renderLessons(lessons) {
               };
 
               if (event.data === YT.PlayerState.PLAYING) {
-                // ▶️ First-time watch logging
+                // â–¶ï¸ First-time watch logging
                 if (!watchedLessons.has(lesson._id)) {
                   watchedLessons.add(lesson._id);
                   try {
@@ -142,10 +142,10 @@ function renderLessons(lessons) {
                   }
                 }
 
-                // ▶️ Start interval to update progress every second
+                // â–¶ï¸ Start interval to update progress every second
                 progressInterval = setInterval(updateProgress, 1000);
               } else {
-                // ▶️ Clear interval when paused, ended, or buffering
+                // â–¶ï¸ Clear interval when paused, ended, or buffering
                 if (progressInterval) clearInterval(progressInterval);
                 // Also update progress one last time
                 updateProgress();
@@ -175,7 +175,7 @@ function renderLessons(lessons) {
         a.className =
           "flex items-center gap-3 p-3 rounded-xl border border-slate-200 dark:border-[#232f48] bg-white dark:bg-[#192233] hover:border-primary dark:hover:border-primary/50 hover:shadow-md transition-all group/file";
         a.href = d.url;
-        a.setAttribute("download", `${d.originalName || "document"}`);
+        a.target = "_blank";
         a.rel = "noopener noreferrer";
         a.innerHTML = `
             <div class="size-10 rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 flex items-center justify-center flex-shrink-0">
@@ -189,7 +189,7 @@ function renderLessons(lessons) {
                 d.size || ""
               }</p>
             </div>
-            <span class="material-symbols-outlined text-slate-400">download</span>
+            <span class="material-symbols-outlined text-slate-400">open_in_new</span>
           `;
         grid.appendChild(a);
       });
@@ -279,3 +279,4 @@ window.addEventListener("beforeunload", async (e) => {
     console.error("Failed to send progress on unload", err);
   }
 });
+
