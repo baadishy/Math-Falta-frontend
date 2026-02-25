@@ -1,1 +1,1 @@
-window.APP_CONFIG = { API_BASE: "https://math-falta-backend.vercel.app/api" };
+window.APP_CONFIG = { API_BASE: "https://math-falta.vercel.app/api" };

@@ -73,6 +73,33 @@ function updateSidebarActiveLink(sidebar) {
   });
 }
 
+async function updateApprovalsIndicators() {
+  try {
+    const res = await getJSON("/admin/users/approvals/pending");
+    const count = Array.isArray(res?.data) ? res.data.length : (res?.count ?? 0);
+    const indicators = document.querySelectorAll("[data-approvals-indicator]");
+
+    indicators.forEach((el) => {
+      if (count > 0) {
+        el.textContent = count;
+        el.classList.remove("hidden");
+        el.classList.add("flex");
+      } else {
+        el.textContent = "";
+        el.classList.add("hidden");
+        el.classList.remove("flex");
+      }
+    });
+  } catch (err) {
+    // Keep sidebar clean if approvals endpoint is unavailable on this page/session.
+    document.querySelectorAll("[data-approvals-indicator]").forEach((el) => {
+      el.textContent = "";
+      el.classList.add("hidden");
+      el.classList.remove("flex");
+    });
+  }
+}
+
 // Simple runtime injection to normalize admin sidebar + header across admin pages
 const asideHtml = `
 <aside class="hidden w-64 flex-col border-r border-slate-200 dark:border-slate-800 bg-surface-light dark:bg-[#111722] md:flex">
@@ -103,6 +130,13 @@ const asideHtml = `
       <a class="group flex items-center gap-3 rounded-lg px-3 py-2 text-slate-600 hover:bg-slate-100 dark:text-slate-400 dark:hover:bg-slate-800 dark:hover:text-white transition-colors" href="manage-users.html">
         <span class="material-symbols-outlined">group</span>
         <span class="text-sm font-medium">Users Management</span>
+      </a>
+      <a class="group flex items-center justify-between gap-3 rounded-lg px-3 py-2 text-slate-600 hover:bg-slate-100 dark:text-slate-400 dark:hover:bg-slate-800 dark:hover:text-white transition-colors" href="admin-approvals.html">
+        <div class="flex items-center gap-3">
+          <span class="material-symbols-outlined">fact_check</span>
+          <span class="text-sm font-medium">Approvals</span>
+        </div>
+        <span data-approvals-indicator class="hidden h-6 w-6 items-center justify-center rounded-full bg-red-500 text-xs font-bold text-white"></span>
       </a>
       <a class="group flex items-center gap-3 rounded-lg px-3 py-2 text-slate-600 hover:bg-slate-100 dark:text-slate-400 dark:hover:bg-slate-800 dark:hover:text-white transition-colors" href="admin-leaderboard.html">
         <span class="material-symbols-outlined">leaderboard</span>
@@ -219,6 +253,13 @@ function ensureMobileSidebar() {
           <a class="group flex items-center gap-3 rounded-lg px-3 py-2 text-slate-600 hover:bg-slate-100 dark:text-slate-400 dark:hover:bg-slate-800 dark:hover:text-white transition-colors" href="manage-users.html">
             <span class="material-symbols-outlined">group</span>
             <span class="text-sm font-medium">Users Management</span>
+          </a>
+          <a class="group flex items-center justify-between gap-3 rounded-lg px-3 py-2 text-slate-600 hover:bg-slate-100 dark:text-slate-400 dark:hover:bg-slate-800 dark:hover:text-white transition-colors" href="admin-approvals.html">
+            <div class="flex items-center gap-3">
+              <span class="material-symbols-outlined">fact_check</span>
+              <span class="text-sm font-medium">Approvals</span>
+            </div>
+            <span data-approvals-indicator class="hidden h-6 w-6 items-center justify-center rounded-full bg-amber-500 text-xs font-bold text-white"></span>
           </a>
           <a class="group flex items-center gap-3 rounded-lg px-3 py-2 text-slate-600 hover:bg-slate-100 dark:text-slate-400 dark:hover:bg-slate-800 dark:hover:text-white transition-colors" href="admin-leaderboard.html">
             <span class="material-symbols-outlined">leaderboard</span>
@@ -346,6 +387,7 @@ export function insertAdminLayout() {
 
   // prepare header with admin info
   prepareHeader();
+  updateApprovalsIndicators();
 
   // notify listeners (filters can rebind after header replacement)
   window.dispatchEvent(new CustomEvent("admin-layout-ready"));
@@ -355,6 +397,8 @@ export function insertAdminLayout() {
 document.addEventListener("DOMContentLoaded", () => {
   insertAdminLayout();
 });
+
+document.addEventListener('approvalsUpdated', updateApprovalsIndicators);
 
 // export { insertAdminLayout, prepareHeader, updateSidebarActiveLink };
 export default { insertAdminLayout, prepareHeader, updateSidebarActiveLink };

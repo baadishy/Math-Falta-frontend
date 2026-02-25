@@ -120,7 +120,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const gradeSelect = document.getElementById("grade-select");
       const searchTerm = searchInput.value;
       const grade = gradeSelect.value;
-      let url = `api/admin/users/export?format=${format}`;
+      let url = `http://localhost:3000/api/admin/users/export?format=${format}`;
       if (searchTerm) {
         url += `&search=${searchTerm}`;
       }

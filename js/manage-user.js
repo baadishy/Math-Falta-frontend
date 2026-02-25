@@ -1,4 +1,4 @@
-import { getJSON, postJSON, putJSON } from "./app.js";
+import { getJSON, postJSON, putJSON, API_BASE } from "./app.js";
 import { showToast } from "./ui.js";
 
 const overlay = document.getElementById("quiz-detail-overlay");
@@ -686,7 +686,7 @@ async function downloadQuizReport() {
 
   try {
     const a = document.createElement("a");
-    a.href = `${window.location.origin}/view-report.html?url=${encodeURIComponent(fileUrl)}`; // public/raw URL
+    a.href = `./view-report.html?url=${encodeURIComponent(fileUrl)}`; // public/raw URL
     a.target = "_blank";
     document.body.appendChild(a);
     a.click();
@@ -760,7 +760,7 @@ function wireFooterActions() {
         renderReportLink(report);
 
         // Use report._id for your short URL redirect
-        const pageUrl = `${window.location.origin}/r/${report._id}`;
+        const pageUrl = `${API_BASE.replace("/api", "")}/r/${report._id}`;
 
         const message = `Hello 👋 ${state.user?.name || "there"}\n\nPlease find the quiz report here:\n${pageUrl}`;
         const url = `https://wa.me/2${phoneRaw}?text=${encodeURIComponent(message)}`;

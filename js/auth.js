@@ -39,14 +39,20 @@ if (signUpForm) {
     if (!grade) return showToast("Please pick a grade", "warning");
 
     try {
-      await postJSON("/auth/sign-up", {
+      const res = await postJSON("/auth/sign-up", {
         name,
         email,
         password,
         parentNumber,
         grade,
       });
-      window.location.href = "user-dashboard.html";
+      showToast(
+        res.msg || "Request submitted. Wait for admin approval.",
+        "success",
+      );
+      setTimeout(() => {
+        window.location.href = "sign-in.html";
+      }, 5000);
     } catch (err) {
       showToast(err.payload?.msg || err.message || "Sign up failed", "error");
     }

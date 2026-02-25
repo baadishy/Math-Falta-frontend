@@ -1,0 +1,74 @@
+<!doctype html>
+<html class="dark" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <script src="app-config.js"></script>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Admin Approvals - MathAdmin</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script>
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              primary: "#135bec",
+              "background-light": "#f6f6f8",
+              "background-dark": "#101622",
+            },
+            fontFamily: {
+              display: ["Inter", "sans-serif"],
+            },
+          },
+        },
+      };
+    </script>
+  </head>
+  <body
+    class="font-display antialiased text-slate-900 dark:text-white bg-background-light dark:bg-background-dark transition-colors duration-200"
+  >
+    <div class="flex min-h-screen w-full overflow-hidden">
+      <aside></aside>
+      <main class="flex-1 overflow-y-auto focus:outline-none">
+        <header></header>
+
+        <section class="px-4 py-8 sm:px-6 lg:px-8">
+          <div class="mx-auto w-full max-w-[1200px]">
+            <div class="mb-6 flex flex-wrap items-end justify-between gap-4">
+              <div>
+                <h1
+                  class="text-3xl font-black leading-tight tracking-tight text-slate-900 dark:text-white"
+                >
+                  Admin Approvals
+                </h1>
+                <p class="mt-1 text-sm text-slate-500 dark:text-slate-400">
+                  Review new signup requests and approve or reject them.
+                </p>
+              </div>
+              <div
+                class="rounded-lg border border-slate-200 bg-white px-4 py-2 text-sm dark:border-slate-700 dark:bg-[#192233]"
+              >
+                Pending Requests:
+                <span id="approvals-count" class="font-bold">0</span>
+              </div>
+            </div>
+
+            <div id="approvals-list" class="grid grid-cols-1 gap-4"></div>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <script type="module" src="./js/admin-approvals.js"></script>
+    <script type="module" src="./js/admin-layout.js"></script>
+    <script type="module" src="./js/theme.js"></script>
+  </body>
+</html>
