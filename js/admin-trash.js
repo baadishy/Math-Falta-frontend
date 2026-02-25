@@ -1,4 +1,10 @@
 import { getJSON, putJSON, deleteJSON } from "./app.js";
+import {
+  showToast,
+  showLoading,
+  hideLoading,
+  createConfirmationPrompt,
+} from "./ui.js";
 
 let deletedLessons = [];
 let deletedQuizzes = [];
@@ -61,13 +67,23 @@ function renderTable() {
               : "bg-purple-100 text-purple-700 dark:bg-purple-900/30 dark:text-purple-300"
           }">${item.type === "lesson" ? "Lesson" : "Quiz"}</span>
         </td>
-        <td class="py-4 px-6 align-middle text-sm font-bold text-slate-900 dark:text-white">${item.title}</td>
-        <td class="py-4 px-6 align-middle text-sm text-slate-600 dark:text-slate-300">${item.grade}</td>
-        <td class="py-4 px-6 align-middle text-sm text-slate-500 dark:text-slate-400">${formatDate(item.deletedAt)}</td>
+        <td class="py-4 px-6 align-middle text-sm font-bold text-slate-900 dark:text-white">${
+          item.title
+        }</td>
+        <td class="py-4 px-6 align-middle text-sm text-slate-600 dark:text-slate-300">${
+          item.grade
+        }</td>
+        <td class="py-4 px-6 align-middle text-sm text-slate-500 dark:text-slate-400">${formatDate(
+          item.deletedAt,
+        )}</td>
         <td class="py-4 px-6 align-middle text-right">
           <div class="flex items-center justify-end gap-2">
-            <button class="restore-item px-3 py-1.5 rounded-lg text-sm font-semibold text-white bg-primary hover:bg-primary-hover" data-id="${item._id}" data-type="${item.type}">Restore</button>
-            <button class="delete-item px-3 py-1.5 rounded-lg text-sm font-semibold text-white bg-red-600 hover:bg-red-700" data-id="${item._id}" data-type="${item.type}">Delete Forever</button>
+            <button class="restore-item px-3 py-1.5 rounded-lg text-sm font-semibold text-white bg-primary hover:bg-primary-hover" data-id="${
+              item._id
+            }" data-type="${item.type}">Restore</button>
+            <button class="delete-item px-3 py-1.5 rounded-lg text-sm font-semibold text-white bg-red-600 hover:bg-red-700" data-id="${
+              item._id
+            }" data-type="${item.type}">Delete Forever</button>
           </div>
         </td>
       </tr>
@@ -78,71 +94,43 @@ function renderTable() {
   wireActions();
 }
 
-function createConfirmationPrompt({
-  title,
-  message,
-  confirmLabel,
-  confirmClass,
-}) {
-  return new Promise((resolve) => {
-    const modal = document.createElement("div");
-    modal.className =
-      "fixed inset-0 z-50 flex items-center justify-center bg-black/50";
-    modal.innerHTML = `
-      <div class="bg-slate-50 dark:bg-slate-800 rounded-lg shadow-xl w-full max-w-sm">
-        <div class="p-6">
-          <h3 class="text-lg font-bold">${title}</h3>
-          <p class="text-sm text-slate-500 mt-2">${message}</p>
-        </div>
-        <div class="bg-slate-50 dark:bg-slate-800/50 px-6 py-4 rounded-b-lg flex justify-end gap-3">
-          <button id="cancel-btn" class="px-4 py-2 rounded-lg text-sm font-semibold hover:bg-slate-200 dark:hover:bg-slate-700">Cancel</button>
-          <button id="confirm-btn" class="px-4 py-2 rounded-lg text-sm font-semibold text-white ${confirmClass}">${confirmLabel}</button>
-        </div>
-      </div>
-    `;
-    document.body.appendChild(modal);
-
-    const confirmBtn = modal.querySelector("#confirm-btn");
-    const cancelBtn = modal.querySelector("#cancel-btn");
-
-    confirmBtn.addEventListener("click", () => {
-      document.body.removeChild(modal);
-      resolve(true);
-    });
-
-    cancelBtn.addEventListener("click", () => {
-      document.body.removeChild(modal);
-      resolve(false);
-    });
-  });
-}
-
 async function restoreItem(id, type) {
-  const confirmed = await createConfirmationPrompt({
-    title: "Restore Item",
-    message: "This item will be restored and visible again in the active list.",
-    confirmLabel: "Restore",
-    confirmClass: "bg-primary hover:bg-primary-hover",
-  });
+  const confirmed = await createConfirmationPrompt(
+    "This item will be restored and visible again in the active list.",
+  );
   if (!confirmed) return;
-
-  const base = type === "lesson" ? "/admin/lessons" : "/admin/quizzes";
-  await putJSON(`${base}/${id}/restore`);
-  await loadTrashData();
+  showLoading("Restoring item...");
+  try {
+    const base = type === "lesson" ? "/admin/lessons" : "/admin/quizzes";
+    await putJSON(`${base}/${id}/restore`);
+    showToast("Item restored successfully", "success");
+    await loadTrashData();
+  } catch (err) {
+    showToast(err?.payload?.message || "Failed to restore item.", "error");
+  } finally {
+    hideLoading();
+  }
 }
 
 async function deleteForeverItem(id, type) {
-  const confirmed = await createConfirmationPrompt({
-    title: "Delete Permanently",
-    message: "This action cannot be undone.",
-    confirmLabel: "Delete Forever",
-    confirmClass: "bg-red-600 hover:bg-red-700",
-  });
+  const confirmed = await createConfirmationPrompt(
+    "This action cannot be undone.",
+  );
   if (!confirmed) return;
-
-  const base = type === "lesson" ? "/admin/lessons" : "/admin/quizzes";
-  await deleteJSON(`${base}/${id}`);
-  await loadTrashData();
+  showLoading("Deleting item permanently...");
+  try {
+    const base = type === "lesson" ? "/admin/lessons" : "/admin/quizzes";
+    await deleteJSON(`${base}/${id}`);
+    showToast("Item deleted permanently", "success");
+    await loadTrashData();
+  } catch (err) {
+    showToast(
+      err?.payload?.message || "Failed to delete item permanently.",
+      "error",
+    );
+  } finally {
+    hideLoading();
+  }
 }
 
 function wireActions() {
@@ -151,13 +139,7 @@ function wireActions() {
       const id = e.currentTarget.dataset.id;
       const type = e.currentTarget.dataset.type;
       if (!id || !type) return;
-
-      try {
-        await restoreItem(id, type);
-      } catch (err) {
-        console.error("Failed to restore item", err);
-        alert(err?.payload?.message || "Failed to restore item.");
-      }
+      await restoreItem(id, type);
     });
   });
 
@@ -166,13 +148,7 @@ function wireActions() {
       const id = e.currentTarget.dataset.id;
       const type = e.currentTarget.dataset.type;
       if (!id || !type) return;
-
-      try {
-        await deleteForeverItem(id, type);
-      } catch (err) {
-        console.error("Failed to delete item", err);
-        alert(err?.payload?.message || "Failed to delete item.");
-      }
+      await deleteForeverItem(id, type);
     });
   });
 }
@@ -188,7 +164,7 @@ async function loadTrashData() {
       </tr>
     `;
   }
-
+  showLoading("Loading trash...");
   try {
     const [lessonsRes, quizzesRes] = await Promise.all([
       getJSON("/admin/lessons/trash"),
@@ -216,6 +192,9 @@ async function loadTrashData() {
         </tr>
       `;
     }
+    showToast("Could not load trash data.", "error");
+  } finally {
+    hideLoading();
   }
 }
 

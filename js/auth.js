@@ -1,5 +1,5 @@
 import { postJSON } from "./app.js";
-import { showToast } from "./ui.js";
+import { showToast, showLoading, hideLoading } from "./ui.js";
 
 // Sign In
 const signInForm = document.getElementById("signInForm");
@@ -9,7 +9,9 @@ if (signInForm) {
     const email = document.getElementById("signin-email").value.trim();
     const password = document.getElementById("signin-password").value;
     try {
+      showLoading("Signing in...");
       const res = await postJSON("/auth/sign-in", { email, password });
+      hideLoading();
       // On success, navigate to user dashboard
       if (!res.success) throw new Error("Sign in failed");
       if (res.isAdmin) {
@@ -19,6 +21,7 @@ if (signInForm) {
       }
       window.location.href = "user-dashboard.html";
     } catch (err) {
+      hideLoading();
       showToast(err.payload?.msg || err.message || "Sign in failed", "error");
     }
   });
@@ -39,6 +42,7 @@ if (signUpForm) {
     if (!grade) return showToast("Please pick a grade", "warning");
 
     try {
+      showLoading("Creating account...");
       const res = await postJSON("/auth/sign-up", {
         name,
         email,
@@ -46,6 +50,7 @@ if (signUpForm) {
         parentNumber,
         grade,
       });
+      hideLoading();
       showToast(
         res.msg || "Request submitted. Wait for admin approval.",
         "success",
@@ -54,6 +59,7 @@ if (signUpForm) {
         window.location.href = "sign-in.html";
       }, 5000);
     } catch (err) {
+      hideLoading();
       showToast(err.payload?.msg || err.message || "Sign up failed", "error");
     }
   });

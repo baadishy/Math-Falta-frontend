@@ -71,4 +71,97 @@ function showToast(message, type = "info", duration = 3000) {
   setTimeout(closeToast, duration);
 }
 
-export { showToast };
+function showLoading(message = "Processing...") {
+  let modal = document.querySelector(".js-loading-modal");
+  if (!modal) {
+    modal = document.createElement("div");
+    modal.className =
+      "js-loading-modal fixed inset-0 z-[60] flex items-center justify-center bg-black/30 backdrop-blur-sm";
+    modal.innerHTML = `
+      <div class="bg-white dark:bg-[#0f1724] rounded-lg p-6 flex items-center gap-4 shadow-2xl transition-all duration-300 ease-in-out transform scale-95 opacity-0 -translate-y-4">
+        <div class="loader w-8 h-8 border-4 border-t-primary rounded-full animate-spin"></div>
+        <div class="text-base font-medium text-slate-700 dark:text-slate-200">${message}</div>
+      </div>
+    `;
+    document.body.appendChild(modal);
+
+    setTimeout(() => {
+      const inner = modal.querySelector("div");
+      if (inner)
+        inner.classList.remove("scale-95", "opacity-0", "-translate-y-4");
+    }, 20);
+  } else {
+    modal.querySelector("div > div:last-child").textContent = message;
+    modal.classList.remove("hidden");
+    const inner = modal.querySelector("div");
+    if (inner)
+      inner.classList.remove("scale-95", "opacity-0", "-translate-y-4");
+  }
+}
+
+function hideLoading() {
+  const modal = document.querySelector(".js-loading-modal");
+  if (!modal) return;
+  const inner = modal.querySelector("div");
+
+  if (inner) {
+    inner.classList.add("scale-95", "opacity-0", "-translate-y-4");
+    inner.addEventListener(
+      "transitionend",
+      () => {
+        modal.classList.add("hidden");
+      },
+      { once: true },
+    );
+  } else {
+    modal.classList.add("hidden");
+  }
+}
+
+function createConfirmationPrompt(message) {
+  return new Promise((resolve) => {
+    const modal = document.createElement("div");
+    modal.className =
+      "fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm p-4";
+
+    const modalContent = document.createElement("div");
+    modalContent.className =
+      "bg-white dark:bg-surface-dark rounded-xl shadow-xl w-full max-w-sm transition-all duration-300 ease-in-out transform scale-95 opacity-0 -translate-y-4";
+    modalContent.innerHTML = `
+        <div class="p-6">
+          <h3 class="text-lg font-semibold text-slate-900 dark:text-white">Confirm Action</h3>
+          <p class="text-sm text-slate-600 dark:text-slate-400 mt-2">${message}</p>
+        </div>
+        <div class="bg-slate-50 dark:bg-slate-800/50 px-6 py-3 rounded-b-xl flex justify-end gap-3">
+          <button id="cancel-btn" class="px-4 py-2 rounded-lg text-sm font-semibold hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors focus:outline-none focus:ring-2 focus:ring-primary/50">Cancel</button>
+          <button id="confirm-btn" class="px-4 py-2 rounded-lg text-sm font-semibold text-white bg-red-600 hover:bg-red-700 transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500">Confirm</button>
+        </div>
+    `;
+    modal.appendChild(modalContent);
+    document.body.appendChild(modal);
+
+    setTimeout(() => {
+      modalContent.classList.remove("scale-95", "opacity-0", "-translate-y-4");
+    }, 20);
+
+    const confirmBtn = modal.querySelector("#confirm-btn");
+    const cancelBtn = modal.querySelector("#cancel-btn");
+
+    const closeModal = (value) => {
+      modalContent.classList.add("scale-95", "opacity-0", "-translate-y-4");
+      modalContent.addEventListener(
+        "transitionend",
+        () => {
+          document.body.removeChild(modal);
+          resolve(value);
+        },
+        { once: true },
+      );
+    };
+
+    confirmBtn.addEventListener("click", () => closeModal(true));
+    cancelBtn.addEventListener("click", () => closeModal(false));
+  });
+}
+
+export { showToast, showLoading, hideLoading, createConfirmationPrompt };

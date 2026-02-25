@@ -1,5 +1,10 @@
 import { getJSON, apiFetch } from "./app.js";
-import { showToast } from "./ui.js";
+import {
+  showToast,
+  showLoading,
+  hideLoading,
+  createConfirmationPrompt,
+} from "./ui.js";
 
 let pendingUsers = [];
 
@@ -31,8 +36,12 @@ function createCard(user) {
           ${initials(user.name)}
         </div>
         <div>
-          <h3 class="text-base font-bold text-slate-900 dark:text-white">${user.name || "Student"}</h3>
-          <p class="text-sm text-slate-500 dark:text-slate-400">${user.email || "-"}</p>
+          <h3 class="text-base font-bold text-slate-900 dark:text-white">${
+            user.name || "Student"
+          }</h3>
+          <p class="text-sm text-slate-500 dark:text-slate-400">${
+            user.email || "-"
+          }</p>
         </div>
       </div>
       <span class="rounded-full bg-amber-100 px-2.5 py-1 text-xs font-semibold text-amber-700 dark:bg-amber-500/20 dark:text-amber-300">
@@ -42,8 +51,12 @@ function createCard(user) {
 
     <div class="mt-4 grid grid-cols-1 gap-2 text-sm text-slate-600 dark:text-slate-300 sm:grid-cols-2">
       <p><span class="font-semibold">Grade:</span> ${user.grade || "-"}</p>
-      <p><span class="font-semibold">Parent Number:</span> ${user.parentNumber || "-"}</p>
-      <p class="sm:col-span-2"><span class="font-semibold">Requested At:</span> ${formatDate(user.createdAt)}</p>
+      <p><span class="font-semibold">Parent Number:</span> ${
+        user.parentNumber || "-"
+      }</p>
+      <p class="sm:col-span-2"><span class="font-semibold">Requested At:</span> ${formatDate(
+        user.createdAt,
+      )}</p>
     </div>
 
     <div class="mt-5 flex flex-wrap gap-2">
@@ -87,6 +100,7 @@ function renderApprovals() {
 }
 
 async function loadPendingApprovals() {
+  showLoading("Loading approvals...");
   try {
     const res = await getJSON("/admin/users/approvals/pending");
     pendingUsers = res.data || [];
@@ -96,11 +110,17 @@ async function loadPendingApprovals() {
       window.location.href = "sign-in.html";
       return;
     }
-    showToast(err.payload?.message || err.message || "Failed to load approvals", "error");
+    showToast(
+      err.payload?.message || err.message || "Failed to load approvals",
+      "error",
+    );
+  } finally {
+    hideLoading();
   }
 }
 
 async function updateApproval(userId, action) {
+  showLoading(`${action === "approve" ? "Approving" : "Rejecting"} user...`);
   try {
     await apiFetch(`/admin/users/approvals/${userId}/${action}`, {
       method: "PATCH",
@@ -108,12 +128,16 @@ async function updateApproval(userId, action) {
     pendingUsers = pendingUsers.filter((user) => user._id !== userId);
     renderApprovals();
     showToast(
-      action === "approve" ? "User approved successfully" : "User rejected successfully",
+      action === "approve"
+        ? "User approved successfully"
+        : "User rejected successfully",
       "success",
     );
-    document.dispatchEvent(new CustomEvent('approvalsUpdated'));
+    document.dispatchEvent(new CustomEvent("approvalsUpdated"));
   } catch (err) {
     showToast(err.payload?.message || err.message || "Action failed", "error");
+  } finally {
+    hideLoading();
   }
 }
 
@@ -130,6 +154,11 @@ document.addEventListener("DOMContentLoaded", () => {
     const action = button.dataset.action;
     const userId = button.dataset.id;
     if (!action || !userId) return;
+
+    const confirmed = await createConfirmationPrompt(
+      `Are you sure you want to ${action} this user?`,
+    );
+    if (!confirmed) return;
 
     button.disabled = true;
     try {
