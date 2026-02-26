@@ -8,6 +8,9 @@ if (signInForm) {
     e.preventDefault();
     const email = document.getElementById("signin-email").value.trim();
     const password = document.getElementById("signin-password").value;
+    const btn = signInForm.querySelector('button[type="submit"]');
+    btn.disabled = true;
+
     try {
       showLoading("Signing in...");
       const res = await postJSON("/auth/sign-in", { email, password });
@@ -38,6 +41,8 @@ if (signUpForm) {
     const parentNumber = document.getElementById("signup-parent").value.trim();
     const gradeEl = signUpForm.querySelector('input[name="grade"]:checked');
     const grade = gradeEl ? gradeEl.value : null;
+    const btn = signUpForm.querySelector('button[type="submit"]');
+    btn.disabled = true;
 
     if (!grade) return showToast("Please pick a grade", "warning");
 
