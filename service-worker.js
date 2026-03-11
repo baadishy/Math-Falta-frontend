@@ -43,8 +43,8 @@ const PAGE_URLS = [
 const ASSET_URLS = [
   "/manifest.json",
   "/app-config.js",
-  "/icons/icon-192.png",
-  "/icons/icon-512.png",
+  "/icons/logo-192.png",
+  "/icons/logo-512.png",
   "/030c6fbc-f3a4-4e31-9740-d6e473b244a9.jpg",
   "/49dbe4ef-dc60-47e6-b606-d658082a0c2f.jpg",
   "/83518886-ada2-4ece-bca2-ae1ee4cec296.jpg",
